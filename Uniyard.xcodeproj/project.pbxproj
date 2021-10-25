@@ -147,9 +147,9 @@
 		0B7E7CD02717D006004DB7AC /* Uniyard */ = {
 			isa = PBXGroup;
 			children = (
+				0BB0C47E27271C8F00060C8E /* Views */,
 				0B4552282725B415009BA1E0 /* Models */,
 				0B7E7CD12717D006004DB7AC /* UniyardApp.swift */,
-				0B7E7CD32717D006004DB7AC /* ContentView.swift */,
 				0B7E7CD52717D006004DB7AC /* Assets.xcassets */,
 				0B7E7CDA2717D006004DB7AC /* Info.plist */,
 				0B4552242725B0F3009BA1E0 /* GoogleService-Info.plist */,
@@ -182,6 +182,14 @@
 				0B7E7CF02717D006004DB7AC /* Info.plist */,
 			);
 			path = UniyardUITests;
+			sourceTree = "<group>";
+		};
+		0BB0C47E27271C8F00060C8E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0B7E7CD32717D006004DB7AC /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
