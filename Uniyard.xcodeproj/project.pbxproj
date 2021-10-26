@@ -35,6 +35,7 @@
 		0BB0C4802727494300060C8E /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0C47F2727494300060C8E /* Login.swift */; };
 		0BB0C48227275F0D00060C8E /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0C48127275F0D00060C8E /* ForgotPassword.swift */; };
 		0BB0C4852727B96900060C8E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0C4842727B96900060C8E /* LoginViewModel.swift */; };
+		BF23DB3227289FF400410436 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23DB3127289FF400410436 /* SignUpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		0BB0C47F2727494300060C8E /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		0BB0C48127275F0D00060C8E /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		0BB0C4842727B96900060C8E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		BF23DB3127289FF400410436 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 				0BB0C47F2727494300060C8E /* Login.swift */,
 				0BB0C48127275F0D00060C8E /* ForgotPassword.swift */,
 				0B6C613927284FEA00D36FAC /* EntryField.swift */,
+				BF23DB3127289FF400410436 /* SignUpView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				0B45522A2725B491009BA1E0 /* User.swift in Sources */,
 				0B4552362725B5A1009BA1E0 /* Message.swift in Sources */,
 				0B6C613A27284FEA00D36FAC /* EntryField.swift in Sources */,
+				BF23DB3227289FF400410436 /* SignUpView.swift in Sources */,
 				0B4552322725B554009BA1E0 /* Item.swift in Sources */,
 				0BB0C48227275F0D00060C8E /* ForgotPassword.swift in Sources */,
 				0B45523A2725B5D3009BA1E0 /* Message_Sequence.swift in Sources */,

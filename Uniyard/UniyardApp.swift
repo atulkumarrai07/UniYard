@@ -16,7 +16,9 @@ struct UniyardApp: App {
     var body: some Scene {
         WindowGroup {
 //            ContentView()
-          Login()
+          
+          //Login()
+          SignUpView()
         }
     }
 }
