@@ -33,7 +33,7 @@ struct ContentView: View {
 //        self.viewModel.fetchAllNotification()
 //        self.viewModel.fetchAllNotification_Sequence()
 //
-      }
+      }.navigationTitle("").navigationBarHidden(true)
     }
 }
 

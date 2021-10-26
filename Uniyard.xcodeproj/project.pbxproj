@@ -25,12 +25,16 @@
 		0B4552382725B5B9009BA1E0 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4552372725B5B9009BA1E0 /* Notification.swift */; };
 		0B45523A2725B5D3009BA1E0 /* Message_Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4552392725B5D3009BA1E0 /* Message_Sequence.swift */; };
 		0B45523C2725B606009BA1E0 /* Notification_Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45523B2725B606009BA1E0 /* Notification_Sequence.swift */; };
+		0B6C613A27284FEA00D36FAC /* EntryField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C613927284FEA00D36FAC /* EntryField.swift */; };
 		0B7E7CD22717D006004DB7AC /* UniyardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7E7CD12717D006004DB7AC /* UniyardApp.swift */; };
 		0B7E7CD42717D006004DB7AC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7E7CD32717D006004DB7AC /* ContentView.swift */; };
 		0B7E7CD62717D006004DB7AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B7E7CD52717D006004DB7AC /* Assets.xcassets */; };
 		0B7E7CD92717D006004DB7AC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B7E7CD82717D006004DB7AC /* Preview Assets.xcassets */; };
 		0B7E7CE42717D006004DB7AC /* UniyardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7E7CE32717D006004DB7AC /* UniyardTests.swift */; };
 		0B7E7CEF2717D006004DB7AC /* UniyardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7E7CEE2717D006004DB7AC /* UniyardUITests.swift */; };
+		0BB0C4802727494300060C8E /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0C47F2727494300060C8E /* Login.swift */; };
+		0BB0C48227275F0D00060C8E /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0C48127275F0D00060C8E /* ForgotPassword.swift */; };
+		0BB0C4852727B96900060C8E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0C4842727B96900060C8E /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +65,7 @@
 		0B4552372725B5B9009BA1E0 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		0B4552392725B5D3009BA1E0 /* Message_Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message_Sequence.swift; sourceTree = "<group>"; };
 		0B45523B2725B606009BA1E0 /* Notification_Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification_Sequence.swift; sourceTree = "<group>"; };
+		0B6C613927284FEA00D36FAC /* EntryField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryField.swift; sourceTree = "<group>"; };
 		0B7E7CCE2717D006004DB7AC /* Uniyard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Uniyard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B7E7CD12717D006004DB7AC /* UniyardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniyardApp.swift; sourceTree = "<group>"; };
 		0B7E7CD32717D006004DB7AC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -73,6 +78,9 @@
 		0B7E7CEA2717D006004DB7AC /* UniyardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UniyardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B7E7CEE2717D006004DB7AC /* UniyardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniyardUITests.swift; sourceTree = "<group>"; };
 		0B7E7CF02717D006004DB7AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0BB0C47F2727494300060C8E /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		0BB0C48127275F0D00060C8E /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
+		0BB0C4842727B96900060C8E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +121,6 @@
 			children = (
 				0B4552292725B491009BA1E0 /* User.swift */,
 				0B45522D2725B503009BA1E0 /* Post.swift */,
-				0B45522F2725B51B009BA1E0 /* ViewModel.swift */,
 				0B4552312725B554009BA1E0 /* Item.swift */,
 				0B4552332725B574009BA1E0 /* Rental.swift */,
 				0B4552352725B5A1009BA1E0 /* Message.swift */,
@@ -147,6 +154,7 @@
 		0B7E7CD02717D006004DB7AC /* Uniyard */ = {
 			isa = PBXGroup;
 			children = (
+				0BB0C4832727B92900060C8E /* ViewModels */,
 				0BB0C47E27271C8F00060C8E /* Views */,
 				0B4552282725B415009BA1E0 /* Models */,
 				0B7E7CD12717D006004DB7AC /* UniyardApp.swift */,
@@ -188,8 +196,20 @@
 			isa = PBXGroup;
 			children = (
 				0B7E7CD32717D006004DB7AC /* ContentView.swift */,
+				0BB0C47F2727494300060C8E /* Login.swift */,
+				0BB0C48127275F0D00060C8E /* ForgotPassword.swift */,
+				0B6C613927284FEA00D36FAC /* EntryField.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		0BB0C4832727B92900060C8E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				0B45522F2725B51B009BA1E0 /* ViewModel.swift */,
+				0BB0C4842727B96900060C8E /* LoginViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,12 +358,16 @@
 				0B4552302725B51B009BA1E0 /* ViewModel.swift in Sources */,
 				0B45523C2725B606009BA1E0 /* Notification_Sequence.swift in Sources */,
 				0B7E7CD42717D006004DB7AC /* ContentView.swift in Sources */,
+				0BB0C4802727494300060C8E /* Login.swift in Sources */,
 				0B4552382725B5B9009BA1E0 /* Notification.swift in Sources */,
 				0B7E7CD22717D006004DB7AC /* UniyardApp.swift in Sources */,
+				0BB0C4852727B96900060C8E /* LoginViewModel.swift in Sources */,
 				0B4552342725B574009BA1E0 /* Rental.swift in Sources */,
 				0B45522A2725B491009BA1E0 /* User.swift in Sources */,
 				0B4552362725B5A1009BA1E0 /* Message.swift in Sources */,
+				0B6C613A27284FEA00D36FAC /* EntryField.swift in Sources */,
 				0B4552322725B554009BA1E0 /* Item.swift in Sources */,
+				0BB0C48227275F0D00060C8E /* ForgotPassword.swift in Sources */,
 				0B45523A2725B5D3009BA1E0 /* Message_Sequence.swift in Sources */,
 				0B45522E2725B503009BA1E0 /* Post.swift in Sources */,
 			);
