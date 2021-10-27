@@ -108,9 +108,9 @@ struct SecureInputViewSignUp: View {
   var body: some View {
     VStack{
       ZStack(alignment: .trailing) {
-        SecureField(title, text: $text).opacity(isSecured ? 0 : 1)
+        SecureField(title, text: $text).opacity(isSecured ? 0 : 1).autocapitalization(.none).disableAutocorrection(true)
         if isSecured == true {
-          TextField(title, text: $text)
+          TextField(title, text: $text).autocapitalization(.none).disableAutocorrection(true)
         }
         Button(action: {
           isSecured.toggle()

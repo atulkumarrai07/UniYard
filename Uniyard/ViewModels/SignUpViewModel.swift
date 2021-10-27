@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import FirebaseFirestore
 import FirebaseAuth
 
 class SignUpViewModel: ObservableObject {
@@ -103,15 +104,20 @@ class SignUpViewModel: ObservableObject {
      return
     }
     //Success
-    DispatchQueue.main.async {
-     self?.loginModel.signedIn = true
+    
+    if let id = result?.user.uid {
+      let user = User(id: id, email: (self?.cmu_email)!, password: password, user_image: "", first_name: (self?.first_name)!, last_name: self?.last_name ?? "", campus_location: self!.campus_location, saved_post_list: [], my_post_list: [], date_joined: Timestamp.init(), suggestion_preference: "Any", user_status: true)
+      
+      let viewModel = ViewModel()
+      viewModel.addUser(user: user)
+      
+      DispatchQueue.main.async {
+       self?.loginModel.signedIn = true
+      }
     }
- //   if let id = result?.user.uid {
- //
- //   }
- //   else{
- //    return
- //   }
+    else{
+     return
+    }
    }
   }
 }
