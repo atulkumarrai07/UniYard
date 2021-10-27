@@ -13,7 +13,7 @@ struct ItemHome: View {
             }){
               Image(systemName: "chevron.backward").resizable().frame(width: 20, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
             }
-            Text("Sign Up")
+            Text("Items")
               .font(.largeTitle)
               .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
               .fontWeight(.heavy)

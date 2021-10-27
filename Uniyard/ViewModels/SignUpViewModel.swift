@@ -65,16 +65,25 @@ class SignUpViewModel: ObservableObject {
     }.assign(to: \.isTCChecked, on: self).store(in: &cancellableSet)
     
     Publishers.CombineLatest4($isValidEmail, $isPasswordValid, $isFirstNameEmpty, $isLastNameEmpty).map{isValidEmail, isPasswordValid, isFirstNameEmpty, isLastNameEmpty in return (isValidEmail && isPasswordValid && isFirstNameEmpty && isLastNameEmpty)}.assign(to: \.canSignUp2, on: self).store(in: &cancellableSet)
+   
     Publishers.CombineLatest3($canSignUp2, $isPwdMatching, $showTCSelector).map{canSignUp2, isPwdMatching, showTCSelector in return (canSignUp2 && isPwdMatching && showTCSelector)}.assign(to: \.canSignUp, on: self).store(in: &cancellableSet)
-  //  print(canSignUp)
+//    print(canSignUp)
+//    print(canSignUp2)
+//    print(password)
+//    print(confirm_password)
+//    print(first_name)
+//    print(last_name)
+//    print(cmu_email)
+//    print(showTCSelector)
+//    print(campus_location)
   }
   
   func passwordMatch() -> Bool{
     password == confirm_password
   }
-  func signUp() {
-    print("signup done")
-  }
+//  func signUp() {
+//    print("signup done")
+//  }
   
   func toggled(){
     self.showTCSelector = !self.showTCSelector

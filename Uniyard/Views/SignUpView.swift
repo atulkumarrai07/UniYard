@@ -107,7 +107,7 @@ struct SignUpView: View {
                       .foregroundColor(.red)
                       .transition(AnyTransition.opacity.animation(.easeIn))
                 .padding(.horizontal, -180)
-              Button(action: {signupvmodel.signUp();
+              Button(action: {signupvmodel.signUp(email: signupvmodel.cmu_email, password: signupvmodel.password);
                 signupvmodel.showingAlert = true
               }
                      , label: {

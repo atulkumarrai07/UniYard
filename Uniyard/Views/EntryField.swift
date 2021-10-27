@@ -11,7 +11,6 @@ struct EntryField: View {
   var sfSymbol:String
   var placeHolder:String
   var prompt:String
-  var isSecure:Bool = false
   @Binding var field:String
   
     var body: some View {
@@ -20,12 +19,12 @@ struct EntryField: View {
         HStack
         {
           Image(systemName: sfSymbol).foregroundColor(.gray).font(.headline).frame(width: 20)
-          if(isSecure)
+          if(placeHolder == "Password")
           {
-            SecureField(placeHolder, text: $field)
+            SecureInputView(placeHolder, text: $field)
           }
           else{
-            TextField(placeHolder, text: $field)
+            TextField(placeHolder, text: $field).disableAutocorrection(true)
           }
         }.autocapitalization(.none).padding(8).overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray,lineWidth: 1))
         Text(prompt).fixedSize(horizontal: false, vertical: true).font(.caption).foregroundColor(.red)
@@ -71,7 +70,6 @@ struct EntryField_Previews: PreviewProvider {
     }
 }
 
-
 struct SecureInputView: View {
   @Binding private var text: String
   @State private var isSecured: Bool = false
@@ -82,9 +80,9 @@ struct SecureInputView: View {
   }
   var body: some View {
     ZStack(alignment: .trailing) {
-      SecureField(title, text: $text).opacity(isSecured ? 0 : 1)
+      SecureField(title, text: $text).opacity(isSecured ? 0 : 1).disableAutocorrection(true)
       if isSecured == true {
-        TextField(title, text: $text)
+        TextField(title, text: $text).disableAutocorrection(true)
       }
       Button(action: {
         isSecured.toggle()
@@ -95,6 +93,7 @@ struct SecureInputView: View {
     }
   }
 }
+
 struct SecureInputViewSignUp: View {
   @Binding private var text: String
   var prompt:String
