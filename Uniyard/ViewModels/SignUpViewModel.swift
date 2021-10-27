@@ -104,7 +104,7 @@ class SignUpViewModel: ObservableObject {
     }
     //Success
     DispatchQueue.main.async {
-//     self?.loginModel.signedIn = true
+     self?.loginModel.signedIn = true
     }
  //   if let id = result?.user.uid {
  //

@@ -1,20 +1,31 @@
-//
-//  ContentView.swift
-//  Uniyard
-//
-//  Created by Atul Kumar Rai on 10/13/21.
-//
 
 import SwiftUI
 import FirebaseFirestore
 
 struct ContentView: View {
-  var viewModel: ViewModel = ViewModel()
+//  var viewModel: ViewModel = ViewModel()
+  @EnvironmentObject var loginModel: LoginModel
     var body: some View {
       NavigationView{
-        Text("Hello, world!")
-            .padding()
-      }.onAppear(){
+        VStack{
+          if(loginModel.signedIn)
+          {
+            UniYardHomepage()
+          }
+          else
+          {
+            Login()
+//            UniYardHomepage()
+          }
+        }.navigationBarHidden(true)
+      }.onAppear{
+        loginModel.signedIn = loginModel.isLoggedIn
+      }
+      
+//      NavigationView{
+//        Text("Hello, world!")
+//            .padding()
+//      }.onAppear(){
 //        self.viewModel.addUser()
 //        self.viewModel.addItem()
 //        self.viewModel.addMessage()
@@ -23,8 +34,8 @@ struct ContentView: View {
 //        self.viewModel.addRental()
 //        self.viewModel.addNotification()
 //        self.viewModel.addNotification_Sequence()
-        
-        self.viewModel.fetchUser()
+//
+//        self.viewModel.fetchUser()
 //        self.viewModel.fetchAllItem()
 //        self.viewModel.fetchAllMessage()
 //        self.viewModel.fetchAllMessage_Sequence()
@@ -32,8 +43,8 @@ struct ContentView: View {
 //        self.viewModel.fetchAllRental()
 //        self.viewModel.fetchAllNotification()
 //        self.viewModel.fetchAllNotification_Sequence()
-//
-      }.navigationTitle("").navigationBarHidden(true)
+////
+//      }
     }
 }
 

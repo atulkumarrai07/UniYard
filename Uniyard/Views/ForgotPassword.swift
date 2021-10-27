@@ -1,9 +1,4 @@
-//
-//  ForgotPassword.swift
-//  Uniyard
-//
-//  Created by Atul Kumar Rai on 10/25/21.
-//
+
 
 import SwiftUI
 

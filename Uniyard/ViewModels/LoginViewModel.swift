@@ -1,12 +1,7 @@
-//
-//  LoginViewModel.swift
-//  Uniyard
-//
-//  Created by Atul Kumar Rai on 10/26/21.
-//
 
 import Foundation
 import Combine
+import FirebaseAuth
 
 class LoginModel: ObservableObject {
   @Published var email = ""
@@ -15,6 +10,8 @@ class LoginModel: ObservableObject {
   @Published var isEmailValid = false
   @Published var isPasswordValid = false
   @Published var canSubmit = false
+  
+  @Published var signedIn = false
   
   private var cancellableSet: Set<AnyCancellable> = []
   
@@ -41,11 +38,29 @@ class LoginModel: ObservableObject {
     (isPasswordValid || password.isEmpty) ? "":"Password entered does not satisfy basic requirements"
   }
   
-  func login() {
-    print("Logging in \(email)")
-    email = ""
-    password = ""
+  var auth = Auth.auth()
+  
+  var isLoggedIn:Bool{
+    return auth.currentUser != nil
   }
+  
+  func login(email:String, password:String) {
+    auth.signIn(withEmail: email, password: password) { [weak self] result, error in
+      guard result != nil, error == nil else{
+        return
+      }
+      //Success
+      DispatchQueue.main.async {
+        self?.signedIn = true
+      }
+    }
+  }
+  
+  func signOut() {
+    try? auth.signOut()
+    self.signedIn = false
+  }
+  
 }
 
 

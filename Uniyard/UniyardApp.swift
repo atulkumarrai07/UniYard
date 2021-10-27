@@ -1,9 +1,4 @@
-//
-//  UniyardApp.swift
-//  Uniyard
-//
-//  Created by Atul Kumar Rai on 10/13/21.
-//
+
 
 import SwiftUI
 import Firebase
@@ -14,11 +9,13 @@ struct UniyardApp: App {
     FirebaseApp.configure()
   }
     var body: some Scene {
+      let loginModel = LoginModel()
         WindowGroup {
-//            ContentView()
+            ContentView()
+              .environmentObject(loginModel)
           
-          //Login()
-          SignUpView()
+//          Login()
+//          SignUpView()
         }
     }
 }
