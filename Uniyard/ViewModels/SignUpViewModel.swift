@@ -48,11 +48,11 @@ class SignUpViewModel: ObservableObject {
     }.assign(to: \.isPasswordValid, on: self).store(in: &cancellableSet)
     
     $first_name.map{firstname in
-      return self.first_name.isEmpty
+      return !self.first_name.isEmpty
     }.assign(to: \.isFirstNameEmpty, on: self).store(in: &cancellableSet)
     
     $last_name.map{lastname in
-      return self.last_name.isEmpty
+      return !self.last_name.isEmpty
     }.assign(to: \.isLastNameEmpty, on: self).store(in: &cancellableSet)
     
     Publishers.CombineLatest($password,$confirm_password)

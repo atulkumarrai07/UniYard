@@ -95,44 +95,44 @@ struct SecureInputView: View {
 }
 
 struct SecureInputViewSignUp: View {
-  @Binding private var text: String
-  var prompt:String
-  @State private var isSecured: Bool = false
-  private var title: String
-  init(_ title: String, prompt: String, text: Binding<String>) {
-    self.title = title
-    self._text = text
-    self.prompt = prompt
-  }
-  var body: some View {
-    VStack{
-      ZStack(alignment: .trailing) {
-        SecureField(title, text: $text).opacity(isSecured ? 0 : 1).autocapitalization(.none).disableAutocorrection(true)
-        if isSecured == true {
-          TextField(title, text: $text).autocapitalization(.none).disableAutocorrection(true)
-        }
-        Button(action: {
-          isSecured.toggle()
-        }) {
-          Image(systemName: self.isSecured ? "eye" : "eye.slash")
-            .accentColor(.gray)
-        }
-      }.padding(.horizontal)
-      Divider()
-        .padding(.horizontal, 15)
-       // .padding(.bottom)
-        .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
-        .shadow(color: Color.black.opacity(0.05), radius: 5, x: -5, y: -5)
-      HStack
-      {
-        Text(prompt).fixedSize(horizontal: true, vertical: false)
-          .font(.caption)
-          .foregroundColor(.red)
-          .transition(AnyTransition.opacity.animation(.easeIn))
-          .padding(.horizontal)
-          .padding(.vertical,5)
-          Spacer()
-      }
+ @Binding private var text: String
+ var prompt:String
+ @State private var isSecured: Bool = false
+ private var title: String
+ init(_ title: String, prompt: String, text: Binding<String>) {
+  self.title = title
+  self._text = text
+  self.prompt = prompt
+ }
+ var body: some View {
+  VStack{
+   ZStack(alignment: .trailing) {
+    SecureField(title, text: $text).opacity(isSecured ? 0 : 1).disableAutocorrection(true)
+    if isSecured == true {
+     TextField(title, text: $text).disableAutocorrection(true)
     }
+    Button(action: {
+     isSecured.toggle()
+    }) {
+     Image(systemName: self.isSecured ? "eye" : "eye.slash")
+      .accentColor(.gray)
+    }
+   }.padding(.horizontal)
+   Divider()
+    .padding(.horizontal, 15)
+    // .padding(.bottom)
+    .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
+    .shadow(color: Color.black.opacity(0.05), radius: 5, x: -5, y: -5)
+   HStack
+   {
+    Text(prompt).fixedSize(horizontal: true, vertical: false)
+     .font(.caption)
+     .foregroundColor(.red)
+     .transition(AnyTransition.opacity.animation(.easeIn))
+     .padding(.horizontal)
+     .padding(.vertical,5)
+     Spacer()
+   }
   }
+ }
 }
