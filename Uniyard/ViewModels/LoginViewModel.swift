@@ -13,6 +13,12 @@ class LoginModel: ObservableObject {
   
   @Published var signedIn = false
   
+  var auth = Auth.auth()
+  
+  var isLoggedIn:Bool{
+    return auth.currentUser != nil
+  }
+  
   private var cancellableSet: Set<AnyCancellable> = []
   
   let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "^.*@andrew.cmu.edu$")
@@ -38,12 +44,6 @@ class LoginModel: ObservableObject {
     (isPasswordValid || password.isEmpty) ? "":"Password entered does not satisfy basic requirements"
   }
   
-  var auth = Auth.auth()
-  
-  var isLoggedIn:Bool{
-    return auth.currentUser != nil
-  }
-  
   func login(email:String, password:String) {
     auth.signIn(withEmail: email, password: password) { [weak self] result, error in
       guard result != nil, error == nil else{
@@ -59,6 +59,8 @@ class LoginModel: ObservableObject {
   func signOut() {
     try? auth.signOut()
     self.signedIn = false
+    self.email = ""
+    self.password = ""
   }
   
 }

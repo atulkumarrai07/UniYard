@@ -8,10 +8,17 @@
 import SwiftUI
 
 struct SignUpView: View {
+   var loginModel:LoginModel
     @Environment(\.presentationMode) var signUpPresentation: Binding<PresentationMode>
-    @StateObject private var signupvmodel = SignUpViewModel()
+    @StateObject var signupvmodel = SignUpViewModel()
     var body: some View {
       VStack{
+        NavigationLink(
+          destination: Login(loginModel: loginModel),
+          isActive: $signupvmodel.displayLogin,
+          label: {
+            Text("")
+          })
         HStack {
              Button(action: {
               self.signUpPresentation.wrappedValue.dismiss()
@@ -108,7 +115,6 @@ struct SignUpView: View {
                       .transition(AnyTransition.opacity.animation(.easeIn))
                 .padding(.horizontal, -180)
               Button(action: {signupvmodel.signUp(email: signupvmodel.cmu_email, password: signupvmodel.password);
-                signupvmodel.showingAlert = true
               }
                      , label: {
                   Text("Register")
@@ -120,14 +126,14 @@ struct SignUpView: View {
                 .cornerRadius(15)
                 .opacity(signupvmodel.canSignUp ? 1 : 0.6)
                 .disabled(!signupvmodel.canSignUp)
-                .alert(isPresented:$signupvmodel.showingAlert) {
+                .alert(isPresented:$signupvmodel.registrationStatus) {
                      Alert(
                      title: Text("You have been successfully registered with UniYard!"),
-                     message: Text("Do you wish to login now?"),
-                     primaryButton: .destructive(Text("Yes")) {
-                       print("Take to login page...")
+                     message: Text("Do you wish to login?"),
+                     primaryButton: .default(Text("Yes")) {
+                      signupvmodel.displayLogin = true
                      },
-                     secondaryButton: .cancel()
+                      secondaryButton: .cancel()
                    )
                  }
             }
@@ -138,9 +144,9 @@ struct SignUpView: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-      Group {
-        SignUpView()
-      }
+      let loginModel = LoginModel()
+      SignUpView(loginModel: loginModel)
+      
     }
 }
 

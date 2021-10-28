@@ -11,10 +11,11 @@ struct ContentView: View {
           if(loginModel.signedIn)
           {
             UniYardHomepage()
+              .environmentObject(loginModel)
           }
           else
           {
-            Login()
+            Login(loginModel: loginModel)
 //            UniYardHomepage()
           }
         }.navigationBarHidden(true)

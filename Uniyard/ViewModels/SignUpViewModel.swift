@@ -12,6 +12,7 @@ import FirebaseAuth
 
 class SignUpViewModel: ObservableObject {
   
+  
   @Published var cmu_email = ""
   @Published var first_name = ""
   @Published var last_name = ""
@@ -30,12 +31,15 @@ class SignUpViewModel: ObservableObject {
   @Published var isTCChecked = false
   @Published var canSignUp = false
   @Published var canSignUp2 = false
+  @Published var registrationStatus:Bool = false
+  @Published var displayLogin = false
+  
  private var cancellableSet: Set<AnyCancellable> = []
   
   let emailPred = NSPredicate(format: "SELF MATCHES %@", "^.*@andrew.cmu.edu$")
   let pwdPred = NSPredicate(format: "SELF MATCHES %@", "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$")
   var loginModel:LoginModel = LoginModel()
-   var auth = Auth.auth()
+  var auth = Auth.auth()
    
   init() {
     $cmu_email
@@ -67,15 +71,6 @@ class SignUpViewModel: ObservableObject {
     Publishers.CombineLatest4($isValidEmail, $isPasswordValid, $isFirstNameEmpty, $isLastNameEmpty).map{isValidEmail, isPasswordValid, isFirstNameEmpty, isLastNameEmpty in return (isValidEmail && isPasswordValid && isFirstNameEmpty && isLastNameEmpty)}.assign(to: \.canSignUp2, on: self).store(in: &cancellableSet)
    
     Publishers.CombineLatest3($canSignUp2, $isPwdMatching, $showTCSelector).map{canSignUp2, isPwdMatching, showTCSelector in return (canSignUp2 && isPwdMatching && showTCSelector)}.assign(to: \.canSignUp, on: self).store(in: &cancellableSet)
-//    print(canSignUp)
-//    print(canSignUp2)
-//    print(password)
-//    print(confirm_password)
-//    print(first_name)
-//    print(last_name)
-//    print(cmu_email)
-//    print(showTCSelector)
-//    print(campus_location)
   }
   
   func passwordMatch() -> Bool{
@@ -110,21 +105,20 @@ class SignUpViewModel: ObservableObject {
   func signUp(email: String, password: String) {
    auth.createUser(withEmail: email, password: password) { [weak self]result, error in
     guard result != nil, error == nil else{
+      self?.registrationStatus = false
      return
     }
     //Success
-    
     if let id = result?.user.uid {
       let user = User(id: id, email: (self?.cmu_email)!, password: password, user_image: "", first_name: (self?.first_name)!, last_name: self?.last_name ?? "", campus_location: self!.campus_location, saved_post_list: [], my_post_list: [], date_joined: Timestamp.init(), suggestion_preference: "Any", user_status: true)
       
       let viewModel = ViewModel()
       viewModel.addUser(user: user)
-      
-      DispatchQueue.main.async {
-       self?.loginModel.signedIn = true
-      }
+      self?.registrationStatus = true
+      self?.loginModel.signOut()
     }
     else{
+      self?.registrationStatus = false
      return
     }
    }

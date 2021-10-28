@@ -4,7 +4,7 @@ import SwiftUI
 let lightGreyColor = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0)
 
 struct Login: View {
-  @StateObject var loginModel = LoginModel()
+  @StateObject var loginModel: LoginModel
     var body: some View {
       NavigationView{
         VStack{
@@ -27,7 +27,7 @@ struct Login: View {
             label: {
               Text("Forgot Password?").font(.system(size: 15)).padding().foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
             })
-          NavigationLink("New User?", destination: SignUpView()).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).padding(.horizontal,60).padding(.vertical).overlay(RoundedRectangle(cornerRadius: 15.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)))
+          NavigationLink("New User?", destination: SignUpView(loginModel: loginModel)).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).padding(.horizontal,60).padding(.vertical).overlay(RoundedRectangle(cornerRadius: 15.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)))
           
           Spacer()
           
@@ -41,7 +41,8 @@ struct Login: View {
 
 struct Login_Previews: PreviewProvider {
     static var previews: some View {
-        Login()
+      let loginModel:LoginModel = LoginModel()
+      Login(loginModel: loginModel)
     }
 }
 
