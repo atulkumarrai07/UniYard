@@ -1,9 +1,3 @@
-//
-//  SignUpViewModel.swift
-//  Uniyard
-//
-//  Created by Aaratrika Chakraborty on 10/25/21.
-//
 
 import SwiftUI
 import Combine
@@ -94,7 +88,7 @@ class SignUpViewModel: ObservableObject {
     ( !last_name.isEmpty) ? "" : "Last name cannot be empty"
   }
   var passwordPrompt:String{
-    (isPasswordValid || password.isEmpty) ? "":"Password must be 8-15 chars,must include at least 1 upper case,\n1 lower case letter, and 1 number"
+    (isPasswordValid || password.isEmpty) ? "":"Password must be 8-15 chars,must include at least 1 upper \ncase, 1 lower case letter, and 1 number"
   }
   var confirmPwdPrompt: String {
     (passwordMatch() || confirm_password.isEmpty) ? "":"Both the passwords don't match"
