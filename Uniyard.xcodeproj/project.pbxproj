@@ -46,6 +46,7 @@
 		BF23DB4527290F4A00410436 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB4427290F4A00410436 /* FirebaseCrashlytics */; };
 		BF23DB4727290F4A00410436 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB4627290F4A00410436 /* FirebaseAuth */; };
 		BF23DB4927290F4A00410436 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB4827290F4A00410436 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		E2F9E954272B3CB5002E518B /* CreateSellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F9E953272B3CB5002E518B /* CreateSellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		BF23DB3127289FF400410436 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		BF23DB332728C2FD00410436 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		BF23DB352728DC6E00410436 /* CampusLocationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusLocationPicker.swift; sourceTree = "<group>"; };
+		E2F9E953272B3CB5002E518B /* CreateSellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +230,7 @@
 				0BFD720F27291F2F0038F669 /* ItemsHome.swift */,
 				0BFD7213272A54920038F669 /* CampusLocationPicker2.swift */,
 				0BF72DF2272B06630013DCC2 /* CreateBuyView.swift */,
+				E2F9E953272B3CB5002E518B /* CreateSellView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2F9E954272B3CB5002E518B /* CreateSellView.swift in Sources */,
 				0BFD7214272A54920038F669 /* CampusLocationPicker2.swift in Sources */,
 				0BFD7212272A3FCF0038F669 /* PostItem.swift in Sources */,
 				0B4552302725B51B009BA1E0 /* ViewModel.swift in Sources */,

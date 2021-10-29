@@ -4,8 +4,11 @@ import FirebaseFirestore
 
 class CreateBuyViewModel: ObservableObject {
   @Published var title = ""
+	@Published var pickUpAddress = ""
   
   @Published var price = ""
+	@Published var budget = ""
+	
   @Published var delivertRequest = false
   @Published var zipCode = ""
   @Published var description = ""
@@ -13,6 +16,9 @@ class CreateBuyViewModel: ObservableObject {
   @Published var showingAlert = false
   @Published var isValid = false
   
+	@Published var availableDate = Date()
+	@Published var locationSelection = "Pittsburgh"
+	@Published var conditionSelection = "New"
   @Published var categorySelection = "clothing"
   
   private var cancellableSet: Set<AnyCancellable> = []
