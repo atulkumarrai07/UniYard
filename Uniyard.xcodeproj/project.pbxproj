@@ -13,6 +13,33 @@
 		0B7E7CD92717D006004DB7AC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B7E7CD82717D006004DB7AC /* Preview Assets.xcassets */; };
 		0B7E7CE42717D006004DB7AC /* UniyardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7E7CE32717D006004DB7AC /* UniyardTests.swift */; };
 		0B7E7CEF2717D006004DB7AC /* UniyardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7E7CEE2717D006004DB7AC /* UniyardUITests.swift */; };
+<<<<<<< Updated upstream
+=======
+		0BB0C4802727494300060C8E /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0C47F2727494300060C8E /* Login.swift */; };
+		0BB0C48227275F0D00060C8E /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0C48127275F0D00060C8E /* ForgotPassword.swift */; };
+		0BB0C4852727B96900060C8E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0C4842727B96900060C8E /* LoginViewModel.swift */; };
+		0BF72DF1272AF5DE0013DCC2 /* ItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF72DF0272AF5DE0013DCC2 /* ItemsViewModel.swift */; };
+		0BF72DF3272B06630013DCC2 /* CreateBuyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF72DF2272B06630013DCC2 /* CreateBuyView.swift */; };
+		0BF72DF5272B06860013DCC2 /* CreateBuyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF72DF4272B06860013DCC2 /* CreateBuyViewModel.swift */; };
+		0BF72DF7272B07E80013DCC2 /* BuyListings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF72DF6272B07E80013DCC2 /* BuyListings.swift */; };
+		0BF72DF9272B08040013DCC2 /* SellListings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF72DF8272B08040013DCC2 /* SellListings.swift */; };
+		0BFD720E27291EF60038F669 /* UniYardHomepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD720D27291EF60038F669 /* UniYardHomepage.swift */; };
+		0BFD721027291F2F0038F669 /* ItemsHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD720F27291F2F0038F669 /* ItemsHome.swift */; };
+		0BFD7212272A3FCF0038F669 /* PostItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD7211272A3FCF0038F669 /* PostItem.swift */; };
+		0BFD7214272A54920038F669 /* CampusLocationPicker2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD7213272A54920038F669 /* CampusLocationPicker2.swift */; };
+		BF23DB3227289FF400410436 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23DB3127289FF400410436 /* SignUpView.swift */; };
+		BF23DB342728C2FD00410436 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23DB332728C2FD00410436 /* SignUpViewModel.swift */; };
+		BF23DB362728DC6E00410436 /* CampusLocationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23DB352728DC6E00410436 /* CampusLocationPicker.swift */; };
+		BF23DB3927290F4A00410436 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB3827290F4A00410436 /* FirebaseFirestore */; };
+		BF23DB3B27290F4A00410436 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB3A27290F4A00410436 /* FirebaseDatabase */; };
+		BF23DB3D27290F4A00410436 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB3C27290F4A00410436 /* FirebaseFirestoreSwift-Beta */; };
+		BF23DB3F27290F4A00410436 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB3E27290F4A00410436 /* FirebaseAnalyticsSwift-Beta */; };
+		BF23DB4127290F4A00410436 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB4027290F4A00410436 /* FirebaseAnalytics */; };
+		BF23DB4327290F4A00410436 /* FirebaseDatabaseSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB4227290F4A00410436 /* FirebaseDatabaseSwift-Beta */; };
+		BF23DB4527290F4A00410436 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB4427290F4A00410436 /* FirebaseCrashlytics */; };
+		BF23DB4727290F4A00410436 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB4627290F4A00410436 /* FirebaseAuth */; };
+		BF23DB4927290F4A00410436 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB4827290F4A00410436 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+>>>>>>> Stashed changes
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +72,24 @@
 		0B7E7CEA2717D006004DB7AC /* UniyardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UniyardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B7E7CEE2717D006004DB7AC /* UniyardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniyardUITests.swift; sourceTree = "<group>"; };
 		0B7E7CF02717D006004DB7AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+<<<<<<< Updated upstream
+=======
+		0BB0C47F2727494300060C8E /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		0BB0C48127275F0D00060C8E /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
+		0BB0C4842727B96900060C8E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		0BF72DF0272AF5DE0013DCC2 /* ItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewModel.swift; sourceTree = "<group>"; };
+		0BF72DF2272B06630013DCC2 /* CreateBuyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBuyView.swift; sourceTree = "<group>"; };
+		0BF72DF4272B06860013DCC2 /* CreateBuyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBuyViewModel.swift; sourceTree = "<group>"; };
+		0BF72DF6272B07E80013DCC2 /* BuyListings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyListings.swift; sourceTree = "<group>"; };
+		0BF72DF8272B08040013DCC2 /* SellListings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellListings.swift; sourceTree = "<group>"; };
+		0BFD720D27291EF60038F669 /* UniYardHomepage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniYardHomepage.swift; sourceTree = "<group>"; };
+		0BFD720F27291F2F0038F669 /* ItemsHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsHome.swift; sourceTree = "<group>"; };
+		0BFD7211272A3FCF0038F669 /* PostItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostItem.swift; sourceTree = "<group>"; };
+		0BFD7213272A54920038F669 /* CampusLocationPicker2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusLocationPicker2.swift; sourceTree = "<group>"; };
+		BF23DB3127289FF400410436 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		BF23DB332728C2FD00410436 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		BF23DB352728DC6E00410436 /* CampusLocationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusLocationPicker.swift; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +175,40 @@
 			path = UniyardUITests;
 			sourceTree = "<group>";
 		};
+<<<<<<< Updated upstream
+=======
+		0BB0C47E27271C8F00060C8E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0B7E7CD32717D006004DB7AC /* ContentView.swift */,
+				0BB0C47F2727494300060C8E /* Login.swift */,
+				0BB0C48127275F0D00060C8E /* ForgotPassword.swift */,
+				0B6C613927284FEA00D36FAC /* EntryField.swift */,
+				BF23DB3127289FF400410436 /* SignUpView.swift */,
+				BF23DB352728DC6E00410436 /* CampusLocationPicker.swift */,
+				0BFD720D27291EF60038F669 /* UniYardHomepage.swift */,
+				0BFD720F27291F2F0038F669 /* ItemsHome.swift */,
+				0BFD7213272A54920038F669 /* CampusLocationPicker2.swift */,
+				0BF72DF2272B06630013DCC2 /* CreateBuyView.swift */,
+				0BF72DF6272B07E80013DCC2 /* BuyListings.swift */,
+				0BF72DF8272B08040013DCC2 /* SellListings.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0BB0C4832727B92900060C8E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				0B45522F2725B51B009BA1E0 /* ViewModel.swift */,
+				0BB0C4842727B96900060C8E /* LoginViewModel.swift */,
+				BF23DB332728C2FD00410436 /* SignUpViewModel.swift */,
+				0BF72DF0272AF5DE0013DCC2 /* ItemsViewModel.swift */,
+				0BF72DF4272B06860013DCC2 /* CreateBuyViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+>>>>>>> Stashed changes
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -259,6 +338,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< Updated upstream
+=======
+				0BFD7214272A54920038F669 /* CampusLocationPicker2.swift in Sources */,
+				0BF72DF9272B08040013DCC2 /* SellListings.swift in Sources */,
+				0BFD7212272A3FCF0038F669 /* PostItem.swift in Sources */,
+				0B4552302725B51B009BA1E0 /* ViewModel.swift in Sources */,
+				0BF72DF5272B06860013DCC2 /* CreateBuyViewModel.swift in Sources */,
+				BF23DB342728C2FD00410436 /* SignUpViewModel.swift in Sources */,
+				0BF72DF7272B07E80013DCC2 /* BuyListings.swift in Sources */,
+				0B45523C2725B606009BA1E0 /* Notification_Sequence.swift in Sources */,
+				BF23DB362728DC6E00410436 /* CampusLocationPicker.swift in Sources */,
+>>>>>>> Stashed changes
 				0B7E7CD42717D006004DB7AC /* ContentView.swift in Sources */,
 				0B7E7CD22717D006004DB7AC /* UniyardApp.swift in Sources */,
 			);
