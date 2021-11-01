@@ -46,6 +46,14 @@
 		BF23DB4527290F4A00410436 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB4427290F4A00410436 /* FirebaseCrashlytics */; };
 		BF23DB4727290F4A00410436 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB4627290F4A00410436 /* FirebaseAuth */; };
 		BF23DB4927290F4A00410436 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB4827290F4A00410436 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		BF27463C272A434800B7C93F /* ItemDetailsSell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF27463B272A434800B7C93F /* ItemDetailsSell.swift */; };
+		BF27463E272AE94F00B7C93F /* BottomBarNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF27463D272AE94F00B7C93F /* BottomBarNav.swift */; };
+		BF274640272AECEF00B7C93F /* ItemDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF27463F272AECEF00B7C93F /* ItemDetailViewModel.swift */; };
+		BF274642272AF5ED00B7C93F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF274641272AF5ED00B7C93F /* ChatView.swift */; };
+		BF274644272AFCD900B7C93F /* SavedPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF274643272AFCD900B7C93F /* SavedPostView.swift */; };
+		BF274646272AFE0300B7C93F /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF274645272AFE0300B7C93F /* NotificationView.swift */; };
+		BF274648272AFE7B00B7C93F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF274647272AFE7B00B7C93F /* ProfileView.swift */; };
+		BFD62E64272E417F00ABCCE3 /* ItemDetailsBuy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD62E63272E417F00ABCCE3 /* ItemDetailsBuy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +110,14 @@
 		BF23DB3127289FF400410436 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		BF23DB332728C2FD00410436 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		BF23DB352728DC6E00410436 /* CampusLocationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusLocationPicker.swift; sourceTree = "<group>"; };
+		BF27463B272A434800B7C93F /* ItemDetailsSell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsSell.swift; sourceTree = "<group>"; };
+		BF27463D272AE94F00B7C93F /* BottomBarNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarNav.swift; sourceTree = "<group>"; };
+		BF27463F272AECEF00B7C93F /* ItemDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewModel.swift; sourceTree = "<group>"; };
+		BF274641272AF5ED00B7C93F /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		BF274643272AFCD900B7C93F /* SavedPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostView.swift; sourceTree = "<group>"; };
+		BF274645272AFE0300B7C93F /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		BF274647272AFE7B00B7C93F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		BFD62E63272E417F00ABCCE3 /* ItemDetailsBuy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsBuy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +244,13 @@
 				0BFD720F27291F2F0038F669 /* ItemsHome.swift */,
 				0BFD7213272A54920038F669 /* CampusLocationPicker2.swift */,
 				0BF72DF2272B06630013DCC2 /* CreateBuyView.swift */,
+				BF27463B272A434800B7C93F /* ItemDetailsSell.swift */,
+				BF27463D272AE94F00B7C93F /* BottomBarNav.swift */,
+				BF274641272AF5ED00B7C93F /* ChatView.swift */,
+				BF274643272AFCD900B7C93F /* SavedPostView.swift */,
+				BF274645272AFE0300B7C93F /* NotificationView.swift */,
+				BF274647272AFE7B00B7C93F /* ProfileView.swift */,
+				BFD62E63272E417F00ABCCE3 /* ItemDetailsBuy.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -240,6 +263,7 @@
 				BF23DB332728C2FD00410436 /* SignUpViewModel.swift */,
 				0BF72DF0272AF5DE0013DCC2 /* ItemsViewModel.swift */,
 				0BF72DF4272B06860013DCC2 /* CreateBuyViewModel.swift */,
+				BF27463F272AECEF00B7C93F /* ItemDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -317,6 +341,9 @@
 		0B7E7CC62717D006004DB7AC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					New,
+				);
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
@@ -393,11 +420,17 @@
 				0B4552302725B51B009BA1E0 /* ViewModel.swift in Sources */,
 				0BF72DF5272B06860013DCC2 /* CreateBuyViewModel.swift in Sources */,
 				BF23DB342728C2FD00410436 /* SignUpViewModel.swift in Sources */,
+				BF27463E272AE94F00B7C93F /* BottomBarNav.swift in Sources */,
+				BF27463C272A434800B7C93F /* ItemDetailsSell.swift in Sources */,
 				0B45523C2725B606009BA1E0 /* Notification_Sequence.swift in Sources */,
 				BF23DB362728DC6E00410436 /* CampusLocationPicker.swift in Sources */,
+				BF274642272AF5ED00B7C93F /* ChatView.swift in Sources */,
+				BF274646272AFE0300B7C93F /* NotificationView.swift in Sources */,
 				0B7E7CD42717D006004DB7AC /* ContentView.swift in Sources */,
 				0BB0C4802727494300060C8E /* Login.swift in Sources */,
 				0B4552382725B5B9009BA1E0 /* Notification.swift in Sources */,
+				BF274648272AFE7B00B7C93F /* ProfileView.swift in Sources */,
+				BF274640272AECEF00B7C93F /* ItemDetailViewModel.swift in Sources */,
 				0BFD720E27291EF60038F669 /* UniYardHomepage.swift in Sources */,
 				0B7E7CD22717D006004DB7AC /* UniyardApp.swift in Sources */,
 				0BB0C4852727B96900060C8E /* LoginViewModel.swift in Sources */,
@@ -405,7 +438,9 @@
 				0B45522A2725B491009BA1E0 /* User.swift in Sources */,
 				0B4552362725B5A1009BA1E0 /* Message.swift in Sources */,
 				0BFD721027291F2F0038F669 /* ItemsHome.swift in Sources */,
+				BF274644272AFCD900B7C93F /* SavedPostView.swift in Sources */,
 				0B6C613A27284FEA00D36FAC /* EntryField.swift in Sources */,
+				BFD62E64272E417F00ABCCE3 /* ItemDetailsBuy.swift in Sources */,
 				BF23DB3227289FF400410436 /* SignUpView.swift in Sources */,
 				0BF72DF1272AF5DE0013DCC2 /* ItemsViewModel.swift in Sources */,
 				0B4552322725B554009BA1E0 /* Item.swift in Sources */,
