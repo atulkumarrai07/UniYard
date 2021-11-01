@@ -53,9 +53,14 @@ struct ItemsHome: View {
           Image("sort_icon").resizable().frame(width: 45, height: 50, alignment: .center).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
         }.padding(.horizontal)
         
+        if(itemViewModel.renderSell){
+          SellListings(itemViewModel: itemViewModel)
+        }
+        else{
+          BuyListings(itemViewModel: itemViewModel)
+        }
         Spacer()
       }.navigationBarHidden(true)
-      
     }
 }
 

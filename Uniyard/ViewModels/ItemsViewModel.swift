@@ -3,6 +3,7 @@ import SwiftUI
 import Combine
 
 class ItemsViewModel: ObservableObject {
+  var viewModel = ViewModel()
   @Published var location:String = "Pittsburgh"
   @Published var showingLocations:Bool = false
   @Published var renderSell:Bool = false
@@ -10,7 +11,11 @@ class ItemsViewModel: ObservableObject {
   @Published var sellButtonBackgroundColor = Color(.white)
   @Published var buyButtonForegroundColor = Color(.white)
   @Published var buyButtonBackgroundColor = Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)
+  @Published var itemswithPostsAvailableArray:[PostItem] = []
   
+  init() {
+    loadItemswithPostsAvailable()
+  }
   
   func viewBuySell() {
     if(self.renderSell)
@@ -25,6 +30,12 @@ class ItemsViewModel: ObservableObject {
       sellButtonBackgroundColor = Color(.white)
       buyButtonForegroundColor = Color(.white)
       buyButtonBackgroundColor = Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)
+    }
+  }
+  
+  func loadItemswithPostsAvailable() {
+    viewModel.fetchAllItemsWithPostsAvailable { results in
+      self.itemswithPostsAvailableArray = results
     }
   }
 }
