@@ -129,10 +129,8 @@ struct CreateSellView: View {
 					.padding(.leading, 20)
 					.padding(.trailing, 20)
 					
-					Button(action:{
-						print("created!")
+					Button(action: {item_vm.createSellPost();
 					}
-					
 					, label: {
 						Text("Post")
 							.frame(width: 300, height: 50, alignment: .center)
@@ -142,16 +140,18 @@ struct CreateSellView: View {
 																green: 0/255.0,
 																blue: 0/255.0, opacity: 1.0))
 							.cornerRadius(15)
-						
 					})
 					.padding(.vertical, 10)
 					.padding(.horizontal, 50)
-					.alert(isPresented:$item_vm.showingAlert) {
+					.opacity(((!item_vm.title.isEmpty) && (!item_vm.description.isEmpty)) ? 1 : 0.6)
+					.disabled((item_vm.title.isEmpty || item_vm.description.isEmpty))
+					.alert(isPresented:$item_vm.availableStatus)
+					{
 						Alert(title: Text("Success"),
-									message: Text("A buy post has been created!"),
+									message: Text("A sell post has been created!"),
 									dismissButton: .default(Text("OK")))
-						
 					}
+					
 				}
 				
 				.navigationBarHidden(true)

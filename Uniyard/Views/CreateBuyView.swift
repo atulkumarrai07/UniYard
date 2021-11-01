@@ -2,13 +2,13 @@ import SwiftUI
 
 struct CreateBuyView: View {
 	@Environment(\.presentationMode) var createBuyPresentation: Binding<PresentationMode>
-	
 	@StateObject var item_vm = ItemsViewModel()
 	
 	var categoryList=["clothing", "books", "computers",
 										"electronics", "furniture", "home appliances", "jewelley, watches",
 										"music instruments", "phones", "sporting goods", "tools",
 										"toys, games", "other"]
+	
 	
 	var body: some View {
 		NavigationView {
@@ -37,6 +37,10 @@ struct CreateBuyView: View {
 						.textCase(nil)
 						.font(.system(size: 18))
 						.foregroundColor(.black)
+						
+						//						EntryFieldSignUp(placeHolder: "Title", prompt:item_vm.titlePrompt, field: $item_vm.title)
+						//
+						//						Spacer()
 						
 						Section(header: Text("Budget (USD)")) {
 							TextField("$0.00", text: $item_vm.budget)
@@ -71,33 +75,33 @@ struct CreateBuyView: View {
 						.font(.system(size: 18))
 						.foregroundColor(.black)
 					}.cornerRadius(15)
-						.padding(.leading, 20)
-					 .padding(.trailing, 20)
+					.padding(.leading, 20)
+					.padding(.trailing, 20)
 					
-					Button(action:{
-						print("created!")
+					Button(action: {item_vm.createBuyPost();
 					}
-					
 					, label: {
 						Text("Post")
-							.frame(width: 300, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+							.frame(width: 300, height: 50, alignment: .center)
 							.font(.system(size: 25, weight: .heavy))
 							.foregroundColor(.white)
 							.background(Color(red: 128/255.0,
 																green: 0/255.0,
 																blue: 0/255.0, opacity: 1.0))
 							.cornerRadius(15)
-						
 					})
-					
 					.padding(.vertical, 10)
 					.padding(.horizontal, 50)
-					//          .disabled(!$createBuy_vm.isValid)
-					.alert(isPresented:$item_vm.showingAlert) {
+					.opacity(((!item_vm.title.isEmpty) && (!item_vm.description.isEmpty)) ? 1 : 0.6)
+					.disabled((item_vm.title.isEmpty || item_vm.description.isEmpty))
+					.alert(isPresented:$item_vm.availableStatus)
+					{
 						Alert(title: Text("Success"),
 									message: Text("A buy post has been created!"),
 									dismissButton: .default(Text("OK")))
 					}
+					//
+					
 				}//zstack
 			}.navigationBarHidden(true)
 		}

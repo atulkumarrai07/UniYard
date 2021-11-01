@@ -15,6 +15,7 @@ struct Item: Identifiable, Codable {
   var zip_code:String
   var delivery:Bool
   var pickup_location:String
+//	var availableDate: Date
 
   enum CodingKeys: String, CodingKey {
     case post_id
@@ -28,6 +29,7 @@ struct Item: Identifiable, Codable {
     case zip_code
     case delivery
     case pickup_location
+//		case availableDate
       
   }
   

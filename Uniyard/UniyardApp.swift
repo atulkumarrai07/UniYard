@@ -11,7 +11,7 @@ struct UniyardApp: App {
     var body: some Scene {
 //      let loginModel = LoginModel()
         WindowGroup {
-					CreateSellView()
+					CreateBuyView()
           
 //          Login()
 //          SignUpView()
