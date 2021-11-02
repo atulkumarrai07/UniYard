@@ -2,26 +2,25 @@
 import SwiftUI
 
 struct ItemsHome: View {
-  @Environment(\.presentationMode) var ItemHomePresentation: Binding<PresentationMode>
-  var userId:String
+  @EnvironmentObject var loginModel:LoginModel
   @StateObject var itemViewModel = ItemsViewModel()
     var body: some View {
       VStack{
         HStack {
-          Button(action: {
-            self.ItemHomePresentation.wrappedValue.dismiss()
-          }){
-            Image(systemName: "chevron.backward").resizable().frame(width: 20, height: 30, alignment: .center).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-          }
+//          Button(action: {
+//            self.ItemHomePresentation.wrappedValue.dismiss()
+//          }){
+//            Image(systemName: "chevron.backward").resizable().frame(width: 20, height: 30, alignment: .center).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
+//          }
           
           Text("Items")
             .font(.largeTitle)
             .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
             .fontWeight(.heavy)
-            .frame(maxWidth: .infinity, alignment: .center).padding(.leading,10)
+            .frame(maxWidth: .infinity, alignment: .center).padding(.leading)
           
           Button(action: {
-            self.ItemHomePresentation.wrappedValue.dismiss()
+            
           }){
             Image(systemName: "magnifyingglass").resizable().frame(width: 30, height: 30, alignment: .center).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
           }
@@ -53,14 +52,19 @@ struct ItemsHome: View {
           Image("sort_icon").resizable().frame(width: 45, height: 50, alignment: .center).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
         }.padding(.horizontal)
         
+        if(itemViewModel.renderSell){
+          SellListings(itemViewModel: itemViewModel)
+        }
+        else{
+          BuyListings(itemViewModel: itemViewModel)
+        }
         Spacer()
       }.navigationBarHidden(true)
-      
     }
 }
 
 struct ItemsHome_Previews: PreviewProvider {
     static var previews: some View {
-        ItemsHome(userId: "U00001")
+        ItemsHome()
     }
 }
