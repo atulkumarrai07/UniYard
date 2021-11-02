@@ -13,6 +13,7 @@ class ViewModel
   var message_sequences = [Message_Sequence]()
   var notifications = [Notification]()
   var notification_sequences = [Notification_Sequence]()
+  var itemsWithPostsAvailable = [PostItem]()
   
   func addUser(user:User){
     
@@ -65,7 +66,7 @@ class ViewModel
   }
   
   // load post in Firestore
-  func addPost() {
+  func addPost_old() {
     posts.append(Post(id: "P00001", last_modified_timestamp: Timestamp.init(), Availability: "Available", post_creation_date: Timestamp.init()))
     posts.append(Post(id: "P00002", last_modified_timestamp: Timestamp.init(), Availability: "Available", post_creation_date: Timestamp.init()))
     posts.append(Post(id: "P00003", last_modified_timestamp: Timestamp.init(), Availability: "Available", post_creation_date: Timestamp.init()))
@@ -76,7 +77,15 @@ class ViewModel
     print("Posts loaded")
   }
   
-  func addItem() {
+  func addPost(post:Post) {
+    database.collection("Posts").document(post.id).setData(post.dictionary)
+  }
+  
+  func addItem(item: Item) {
+    database.collection("Items").document(item.id).setData(item.dictionary)
+  }
+  
+  func addItem_old() {
     items.append(Item(id: "I00001", post_id: "P00001", item_title: "Lamp", item_description: "A lamp for the study table", item_category: "Electronics", item_buy: false, condition: "Almost new", price: 15.90, images: ["https://..jpg"], zip_code: "15213", delivery: true, pickup_location: "3229 Hardie Way"))
     items.append(Item(id: "I00002", post_id: "P00004", item_title: "Vacuum Cleaner", item_description: "1 year old vacuum cleaner with auto detection technology available at reasonable price.", item_category: "Cleaning-Appliance", item_buy: false, condition: "New", price: 19.00, images: ["https://..jpg"], zip_code: "15213", delivery: false, pickup_location: "123 Forbes Avenue, Pittburgh"))
     
@@ -184,6 +193,60 @@ class ViewModel
             print("Items printed")
         }
     }
+  }
+  
+  // using this function for fetching all items with their posts to render details in items listing
+  func fetchAllItemsWithPostsAvailable(completion: @escaping ([PostItem])->Void) {
+    database.collection("Items").getDocuments() { (querySnapshot, err) in
+        if let err = err {
+            print("Error getting documents: \(err)")
+        } else {
+            for document in querySnapshot!.documents {
+              let id = document.documentID
+              let post_id = document.get("post_id") as? String ?? ""
+              let item_title = document.get("item_title") as? String ?? ""
+              let item_description = document.get("item_description") as? String ?? ""
+              let item_category = document.get("item_category") as? String ?? ""
+              let item_buy = document.get("item_buy") as? Bool ?? false
+              let condition = document.get("condition") as? String ?? ""
+              let price = document.get("price") as? Double ?? 0
+              let images = document.get("images") as? [String] ?? []
+              let zip_code = document.get("zip_code") as? String ?? ""
+              let delivery = document.get("delivery") as? Bool ?? false
+              let pickup_location = document.get("pickup_location") as? String ?? ""
+              self.fetchPostBasedOnPostId(postId: post_id) {(post) in
+                if(post.Availability == "Available")
+                {
+                  self.itemsWithPostsAvailable.append(PostItem(postId: post_id, last_modified_timestamp: post.last_modified_timestamp, Availability: post.Availability, post_creation_date: post.post_creation_date, itemId: id, item_title: item_title, item_description: item_description, item_category: item_category, item_buy: item_buy, condition: condition, price: price, images: images, zip_code: zip_code, delivery: delivery, pickup_location: pickup_location))
+                }
+                completion(self.itemsWithPostsAvailable)
+              }
+              }
+          
+//            print("Position 2: " + String(self.itemsWithPostsAvailable.count))
+//          for itemwithPosts in self.itemsWithPostsAvailable{
+//            print(itemwithPosts)
+//          }
+//          print("Items with posts printed")
+          }
+      }
+  }
+  
+  func fetchPostBasedOnPostId(postId:String ,completion: @escaping (Post)->Void)
+  {
+    self.database.collection("Posts").document(postId).getDocument() { (documentpost, error) in
+          if let documentpost = documentpost, documentpost.exists {
+            let last_modified_timestamp = documentpost.get("last_modified_timestamp") as? Timestamp ?? Timestamp.init()
+            let availability = documentpost.get("Availability") as? String ?? ""
+            let post_creation_date = documentpost.get("post_creation_date") as? Timestamp ?? Timestamp.init()
+            let post = Post(id: postId, last_modified_timestamp: last_modified_timestamp, Availability: availability, post_creation_date: post_creation_date)
+            completion(post)
+          } else {
+              print("Document does not exist")
+        }
+//                print("Position 1: " + String(self.itemsWithPostsAvailable.count))
+      
+      }
   }
   
   func fetchAllRental() {
