@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct CreateBuyView: View {
+
   @Environment(\.presentationMode) var createBuyPresentation: Binding<PresentationMode>
   @StateObject var item_vm = ItemsViewModel()
   
@@ -107,11 +108,14 @@ struct CreateBuyView: View {
       }
     }
   }
+
 }
 
 
 struct CreateBuyView_Previews: PreviewProvider {
+
   static var previews: some View {
     CreateBuyView()
   }
+
 }

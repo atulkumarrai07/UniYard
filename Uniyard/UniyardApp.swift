@@ -9,10 +9,9 @@ struct UniyardApp: App {
     FirebaseApp.configure()
   }
     var body: some Scene {
-      let loginModel = LoginModel()
+//      let loginModel = LoginModel()
         WindowGroup {
-            ContentView()
-              .environmentObject(loginModel)
+					CreateBuyView()
           
 //          Login()
 //          SignUpView()

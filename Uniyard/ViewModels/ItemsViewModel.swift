@@ -152,4 +152,5 @@ class ItemsViewModel: ObservableObject {
       viewModel.addItem(item: newItemData)
       viewModel.addPost(post: newPostData)
     }
+
 }
