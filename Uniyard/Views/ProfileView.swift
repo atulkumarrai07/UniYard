@@ -4,15 +4,11 @@ struct ProfileView: View {
  var body: some View {
     VStack{
     HStack {
-       Button(action: {})
-       {
-       Image(systemName: "chevron.backward").resizable().frame(width: 20, height: 30, alignment: .center).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).padding()
-       }
        Text("Profile")
        .font(.largeTitle)
        .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
        .fontWeight(.heavy)
-       .frame(maxWidth: .infinity, alignment: .center).padding(.leading,-20)
+       .frame(maxWidth: .infinity, alignment: .center)
     }
      Text("This is the profile view").bold()
       HStack{

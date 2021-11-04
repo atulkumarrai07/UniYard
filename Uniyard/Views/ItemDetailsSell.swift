@@ -79,7 +79,7 @@ struct CardDetails: View {
        VStack{
         HStack{
          Text("[Sell]").foregroundColor(.blue).font(.title2)
-         Text("iPad 2020")
+          Text(itemDetails.item_title)
           .font(.title)
           .fontWeight(.bold)
           .frame(alignment: .leading)
