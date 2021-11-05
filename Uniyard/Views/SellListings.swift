@@ -9,7 +9,8 @@ struct SellListings: View {
             label: {
               Text("Post to Sell")
             }).frame(width: 350, height: 40, alignment: .center).foregroundColor(.white).background(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).font(.title).cornerRadius(15.0).overlay(RoundedRectangle(cornerRadius: 14.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)))
-          List(itemViewModel.itemswithPostsAvailableArray, id: \.itemId){itemPostAvailable in
+           
+          List(itemViewModel.sell_filteredItems, id: \.itemId){itemPostAvailable in
             NavigationLink(
               destination: ItemDetailsBuy(itemDetails: itemPostAvailable),
               label: {
@@ -20,7 +21,7 @@ struct SellListings: View {
                   Spacer()
                   VStack{
                     HStack {
-                      Text("Title:" + String(itemPostAvailable.item_title)).font(.headline).foregroundColor(.black)
+                      Text(String(itemPostAvailable.item_title)).font(.headline).foregroundColor(.black)
                     }.frame(width: 230, height: 15, alignment: .leading).padding(.bottom,0.1)
                     HStack{
                       Text("Condition: " + String(itemPostAvailable.condition)).font(.subheadline).foregroundColor(.black).opacity(0.8)

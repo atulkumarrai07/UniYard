@@ -13,7 +13,7 @@ struct BottomBarNav: View {
       .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
       Text("Home")
      }.tag(0)
-    ChatView(viaFlag: true)
+    ChatList()
      .tabItem {
       Image(systemName: "message.fill")
       .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))

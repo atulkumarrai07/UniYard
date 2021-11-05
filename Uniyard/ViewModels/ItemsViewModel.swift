@@ -26,14 +26,45 @@ class ItemsViewModel: ObservableObject {
   @Published var locationSelection = "Pittsburgh"
   @Published var conditionSelection = "New"
   @Published var categorySelection = "clothing"
-  
   @Published var availableStatus : Bool = false
   
+  
+  //aaratrika
+  @Published var searchString: String = ""
+  @Published var isSearching: Bool = false
+  @Published var filteredPosts:[PostItem] = []
+  //--aaratrika
+  //iris
+  @Published var showSorts: Bool = false
+  @Published var sortOption: String = "Newest Date First"
+  @Published var showFilter: Bool = false
+  @Published var sell_filter_minPrice: String = ""
+  @Published var sell_filter_maxPrice = ""
+  @Published var sell_filter_conditionSelection = "All"
+  @Published var sell_filter_categorySelection = "All"
+  @Published var buy_filter_minPrice = ""
+  @Published var buy_filter_maxPrice = ""
+  @Published var buy_filter_categorySelection = "All"
+  
+  @Published var sell_filteredItems:[PostItem] = []
+  @Published var buy_filteredItems:[PostItem] = []
+  @Published var sort_NewDateFirst: Bool = true
+  @Published var sort_LowPriceFirst: Bool = true
+
+  //--iris
   private var cancellableSet: Set<AnyCancellable> = []
   
   init() {
     loadItemswithPostsAvailable()
   }
+  //aaratrika
+  func search(searchString: String) {
+   // print("Search string:", searchString)
+      filteredPosts = itemswithPostsAvailableArray.filter { card in
+        return card.item_title.lowercased().contains(searchString.lowercased())
+        }
+    }
+  //--aaratrika
   
   func viewBuySell() {
     if(self.renderSell)
@@ -51,12 +82,129 @@ class ItemsViewModel: ObservableObject {
     }
   }
   
-  func loadItemswithPostsAvailable() {
-    viewModel.fetchAllItemsWithPostsAvailable { results in
-      self.itemswithPostsAvailableArray = results
+//  func loadItemswithPostsAvailable() {
+//    viewModel.fetchAllItemsWithPostsAvailable { results in
+//      self.itemswithPostsAvailableArray = results
+//    }
+//  }
+  //sort buy or sell item lists.
+    func sortItems( _ sellItems: Bool)  {
+      if (sortOption == "Newest Date First"){
+        if (sellItems){
+          sell_filteredItems = sortItems_newDateFirst(postItem: sell_filteredItems)
+        } else{
+          buy_filteredItems = sortItems_newDateFirst(postItem: buy_filteredItems)
+        }
+      }
+      
+      if (sortOption == "Oldest Date First"){
+        if (sellItems){
+          sell_filteredItems = sortItems_oldDateFirst(postItem: sell_filteredItems)
+        } else{
+          buy_filteredItems = sortItems_oldDateFirst(postItem: buy_filteredItems)
+        }
+      }
+      
+      if (sortOption == "Lowest Price First"){
+        if (sellItems){
+          sell_filteredItems = sortItems_lowPriceFirst(postItem: sell_filteredItems)
+        } else{
+          buy_filteredItems = sortItems_lowPriceFirst(postItem: buy_filteredItems)
+        }
+      }
+      
+      if (sortOption == "Highest Price First"){
+        if (sellItems){
+          sell_filteredItems = sortItems_highPriceFirst(postItem: sell_filteredItems)
+        } else{
+          buy_filteredItems = sortItems_highPriceFirst(postItem: buy_filteredItems)
+        }
+      }
     }
-  }
-  
+    
+    
+    func loadItemswithPostsAvailable() {
+      viewModel.fetchAllItemsWithPostsAvailable { results in
+        self.itemswithPostsAvailableArray = results
+        self.filterBuyItems()
+        self.filterSellItems()
+        self.sortItems(true)   //sort for sell listings by date
+        self.sortItems(false) //sort for buy listings by date
+      }
+      
+    }
+    
+    func sortItems_lowPriceFirst(postItem: [PostItem] ) -> [PostItem]{
+      return postItem.sorted(by: {$0.price <= $1.price})
+    }
+    
+    func sortItems_highPriceFirst(postItem: [PostItem] ) -> [PostItem]{
+      return postItem.sorted(by: {$0.price >= $1.price})
+    }
+    
+    func sortItems_newDateFirst(postItem: [PostItem] ) -> [PostItem]{
+  //    return postItem.sorted(by: { $0.post_creation_date.dateValue() >= $1.post_creation_date.dateValue()})
+  //    return postItem.sorted(by: { $0.post_creation_date.compare($1.post_creation_date) == .orderedDescending})
+      let result =  postItem.sorted(by: {
+        if ($0.post_creation_date.seconds == $1.post_creation_date.seconds){
+          return $0.post_creation_date.nanoseconds >= $1.post_creation_date.nanoseconds
+        }
+
+        return $0.post_creation_date.seconds >= $1.post_creation_date.seconds
+      })
+
+      return result
+    }
+    
+    func sortItems_oldDateFirst(postItem: [PostItem] ) -> [PostItem]{
+      let result =  postItem.sorted(by: {
+        if ($0.post_creation_date.seconds == $1.post_creation_date.seconds){
+          return $0.post_creation_date.nanoseconds <= $1.post_creation_date.nanoseconds
+        }
+
+        return $0.post_creation_date.seconds <= $1.post_creation_date.seconds
+      })
+
+      return result
+      
+      
+  //    return postItem.sorted(by: { $0.post_creation_date.dateValue() <= $1.post_creation_date.dateValue()})
+  //    return postItem.sorted(by: { $0.post_creation_date.seconds < $1.post_creation_date.seconds})
+  //    return postItem.sorted(by: { $0.post_creation_date.compare($1.post_creation_date) == .orderedAscending})
+    }
+    
+    //filter sell listings
+    func filterSellItems(){
+      sell_filteredItems = itemswithPostsAvailableArray.filter({item in return !item.item_buy})
+        .filter({item in return item.price >= (Double(sell_filter_minPrice) ?? 0)})
+        .filter({item in return item.price <= (Double(sell_filter_maxPrice) ?? Double.infinity)})
+
+      if (sell_filter_conditionSelection != "All"){
+        self.sell_filteredItems = self.itemswithPostsAvailableArray.filter({
+          ($0.item_category == sell_filter_categorySelection)
+      })
+      }
+
+      if (sell_filter_conditionSelection != "All"){
+        self.sell_filteredItems = self.itemswithPostsAvailableArray.filter({
+          ($0.condition == sell_filter_conditionSelection)
+      })
+      }
+    }
+    
+    //filter buy listings
+    func filterBuyItems(){
+      buy_filteredItems = itemswithPostsAvailableArray.filter({item in return item.item_buy})
+        .filter({item in return item.price >= (Double(buy_filter_minPrice) ?? 0)})
+        .filter({item in return item.price <= (Double(buy_filter_maxPrice) ?? Double.infinity)})
+  //    print("Filtering")
+  //    print(buy_filteredItems)
+      if (buy_filter_categorySelection != "All"){
+        self.buy_filteredItems = self.itemswithPostsAvailableArray.filter({
+          ($0.item_category == buy_filter_categorySelection)
+      })
+      }
+    }
   func createBuyPost(){
       let ref_title = database.collection("Items").document()
       let ref_post = database.collection("Posts").document()
