@@ -5,10 +5,10 @@ struct CreateBuyView: View {
   @Environment(\.presentationMode) var createBuyPresentation: Binding<PresentationMode>
   @StateObject var item_vm = ItemsViewModel()
   
-  var categoryList=["clothing", "books", "computers",
-                    "electronics", "furniture", "home appliances", "jewelley, watches",
-                    "music instruments", "phones", "sporting goods", "tools",
-                    "toys, games", "other"]
+  var categoryList=["Clothing", "Books", "Computers",
+										"Electronics", "Furniture", "Home appliances",
+										 "Jewelley, watches", "Music instruments", "Phones",
+										 "Sporting goods", "Tools", "Toys, games", "Other"]
   
   
   var body: some View {
@@ -25,7 +25,7 @@ struct CreateBuyView: View {
                 .frame(width: 15, height: 20, alignment: .center)
                 .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
             }
-            Text("Buy an item")
+            Text("Buy an Item")
               .font(.system(size: 25, weight: .heavy))
               .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
               .frame(maxWidth: .infinity, alignment: .center).padding(.leading,-20)
@@ -38,10 +38,6 @@ struct CreateBuyView: View {
             .textCase(nil)
             .font(.system(size: 18))
             .foregroundColor(.black)
-            
-            //            EntryFieldSignUp(placeHolder: "Title", prompt:item_vm.titlePrompt, field: $item_vm.title)
-            //
-            //            Spacer()
             
             Section(header: Text("Budget (USD)")) {
               TextField("$0.00", text: $item_vm.budget)

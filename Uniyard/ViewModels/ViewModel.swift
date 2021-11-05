@@ -2,7 +2,7 @@
 import Foundation
 import FirebaseFirestore
 
-class ViewModel
+class ViewModel: ObservableObject
 {
   private let database = Firestore.firestore()
   var users = [User]()
@@ -15,6 +15,7 @@ class ViewModel
   var notification_sequences = [Notification_Sequence]()
   var itemsWithPostsAvailable = [PostItem]()
   
+	
   func addUser(user:User){
     
     database.collection("Users").document(user.id).setData(user.dictionary)
@@ -380,6 +381,7 @@ class ViewModel
       }
     }
   }
+
   
 
 }

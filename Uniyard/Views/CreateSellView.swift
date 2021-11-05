@@ -8,13 +8,12 @@ struct CreateSellView: View {
   
   var conditionList = ["New", "Almost new", "Very good", "Good", "Acceptable"]
   
-  var categoryList = ["clothing", "books", "computers",
-                      "electronics", "furniture", "home appliances",
-                      "jewelley, watches", "music instruments", "phones",
-                      "sporting goods", "tools", "toys, games", "other"]
+  var categoryList = ["Clothing", "Books", "Computers",
+											"Electronics", "Furniture", "Home appliances",
+											"Jewelley, watches", "Music instruments", "Phones",
+											"Sporting goods", "Tools", "Toys, games", "Other"]
   
-  var locationList = ["Pittsburgh", "Adelaide", "Silicon Valley"]
-  //  @State private var deliveryRequestIndex = 0
+  var locationList = ["Pittsburgh","Australia","Qatar", "Africa"]
   
   //set a date range
   var dateRange: ClosedRange<Date> {
@@ -37,7 +36,7 @@ struct CreateSellView: View {
                 .frame(width: 15, height: 20, alignment: .center)
                 .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
             }
-            Text("Sell an item")
+            Text("Sell an Item")
               .font(.system(size: 25, weight: .heavy))
               .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
               .frame(maxWidth: .infinity, alignment: .center).padding(.leading,-20)
