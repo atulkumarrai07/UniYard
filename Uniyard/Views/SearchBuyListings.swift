@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct BuyListings: View {
+struct SearchBuyListings: View {
   @StateObject var itemViewModel:ItemsViewModel
     var body: some View {
         VStack{
@@ -10,9 +10,8 @@ struct BuyListings: View {
             label: {
               Text("Post to Buy")
             }).frame(width: 350, height: 40, alignment: .center).foregroundColor(.white).background(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).font(.title).cornerRadius(15.0).overlay(RoundedRectangle(cornerRadius: 14.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)))
-            .navigationBarHidden(true)
           
-          List(itemViewModel.buy_filteredItems, id: \.itemId){itemPostAvailable in
+          List(itemViewModel.filteredPosts, id: \.itemId){itemPostAvailable in
             NavigationLink(
               destination: ItemDetailsSell(itemDetails: itemPostAvailable),
               label: {
@@ -26,7 +25,7 @@ struct BuyListings: View {
                       Text(String(itemPostAvailable.item_title)).font(.headline).foregroundColor(.black)
                     }.frame(width: 230, height: 15, alignment: .leading).padding(.bottom,0.1)
 //                    HStack{
-//                      Text("Condition: " + String(itemPostAvailable.condition)).font(.subheadline).foregroundColor(.black).opacity(0.8)
+//                      Text(String(itemPostAvailable.condition)).font(.subheadline).foregroundColor(.black).opacity(0.8)
 //                    }.frame(width: 230, height: 15, alignment: .leading)
                     Spacer()
                     HStack{
@@ -46,10 +45,10 @@ struct BuyListings: View {
     }
 }
 
-struct BuyListings_Previews: PreviewProvider {
+struct SearchBuyListings_Previews: PreviewProvider {
   
     static var previews: some View {
       let itemViewModel = ItemsViewModel()
-      BuyListings(itemViewModel: itemViewModel)
+      SearchBuyListings(itemViewModel: itemViewModel)
     }
 }

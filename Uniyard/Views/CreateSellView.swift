@@ -8,12 +8,15 @@ struct CreateSellView: View {
   
   var conditionList = ["New", "Almost new", "Very good", "Good", "Acceptable"]
   
-  var categoryList = ["clothing", "books", "computers",
-                      "electronics", "furniture", "home appliances",
-                      "jewelley, watches", "music instruments", "phones",
-                      "sporting goods", "tools", "toys, games", "other"]
+  var categoryList=["Clothing", "Books", "Computers",
+                      "Electronics", "Furniture", "Home appliances",
+                       "Jewelley, watches", "Music instruments", "Phones",
+                       "Sporting goods", "Tools", "Toys, games", "Other"]
+    
   
-  var locationList = ["Pittsburgh", "Adelaide", "Silicon Valley"]
+  
+  var locationList = ["Pittsburgh","Australia","Qatar", "Africa"]
+
   //  @State private var deliveryRequestIndex = 0
   
   //set a date range
