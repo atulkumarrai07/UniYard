@@ -10,12 +10,13 @@ struct UniyardApp: App {
   }
     var body: some Scene {
       let loginModel = LoginModel()
-        WindowGroup {
-            ContentView()
-              .environmentObject(loginModel)
-          
-//          Login()
-//          SignUpView()
-        }
+              WindowGroup {
+                ContentView()
+                  .environmentObject(loginModel)
+      //          CreateBuyView()
+                
+      //          Login()
+      //          SignUpView()
+              }
     }
 }

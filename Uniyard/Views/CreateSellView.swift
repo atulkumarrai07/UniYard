@@ -1,3 +1,4 @@
+
 import SwiftUI
 
 struct CreateSellView: View {
@@ -152,4 +153,5 @@ struct CreateSellView_Previews: PreviewProvider {
   static var previews: some View {
     CreateSellView()
   }
+
 }

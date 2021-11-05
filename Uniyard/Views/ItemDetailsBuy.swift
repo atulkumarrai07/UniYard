@@ -41,9 +41,11 @@ struct CardDetailsBuy: View {
   VStack{
    VStack{
     HStack{
+
      Text("[Buy]").foregroundColor(.blue).font(.title3)
      Text(itemDetails.item_title)
       .font(.title3)
+
       .fontWeight(.bold)
       .frame(alignment: .leading)
      Button(action: itemdetailvmodel.toggled){
@@ -52,7 +54,7 @@ struct CardDetailsBuy: View {
     }
     }
     HStack{
-     Text("$1200.00").font(.title2).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).bold()
+     Text("$" +  String(itemDetails.price)).font(.title2).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).bold()
       .frame(width:104,alignment: .leading)
      Text("List Date: 2019-09-31").font(.subheadline).foregroundColor(.gray).frame(width:220,alignment: .trailing)
     }
