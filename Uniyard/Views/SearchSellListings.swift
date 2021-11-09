@@ -1,17 +1,15 @@
 import SwiftUI
 
-struct SellListings: View {
-  @StateObject var itemViewModel = ItemsViewModel()
+struct SearchSellListings: View {
+  @StateObject var itemViewModel:ItemsViewModel
     var body: some View {
         VStack{
-					
           NavigationLink(
             destination: CreateSellView(),
             label: {
               Text("Post to Sell")
             }).frame(width: 350, height: 40, alignment: .center).foregroundColor(.white).background(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).font(.title).cornerRadius(15.0).overlay(RoundedRectangle(cornerRadius: 14.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)))
-           
-          List(itemViewModel.sell_filteredItems, id: \.itemId){itemPostAvailable in
+          List(itemViewModel.filteredPosts, id: \.itemId){itemPostAvailable in
             NavigationLink(
               destination: ItemDetailsBuy(itemDetails: itemPostAvailable),
               label: {
@@ -42,9 +40,9 @@ struct SellListings: View {
     }
 }
 
-struct SellListings_Previews: PreviewProvider {
+struct SearchSellListings_Previews: PreviewProvider {
     static var previews: some View {
       let itemViewModel = ItemsViewModel()
-      SellListings(itemViewModel: itemViewModel)
+      SearchSellListings(itemViewModel: itemViewModel)
     }
 }

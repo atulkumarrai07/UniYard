@@ -78,9 +78,11 @@ struct CardDetails: View {
       VStack{
        VStack{
         HStack{
-         Text("[Sell]").foregroundColor(.blue).font(.title2)
-         Text("iPad 2020")
-          .font(.title)
+
+         Text("[Sell]").foregroundColor(.blue).font(.title3)
+          Text(itemDetails.item_title)
+          .font(.title3)
+
           .fontWeight(.bold)
           .frame(alignment: .leading)
          Button(action: itemdetailvmodel.toggled){

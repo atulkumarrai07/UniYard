@@ -106,14 +106,14 @@ class ViewModel: ObservableObject
     print("rentals loaded")
   }
   
-  func addMessage() {
-    messages.append(Message(id: "M00001", post_id: "P00001", user_1: "U00004", user_2: "U00001", sequence: ["MS00001","MS00002"]))
-    
-    for message in messages{
-      database.collection("Messages").document(message.id).setData(message.dictionary)
-    }
-    print("messages loaded")
-  }
+//  func addMessage() {
+//    messages.append(Message(id: "M00001", post_id: "P00001", user_1: "U00004", user_2: "U00001", sequence: ["MS00001","MS00002"]))
+//
+//    for message in messages{
+//      database.collection("Messages").document(message.id).setData(message.dictionary)
+//    }
+//    print("messages loaded")
+//  }
   
   func addMessage_Sequence() {
     message_sequences.append(Message_Sequence(id: "MS00001", from_id: "U00004", timestamp_msg: Timestamp.init(), content: "Hi Aaratrika", read_status: true))
@@ -287,29 +287,29 @@ class ViewModel: ObservableObject
     }
   }
   
-  func fetchAllMessage() {
-    print("fetching messages")
-    database.collection("Messages").getDocuments() { (querySnapshot, err) in
-        if let err = err {
-            print("Error getting documents: \(err)")
-        } else {
-            for document in querySnapshot!.documents {
-              let id = document.documentID
-              let post_id = document.get("post_id") as? String ?? ""
-              let user_1 = document.get("user_1") as? String ?? ""
-              let user_2 = document.get("user_2") as? String ?? ""
-              let sequence = document.get("sequence") as? [String] ?? []
-              
-              self.messages.append(Message(id: id, post_id: post_id, user_1: user_1, user_2: user_2, sequence: sequence))
-//                print("\(document.documentID) => \(document.data())")
-            }
-          for message in self.messages{
-            print(message)
-          }
-        print("Messages printed")
-        }
-    }
-  }
+//  func fetchAllMessage() {
+//    print("fetching messages")
+//    database.collection("Messages").getDocuments() { (querySnapshot, err) in
+//        if let err = err {
+//            print("Error getting documents: \(err)")
+//        } else {
+//            for document in querySnapshot!.documents {
+//              let id = document.documentID
+//              let post_id = document.get("post_id") as? String ?? ""
+//              let user_1 = document.get("user_1") as? String ?? ""
+//              let user_2 = document.get("user_2") as? String ?? ""
+//              let sequence = document.get("sequence") as? [String] ?? []
+//
+//              self.messages.append(Message(id: id, post_id: post_id, user_1: user_1, user_2: user_2, sequence: sequence))
+////                print("\(document.documentID) => \(document.data())")
+//            }
+//          for message in self.messages{
+//            print(message)
+//          }
+//        print("Messages printed")
+//        }
+//    }
+//  }
   
   func fetchAllMessage_Sequence() {
     print("fetching message sequences")

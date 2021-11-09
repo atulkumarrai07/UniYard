@@ -6,13 +6,13 @@ struct CreateBuyView: View {
   @StateObject var item_vm = ItemsViewModel()
   
   var categoryList=["Clothing", "Books", "Computers",
-										"Electronics", "Furniture", "Home appliances",
-										 "Jewelley, watches", "Music instruments", "Phones",
-										 "Sporting goods", "Tools", "Toys, games", "Other"]
-  
+                      "Electronics", "Furniture", "Home appliances",
+                       "Jewelley, watches", "Music instruments", "Phones",
+                       "Sporting goods", "Tools", "Toys, games", "Other"]
+    
   
   var body: some View {
-    NavigationView {
+  //  NavigationView {
       ZStack{
         Color(red: 214/255.0, green: 158/255.0, blue: 158/255.0, opacity: 1.0)
           .ignoresSafeArea(.all)
@@ -105,7 +105,8 @@ struct CreateBuyView: View {
     }
   }
 
-}
+//}
+
 
 
 struct CreateBuyView_Previews: PreviewProvider {

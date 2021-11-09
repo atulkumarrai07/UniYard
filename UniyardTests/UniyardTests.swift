@@ -6,12 +6,19 @@
 //
 
 import XCTest
-//@testable import Uniyard
+@testable import Uniyard
+
+class SignUpViewModelTest: XCTestCase {
+  
+//  func testEmailAddressEntered() {
+//    let user = User(email: "sara@andrew.cmu.edu", password: "Sara1234", user_image: "", first_name: "Sara", last_name: "Gomez", campus_location: "Pittsburgh", saved_post_list: <#T##[String]#>, my_post_list: <#T##[String]#>, date_joined: Timestamp, suggestion_preference: "Any", user_status: true)
 //
-//class UniyardTests: XCTestCase {
-//
-//    override func setUpWithError() throws {
+//  }
+
+//  var viewModel: SignUpViewModel!
+//    override func setUp() {
 //        // Put setup code here. This method is called before the invocation of each test method in the class.
+//      viewModel = .init()
 //    }
 //
 //    override func tearDownWithError() throws {
@@ -29,5 +36,5 @@ import XCTest
 //            // Put the code you want to measure the time of here.
 //        }
 //    }
-//
-//}
+
+}

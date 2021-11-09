@@ -16,7 +16,6 @@ class SignUpViewModel: ObservableObject {
   @Published var campus_location = "Pittsburgh"
   @Published var showCampusSelector = false
   @Published var showTCSelector = false
-  
   @Published var isValidEmail = false
   @Published var isFirstNameEmpty = false
   @Published var isLastNameEmpty = false
@@ -70,10 +69,7 @@ class SignUpViewModel: ObservableObject {
   func passwordMatch() -> Bool{
     password == confirm_password
   }
-//  func signUp() {
-//    print("signup done")
-//  }
-  
+
   func toggled(){
     self.showTCSelector = !self.showTCSelector
   }
@@ -102,7 +98,6 @@ class SignUpViewModel: ObservableObject {
       self?.registrationStatus = false
      return
     }
-    //Success
     if let id = result?.user.uid {
       let user = User(id: id, email: (self?.cmu_email)!, password: password, user_image: "", first_name: (self?.first_name)!, last_name: self?.last_name ?? "", campus_location: self!.campus_location, saved_post_list: [], my_post_list: [], date_joined: Timestamp.init(), suggestion_preference: "Any", user_status: true)
       
