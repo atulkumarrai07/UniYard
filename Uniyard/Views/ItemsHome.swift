@@ -40,22 +40,8 @@ struct ItemsHome: View {
 //          }
           .onChange(of: itemViewModel.searchString, perform: {_ in
             itemViewModel.isSearching = true
-            print(itemViewModel.searchString)
             itemViewModel.search(searchString: itemViewModel.searchString)
             
-            if(itemViewModel.renderSell && itemViewModel.searchString == ""){
-              SellListings(itemViewModel: itemViewModel)
-            }
-            else if(itemViewModel.renderSell && itemViewModel.searchString != "")
-            {
-                    SearchSellListings(itemViewModel: itemViewModel)
-                  }
-            else if(!itemViewModel.renderSell && itemViewModel.searchString == ""){
-              BuyListings(itemViewModel: itemViewModel)
-            }
-            else{
-              SearchBuyListings(itemViewModel: itemViewModel)
-            }
           })
           .overlay(
             HStack{
@@ -84,7 +70,7 @@ struct ItemsHome: View {
           Button("Sell", action: {
             itemViewModel.renderSell.toggle()
             itemViewModel.search(searchString: itemViewModel.searchString)
-            itemViewModel.filterSellItems()
+//            itemViewModel.filterSellItems()
             itemViewModel.sortItems(true)
             itemViewModel.viewBuySell()
           }).frame(width: 175, height: 40, alignment: .center).foregroundColor(itemViewModel.sellButtonForegroundColor).background(itemViewModel.sellButtonBackgroundColor).font(.title).cornerRadius(15.0).overlay(RoundedRectangle(cornerRadius: 14.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))).disabled(itemViewModel.renderSell)
@@ -92,7 +78,7 @@ struct ItemsHome: View {
           Button("Buy", action: {
             itemViewModel.renderSell.toggle()
             itemViewModel.search(searchString: itemViewModel.searchString)
-            itemViewModel.filterBuyItems()
+//            itemViewModel.filterBuyItems()
             itemViewModel.sortItems(false)
             itemViewModel.viewBuySell()
           }).frame(width: 175, height: 40, alignment: .center).foregroundColor(itemViewModel.buyButtonForegroundColor).background(itemViewModel.buyButtonBackgroundColor).font(.title).cornerRadius(15.0).overlay(RoundedRectangle(cornerRadius: 14.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))).disabled(!itemViewModel.renderSell)
@@ -119,7 +105,7 @@ struct ItemsHome: View {
             if (itemViewModel.renderSell){
               SellFilterView(sell_filter_minPrice: $itemViewModel.sell_filter_minPrice, sell_filter_maxPrice: $itemViewModel.sell_filter_maxPrice, sell_conditionSelection: $itemViewModel.sell_filter_conditionSelection, sell_categorySelection: $itemViewModel.sell_filter_categorySelection)
             } else{
-              BuyFilterView(buy_filter_minPrice: $itemViewModel.buy_filter_minPrice, buy_filter_maxPrice: $itemViewModel.buy_filter_maxPrice, buy_categorySelection: $itemViewModel.buy_filter_categorySelection)
+              BuyFilterView(itemViewModel: itemViewModel,buy_filter_minPrice: $itemViewModel.buy_filter_minPrice, buy_filter_maxPrice: $itemViewModel.buy_filter_maxPrice, buy_categorySelection: $itemViewModel.buy_filter_categorySelection)
             }
           }
           
