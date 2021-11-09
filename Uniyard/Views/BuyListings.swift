@@ -39,9 +39,6 @@ struct BuyListings: View {
                 }.frame(width: 350, height: 110, alignment: .center).overlay(RoundedRectangle(cornerRadius: 14.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)))
               })
           }
-          
-          
-
           Spacer()
         }.navigationBarHidden(true)
     }

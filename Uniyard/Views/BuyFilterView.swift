@@ -1,11 +1,12 @@
 import SwiftUI
 
 struct BuyFilterView: View {
+  @StateObject var itemViewModel:ItemsViewModel
   @State var buy_filter_minPrice:Binding<String>
   @State var buy_filter_maxPrice:Binding<String>
   @State var buy_categorySelection:Binding<String>
   
-  @StateObject var itemViewModel = ItemsViewModel()
+  //@StateObject var itemViewModel = ItemsViewModel()
 
   @Environment(\.presentationMode) var itemBuyFilter: Binding< PresentationMode>
   
