@@ -10,7 +10,8 @@ struct CreateBuyView: View {
                        "Jewelley, watches", "Music instruments", "Phones",
                        "Sporting goods", "Tools", "Toys, games", "Other"]
     
-  
+	var locationList = ["Pittsburgh","Australia","Qatar", "Africa"]
+	
   var body: some View {
   //  NavigationView {
       ZStack{
@@ -55,6 +56,12 @@ struct CreateBuyView: View {
               Toggle(isOn: $item_vm.delivertRequest) {
                 Text("Delivery request")
               }
+							
+							Picker("Location", selection: $item_vm.locationSelection) {
+								ForEach(locationList, id: \.self) {
+									Text($0)
+								}}
+							
             }.textCase(nil)
             .font(.system(size: 18))
             
