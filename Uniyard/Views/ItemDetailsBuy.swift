@@ -83,10 +83,9 @@ struct CardDetailsBuy: View {
       .fixedSize(horizontal: false, vertical: true)
       .cornerRadius(10)
      Button(action: {}
-         , label: {
-         Text("Chat")
-         })
+         , label: {Text("Chat")})
       .foregroundColor(.white)
+			
       .padding(.vertical, 10)
       .padding(.horizontal, 50)
       .background(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))

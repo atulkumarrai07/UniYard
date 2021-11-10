@@ -1,9 +1,10 @@
 import SwiftUI
 
 struct SellListings: View {
-  @StateObject var itemViewModel:ItemsViewModel
+  @StateObject var itemViewModel = ItemsViewModel()
     var body: some View {
         VStack{
+					
           NavigationLink(
             destination: CreateSellView(),
             label: {
