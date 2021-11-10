@@ -66,8 +66,6 @@
 		BF9C280B2735892F00E3231C /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C280A2735892F00E3231C /* MessageViewModel.swift */; };
 		BF9C280E2735897C00E3231C /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C280D2735897C00E3231C /* ChatList.swift */; };
 		BF9C2810273589AE00E3231C /* ChatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C280F273589AE00E3231C /* ChatRow.swift */; };
-
-
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,7 +142,6 @@
 		BF9C280A2735892F00E3231C /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		BF9C280D2735897C00E3231C /* ChatList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
 		BF9C280F273589AE00E3231C /* ChatRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRow.swift; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,7 +283,6 @@
 				BF9C28012735836300E3231C /* SortView.swift */,
 				BF9C28032735838000E3231C /* BuyFilterView.swift */,
 				BF9C2805273583B000E3231C /* SellFilterView.swift */,
-
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -495,12 +491,10 @@
 				0B4552342725B574009BA1E0 /* Rental.swift in Sources */,
 				0B45522A2725B491009BA1E0 /* User.swift in Sources */,
 				0B4552362725B5A1009BA1E0 /* Message.swift in Sources */,
-				E2ED0B4E2733884E002442C6 /* SellFilterView.swift in Sources */,
 				0BF72E0D273098150013DCC2 /* BottomBarNav.swift in Sources */,
 				0BFD721027291F2F0038F669 /* ItemsHome.swift in Sources */,
 				0BF72E0F273098380013DCC2 /* Chats.swift in Sources */,
 				0B6C613A27284FEA00D36FAC /* EntryField.swift in Sources */,
-				E2963B6A27320E7100E2FE5B /* SortView.swift in Sources */,
 				BF23DB3227289FF400410436 /* SignUpView.swift in Sources */,
 				0BF72E0B273097C30013DCC2 /* ItemDetailsSell.swift in Sources */,
 				0BF72E15273098A20013DCC2 /* ProfileView.swift in Sources */,
@@ -514,7 +508,6 @@
 				0BF72E09273097730013DCC2 /* ItemDetailViewModel.swift in Sources */,
 				BF9C280E2735897C00E3231C /* ChatList.swift in Sources */,
 				0B45522E2725B503009BA1E0 /* Post.swift in Sources */,
-				E2963B6C27320E7C00E2FE5B /* BuyFilterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,7 +669,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Uniyard/Preview Content\"";
-				DEVELOPMENT_TEAM = CZM9X7T294;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Uniyard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -698,7 +691,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Uniyard/Preview Content\"";
-				DEVELOPMENT_TEAM = CZM9X7T294;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Uniyard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

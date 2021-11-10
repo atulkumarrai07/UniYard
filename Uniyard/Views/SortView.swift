@@ -2,10 +2,9 @@
 import SwiftUI
 
 struct SortView: View {
-  @State var sortOption:Binding<String>
+	@StateObject var itemViewModel:ItemsViewModel
+//  @State var sortOption:Binding<String>
   @Environment(\.presentationMode) var itemSortPicker: Binding< PresentationMode>
-  
-  @StateObject var itemViewModel = ItemsViewModel()
   
   var body: some View {
         VStack{
@@ -22,7 +21,7 @@ struct SortView: View {
               
             }
           }.padding()
-          Picker("", selection: sortOption) {
+					Picker("", selection: $itemViewModel.sortOption) {
                      ForEach(["Newest Date First",
                               "Oldest Date First",
                               "Lowest Price First",

@@ -83,11 +83,7 @@ class ItemsViewModel: ObservableObject {
     }
   }
   
-//  func loadItemswithPostsAvailable() {
-//    viewModel.fetchAllItemsWithPostsAvailable { results in
-//      self.itemswithPostsAvailableArray = results
-//    }
-//  }
+
   //sort buy or sell item lists.
     func sortItems( _ sellItems: Bool)  {
       if (sortOption == "Newest Date First"){
@@ -132,7 +128,6 @@ class ItemsViewModel: ObservableObject {
         self.sortItems(true)   //sort for sell listings by date
         self.sortItems(false) //sort for buy listings by date
       }
-      
     }
     
     func sortItems_lowPriceFirst(postItem: [PostItem] ) -> [PostItem]{
@@ -180,7 +175,7 @@ class ItemsViewModel: ObservableObject {
         .filter({item in return item.price >= (Double(sell_filter_minPrice) ?? 0)})
         .filter({item in return item.price <= (Double(sell_filter_maxPrice) ?? Double.infinity)})
 
-      if (sell_filter_conditionSelection != "All"){
+      if (sell_filter_categorySelection != "All"){
         self.sell_filteredItems = self.itemswithPostsAvailableArray.filter({
           ($0.item_category == sell_filter_categorySelection)
       })
@@ -198,14 +193,13 @@ class ItemsViewModel: ObservableObject {
       buy_filteredItems = itemswithPostsAvailableArray.filter({item in return item.item_buy})
         .filter({item in return item.price >= (Double(buy_filter_minPrice) ?? 0)})
         .filter({item in return item.price <= (Double(buy_filter_maxPrice) ?? Double.infinity)})
-  //    print("Filtering")
-  //    print(buy_filteredItems)
       if (buy_filter_categorySelection != "All"){
         self.buy_filteredItems = self.itemswithPostsAvailableArray.filter({
           ($0.item_category == buy_filter_categorySelection)
       })
       }
     }
+	
   func createBuyPost(){
       let ref_title = database.collection("Items").document()
       let ref_post = database.collection("Posts").document()
