@@ -15,7 +15,7 @@ struct BuyListings: View {
           
           List(itemViewModel.buy_filteredItems, id: \.itemId){itemPostAvailable in
             NavigationLink(
-              destination: ItemDetailsSell(itemDetails: itemPostAvailable),
+              destination: ItemDetailsBuy(itemDetails: itemPostAvailable),
               label: {
                 HStack{
                   VStack{
@@ -26,9 +26,9 @@ struct BuyListings: View {
                     HStack {
                       Text(String(itemPostAvailable.item_title)).font(.headline).foregroundColor(.black)
                     }.frame(width: 230, height: 15, alignment: .leading).padding(.bottom,0.1)
-//                    HStack{
-//                      Text("Condition: " + String(itemPostAvailable.condition)).font(.subheadline).foregroundColor(.black).opacity(0.8)
-//                    }.frame(width: 230, height: 15, alignment: .leading)
+                    HStack{
+											Text("Category: " + String(itemPostAvailable.item_category)).font(.subheadline).foregroundColor(.black).opacity(0.8)
+                    }.frame(width: 230, height: 15, alignment: .leading)
                     Spacer()
                     HStack{
                       Text("$ " + String(itemPostAvailable.price)).font(.subheadline).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))

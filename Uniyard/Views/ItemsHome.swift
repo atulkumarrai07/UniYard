@@ -70,7 +70,6 @@ struct ItemsHome: View {
 				Button("Sell", action: {
 					itemViewModel.renderSell.toggle()
 					itemViewModel.search(searchString: itemViewModel.searchString)
-					//            itemViewModel.filterSellItems()
 					itemViewModel.sortItems(true)
 					itemViewModel.viewBuySell()
 				}).frame(width: 175, height: 40, alignment: .center).foregroundColor(itemViewModel.sellButtonForegroundColor).background(itemViewModel.sellButtonBackgroundColor).font(.title).cornerRadius(15.0).overlay(RoundedRectangle(cornerRadius: 14.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))).disabled(itemViewModel.renderSell)
@@ -78,7 +77,6 @@ struct ItemsHome: View {
 				Button("Buy", action: {
 					itemViewModel.renderSell.toggle()
 					itemViewModel.search(searchString: itemViewModel.searchString)
-					//            itemViewModel.filterBuyItems()
 					itemViewModel.sortItems(false)
 					itemViewModel.viewBuySell()
 				}).frame(width: 175, height: 40, alignment: .center).foregroundColor(itemViewModel.buyButtonForegroundColor).background(itemViewModel.buyButtonBackgroundColor).font(.title).cornerRadius(15.0).overlay(RoundedRectangle(cornerRadius: 14.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))).disabled(!itemViewModel.renderSell)
@@ -87,10 +85,11 @@ struct ItemsHome: View {
 			HStack{
 				Text("Current Location:").font(.body).opacity(0.8)
 				
-				Button(itemViewModel.location) {
+				Button(itemViewModel.locationSelection) {
 					itemViewModel.showingLocations.toggle()
+					
 				}.sheet(isPresented: $itemViewModel.showingLocations){
-					CampusLocationPicker2(location: $itemViewModel.location)
+					CampusLocationPicker2(itemViewModel: itemViewModel)
 				}
 				Spacer()
 				

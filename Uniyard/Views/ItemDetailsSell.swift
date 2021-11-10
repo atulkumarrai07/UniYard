@@ -76,10 +76,11 @@ struct CardDetails: View {
   ZStack{
     ScrollView{
       VStack{
-       VStack{
+       VStack (alignment: .leading){
         HStack{
 
          Text("[Sell]").foregroundColor(.blue).font(.title3)
+					
           Text(itemDetails.item_title)
           .font(.title3)
 
@@ -119,7 +120,7 @@ struct CardDetails: View {
          Spacer()
          Text("Description:").bold().font(.subheadline).frame(width:330,alignment: .leading)
           Text(itemDetails.item_description).padding().font(.subheadline)
-          .frame(width: 330, alignment: .center)
+						.frame(width: 330, alignment: .leading)
             .background(Color(red: 229/255.0, green: 229/255.0, blue: 229/255.0, opacity: 1.0))
             .cornerRadius(10)
           .fixedSize(horizontal: false, vertical: true)

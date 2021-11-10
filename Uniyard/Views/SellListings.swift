@@ -13,7 +13,7 @@ struct SellListings: View {
            
           List(itemViewModel.sell_filteredItems, id: \.itemId){itemPostAvailable in
             NavigationLink(
-              destination: ItemDetailsBuy(itemDetails: itemPostAvailable),
+              destination: ItemDetailsSell(itemDetails: itemPostAvailable),
               label: {
                 HStack{
                   VStack{

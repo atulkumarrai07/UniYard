@@ -13,8 +13,6 @@ struct CreateSellView: View {
                        "Jewelley, watches", "Music instruments", "Phones",
                        "Sporting goods", "Tools", "Toys, games", "Other"]
     
-  
-  
   var locationList = ["Pittsburgh","Australia","Qatar", "Africa"]
 
   //  @State private var deliveryRequestIndex = 0
