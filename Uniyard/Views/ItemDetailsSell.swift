@@ -31,10 +31,7 @@ struct ItemDetailsSell: View {
       }
      ItemDetails()
       CardDetails(itemDetails: itemDetails)
-//    HStack{
-//     Text("Status: ").bold().font(.title3)
-//     Text("Available").font(.title3)
-//    }
+
    }
   }
  }

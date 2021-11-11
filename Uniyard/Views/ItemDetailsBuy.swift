@@ -24,10 +24,6 @@ struct ItemDetailsBuy: View {
 						.frame(maxWidth: .infinity, alignment: .center).padding(.leading,-20)
 				}
 				CardDetailsBuy(itemDetails:itemDetails)
-				//    HStack{
-				//     Text("Status: ").bold().font(.title3)
-				//     Text("Available").font(.title3)
-				//    }
 			}
 		}
 	}

@@ -35,6 +35,9 @@ struct BottomBarNav: View {
      }.tag(3)
     ProfileView()
      .tabItem {
+//			Image(uiImage: #imageLiteral(resourceName: "Login_logo"))
+//				.clipShape(Circle()) // Clip the image to a circle
+			
       Image(systemName: "person.circle.fill")
       .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
       Text("Profile")

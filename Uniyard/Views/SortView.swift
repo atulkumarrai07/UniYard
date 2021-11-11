@@ -3,7 +3,6 @@ import SwiftUI
 
 struct SortView: View {
 	@StateObject var itemViewModel:ItemsViewModel
-//  @State var sortOption:Binding<String>
   @Environment(\.presentationMode) var itemSortPicker: Binding< PresentationMode>
   
   var body: some View {
