@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CampusLocationPicker2: View {
 	@StateObject var itemViewModel:ItemsViewModel
-//  @State var location:Binding<String>
+  @State var locationSelection:Binding<String>
   @Environment(\.presentationMode) var campusLocationPicker: Binding< PresentationMode>
   
     var body: some View {
@@ -26,7 +26,7 @@ struct CampusLocationPicker2: View {
             self.campusLocationPicker.wrappedValue.dismiss()
           }
         }.padding()
-				Picker("", selection: $itemViewModel.locationSelection) {
+				Picker("", selection: locationSelection) {
                    ForEach(["Pittsburgh","Australia","Qatar", "Africa"], id: \.self) {
                        Text("\($0)")
                    }

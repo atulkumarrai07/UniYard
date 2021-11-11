@@ -25,7 +25,7 @@ struct SellListings: View {
                       Text(String(itemPostAvailable.item_title)).font(.headline).foregroundColor(.black)
                     }.frame(width: 230, height: 15, alignment: .leading).padding(.bottom,0.1)
                     HStack{
-                      Text("Condition: " + String(itemPostAvailable.condition)).font(.subheadline).foregroundColor(.black).opacity(0.8)
+											Text("Condition: " + String(itemPostAvailable.condition)).font(.subheadline).foregroundColor(.black).opacity(0.8)
                     }.frame(width: 230, height: 15, alignment: .leading)
                     Spacer()
                     HStack{

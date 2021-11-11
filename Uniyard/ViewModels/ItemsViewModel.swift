@@ -8,7 +8,6 @@ class ItemsViewModel: ObservableObject {
   var viewModel = ViewModel()
   private let database = Firestore.firestore()
 	
-//  @Published var location:String = "Pittsburgh"
   @Published var showingLocations:Bool = false
   @Published var renderSell:Bool = false
   @Published var sellButtonForegroundColor = Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)
@@ -181,17 +180,17 @@ class ItemsViewModel: ObservableObject {
       sell_filteredItems = itemswithPostsAvailableArray.filter({item in return !item.item_buy})
         .filter({item in return item.price >= (Double(sell_filter_minPrice) ?? 0)})
         .filter({item in return item.price <= (Double(sell_filter_maxPrice) ?? Double.infinity)})
-				.filter({item in return item.pickup_location == locationSelection})
+				.filter({item in return item.pickup_location.contains(locationSelection)})
 
       if (sell_filter_categorySelection != "All"){
-        self.sell_filteredItems = self.itemswithPostsAvailableArray.filter({
+        self.sell_filteredItems = self.sell_filteredItems.filter({
           ($0.item_category == sell_filter_categorySelection)
       })
       }
 
       if (sell_filter_conditionSelection != "All"){
-        self.sell_filteredItems = self.itemswithPostsAvailableArray.filter({
-          ($0.condition == sell_filter_conditionSelection)
+        self.sell_filteredItems = self.sell_filteredItems.filter({
+					($0.condition == sell_filter_conditionSelection)
       })
       }
     }
@@ -204,7 +203,7 @@ class ItemsViewModel: ObservableObject {
 				.filter({item in return item.pickup_location == locationSelection})
 			
       if (buy_filter_categorySelection != "All"){
-        self.buy_filteredItems = self.itemswithPostsAvailableArray.filter({
+        self.buy_filteredItems = self.buy_filteredItems.filter({
           ($0.item_category == buy_filter_categorySelection)
       })
       }
