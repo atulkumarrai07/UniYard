@@ -97,7 +97,7 @@ struct ItemsHome: View {
 					itemViewModel.showingLocations.toggle()
 					
 				}.sheet(isPresented: $itemViewModel.showingLocations){
-					CampusLocationPicker2(itemViewModel: itemViewModel)
+					CampusLocationPicker2(itemViewModel: itemViewModel, locationSelection: $itemViewModel.locationSelection)
 				}
 				Spacer()
 				
