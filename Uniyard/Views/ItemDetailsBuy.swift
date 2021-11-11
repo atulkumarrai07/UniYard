@@ -39,7 +39,7 @@ struct CardDetailsBuy: View {
 					HStack{
 						Text("[Buy]").font(.title3).foregroundColor(.blue).frame(alignment: .leading)
 						Text(itemDetails.item_title).font(.title3).fontWeight(.bold).frame(alignment: .leading)
-						
+						Spacer()
 						Button(action: itemdetailvmodel.toggled){
 							Image(systemName: itemdetailvmodel.showBookmarkSelector ? "bookmark.fill" :"bookmark").font(.system(size: 25.0, weight: .bold))
 								.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))

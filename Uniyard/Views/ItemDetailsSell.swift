@@ -73,16 +73,15 @@ struct CardDetails: View {
   ZStack{
     ScrollView{
       VStack{
-       VStack (alignment: .leading){
+       VStack {
         HStack{
-
-         Text("[Sell]").foregroundColor(.blue).font(.title3)
-					
+          
+          Text("[Sell]").foregroundColor(.blue).font(.title3).frame( alignment: .leading)
           Text(itemDetails.item_title)
           .font(.title3)
-
           .fontWeight(.bold)
           .frame(alignment: .leading)
+          Spacer()
          Button(action: itemdetailvmodel.toggled){
          Image(systemName: itemdetailvmodel.showBookmarkSelector ? "bookmark.fill" :"bookmark").font(.system(size: 25.0, weight: .bold)).frame(width: 120, height: 50, alignment: .trailing)
           .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
@@ -132,7 +131,7 @@ struct CardDetails: View {
           .cornerRadius(15)
         }
        }.padding(.top)
-       .frame(width: 334,height: 490 , alignment: .leading)
+       .frame(width: 334,height: 490 , alignment: .center)
        Spacer()
     //   BottomBarNav().frame(width: 400).navigationBarHidden(true).onAppear()
       }.padding()
