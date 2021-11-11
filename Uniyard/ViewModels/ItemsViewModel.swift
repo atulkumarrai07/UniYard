@@ -59,9 +59,16 @@ class ItemsViewModel: ObservableObject {
     loadItemswithPostsAvailable()
   }
   //aaratrika
-  func search(searchString: String) {
+  func searchBuy(searchString: String) {
    // print("Search string:", searchString)
-      filteredPosts = itemswithPostsAvailableArray.filter { card in
+    filteredPosts = buy_filteredItems.filter { card in
+        return card.item_title.lowercased().contains(searchString.lowercased())
+        }
+    }
+  //aaratrika
+  func searchSell(searchString: String) {
+   // print("Search string:", searchString)
+    filteredPosts = sell_filteredItems.filter { card in
         return card.item_title.lowercased().contains(searchString.lowercased())
         }
     }

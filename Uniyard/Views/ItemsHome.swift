@@ -40,7 +40,15 @@ struct ItemsHome: View {
 				//          }
 				.onChange(of: itemViewModel.searchString, perform: {_ in
 					itemViewModel.isSearching = true
-					itemViewModel.search(searchString: itemViewModel.searchString)
+          if(itemViewModel.renderSell)
+          {
+            itemViewModel.searchSell(searchString: itemViewModel.searchString)
+          }
+          else
+          {
+            itemViewModel.searchBuy(searchString: itemViewModel.searchString)
+          }
+					
 					
 				})
 				.overlay(
@@ -69,14 +77,14 @@ struct ItemsHome: View {
 			HStack{
 				Button("Sell", action: {
 					itemViewModel.renderSell.toggle()
-					itemViewModel.search(searchString: itemViewModel.searchString)
+					itemViewModel.searchSell(searchString: itemViewModel.searchString)
 					itemViewModel.sortItems(true)
 					itemViewModel.viewBuySell()
 				}).frame(width: 175, height: 40, alignment: .center).foregroundColor(itemViewModel.sellButtonForegroundColor).background(itemViewModel.sellButtonBackgroundColor).font(.title).cornerRadius(15.0).overlay(RoundedRectangle(cornerRadius: 14.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))).disabled(itemViewModel.renderSell)
 				
 				Button("Buy", action: {
 					itemViewModel.renderSell.toggle()
-					itemViewModel.search(searchString: itemViewModel.searchString)
+					itemViewModel.searchBuy(searchString: itemViewModel.searchString)
 					itemViewModel.sortItems(false)
 					itemViewModel.viewBuySell()
 				}).frame(width: 175, height: 40, alignment: .center).foregroundColor(itemViewModel.buyButtonForegroundColor).background(itemViewModel.buyButtonBackgroundColor).font(.title).cornerRadius(15.0).overlay(RoundedRectangle(cornerRadius: 14.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))).disabled(!itemViewModel.renderSell)
