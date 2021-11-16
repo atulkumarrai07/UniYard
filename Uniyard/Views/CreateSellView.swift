@@ -14,8 +14,6 @@ struct CreateSellView: View {
                        "Sporting goods", "Tools", "Toys, games", "Other"]
     
   var locationList = ["Pittsburgh","Australia","Qatar", "Africa"]
-
-  //  @State private var deliveryRequestIndex = 0
   
   //set a date range
   var dateRange: ClosedRange<Date> {
@@ -32,7 +30,9 @@ struct CreateSellView: View {
         VStack{
           HStack {
             Button(action: {
+							UIApplication.shared.endEditing()
               self.createSellPresentation.wrappedValue.dismiss()
+							
             }){
               Image(systemName: "chevron.backward").resizable()
                 .frame(width: 15, height: 20, alignment: .center)
@@ -141,7 +141,7 @@ struct CreateSellView: View {
                   dismissButton: .default(Text("OK")))
           }
           
-        }
+        }.onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
       }.navigationBarHidden(true)
   }
   
@@ -153,3 +153,5 @@ struct CreateSellView_Previews: PreviewProvider {
   }
 
 }
+
+
