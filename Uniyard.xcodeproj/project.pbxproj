@@ -66,6 +66,9 @@
 		BF9C280B2735892F00E3231C /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C280A2735892F00E3231C /* MessageViewModel.swift */; };
 		BF9C280E2735897C00E3231C /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C280D2735897C00E3231C /* ChatList.swift */; };
 		BF9C2810273589AE00E3231C /* ChatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C280F273589AE00E3231C /* ChatRow.swift */; };
+		E2E6664B2745A6D10030E5C5 /* PersonalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6664A2745A6D10030E5C5 /* PersonalView.swift */; };
+		E2E6664D2745ABCC0030E5C5 /* MyPostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6664C2745ABCC0030E5C5 /* MyPostsView.swift */; };
+		E2E6664F2745AC1C0030E5C5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6664E2745AC1C0030E5C5 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +145,9 @@
 		BF9C280A2735892F00E3231C /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		BF9C280D2735897C00E3231C /* ChatList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
 		BF9C280F273589AE00E3231C /* ChatRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRow.swift; sourceTree = "<group>"; };
+		E2E6664A2745A6D10030E5C5 /* PersonalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalView.swift; sourceTree = "<group>"; };
+		E2E6664C2745ABCC0030E5C5 /* MyPostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsView.swift; sourceTree = "<group>"; };
+		E2E6664E2745AC1C0030E5C5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,6 +280,9 @@
 				0BF72E10273098650013DCC2 /* SavedPostView.swift */,
 				0BF72E122730988A0013DCC2 /* NotificationView.swift */,
 				0BF72E14273098A20013DCC2 /* ProfileView.swift */,
+				E2E6664E2745AC1C0030E5C5 /* SettingsView.swift */,
+				E2E6664A2745A6D10030E5C5 /* PersonalView.swift */,
+				E2E6664C2745ABCC0030E5C5 /* MyPostsView.swift */,
 				0BF72E0A273097C30013DCC2 /* ItemDetailsSell.swift */,
 				0BF72E16273098BF0013DCC2 /* ItemDetailsBuy.swift */,
 				0BF72DF2272B06630013DCC2 /* CreateBuyView.swift */,
@@ -476,7 +485,9 @@
 				0BF72DF7272B07E80013DCC2 /* BuyListings.swift in Sources */,
 				BF9C2809273588F900E3231C /* Chat.swift in Sources */,
 				BF9C2806273583B000E3231C /* SellFilterView.swift in Sources */,
+				E2E6664B2745A6D10030E5C5 /* PersonalView.swift in Sources */,
 				BF9C27FE27346C9000E3231C /* SearchSellListings.swift in Sources */,
+				E2E6664D2745ABCC0030E5C5 /* MyPostsView.swift in Sources */,
 				0B45523C2725B606009BA1E0 /* Notification_Sequence.swift in Sources */,
 				BF23DB362728DC6E00410436 /* CampusLocationPicker.swift in Sources */,
 				0B7E7CD42717D006004DB7AC /* ContentView.swift in Sources */,
@@ -489,6 +500,7 @@
 				0BB0C4852727B96900060C8E /* LoginViewModel.swift in Sources */,
 				BF9C28022735836300E3231C /* SortView.swift in Sources */,
 				0B4552342725B574009BA1E0 /* Rental.swift in Sources */,
+				E2E6664F2745AC1C0030E5C5 /* SettingsView.swift in Sources */,
 				0B45522A2725B491009BA1E0 /* User.swift in Sources */,
 				0B4552362725B5A1009BA1E0 /* Message.swift in Sources */,
 				0BF72E0D273098150013DCC2 /* BottomBarNav.swift in Sources */,

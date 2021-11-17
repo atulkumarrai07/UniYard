@@ -7,8 +7,7 @@ struct ItemDetailsBuy: View {
 	@Environment(\.presentationMode) var itemDetailsBuyPresentation: Binding<PresentationMode>
 	var body: some View {
 		ZStack{
-			Color(red: 214/255.0, green: 158/255.0, blue: 158/255.0, opacity: 1.0)
-				.ignoresSafeArea(.all)
+			Color(red:237/255.0, green: 213/255.0, blue: 213/255.0, opacity: 1.0).ignoresSafeArea(.all)
 			VStack{
 				HStack {
 					Button(action: {
@@ -53,10 +52,6 @@ struct CardDetailsBuy: View {
 						Text("List Date: 2019-09-31").font(.subheadline).foregroundColor(.gray).frame(width:220,alignment: .trailing)
 					}
 					
-					Group{
-						Spacer()
-						IndividualCardDetails("Budget:", text: "$" + String(itemDetails.price) )
-					}
 					Group{
 						Spacer()
 						IndividualCardDetails("Category:", text: itemDetails.item_category )
