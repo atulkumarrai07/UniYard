@@ -7,8 +7,7 @@ struct ItemDetailsSell: View {
   @Environment(\.presentationMode) var itemDetailsSellPresentation: Binding<PresentationMode>
   var body: some View {
    ZStack{
-    Color(red: 214/255.0, green: 158/255.0, blue: 158/255.0, opacity: 1.0)
-     .ignoresSafeArea(.all)
+		Color(red:237/255.0, green: 213/255.0, blue: 213/255.0, opacity: 1.0).ignoresSafeArea(.all)
 //    NavigationLink(
 //     destination: Login(loginModel: loginModel),
 //     isActive: $signupvmodel.displayLogin,
