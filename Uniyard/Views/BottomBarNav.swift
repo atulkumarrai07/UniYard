@@ -3,6 +3,8 @@ import SwiftUI
 
 struct BottomBarNav: View {
   @EnvironmentObject var loginModel:LoginModel
+	@StateObject var curUserVm = CurUserViewModel()
+
  @State var selectedTab: Int
   //var auth = Auth.auth()
   var body: some View {
@@ -33,11 +35,8 @@ struct BottomBarNav: View {
       .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
       Text("Notifications")
      }.tag(3)
-    ProfileView()
+		ProfileView(curUserVm: curUserVm)
      .tabItem {
-//			Image(uiImage: #imageLiteral(resourceName: "Login_logo"))
-//				.clipShape(Circle()) // Clip the image to a circle
-			
       Image(systemName: "person.circle.fill")
       .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
       Text("Profile")
