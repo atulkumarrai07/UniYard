@@ -145,11 +145,11 @@ class ItemsViewModel: ObservableObject {
             self.itemswithPostsAvailableArray[row].isSaved = true
             }
         }
-        self.filterBuyItems()
-        self.filterSellItems()
-        self.sortItems(true)   //sort for sell listings by date
-        self.sortItems(false) //sort for buy listings by date
       }
+      self.filterBuyItems()
+      self.filterSellItems()
+      self.sortItems(true)   //sort for sell listings by date
+      self.sortItems(false) //sort for buy listings by date
       
   }
     

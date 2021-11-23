@@ -25,7 +25,7 @@ class SavedPostViewModel: ObservableObject {
     
     let auth = Auth.auth()
     let user_id = auth.currentUser?.uid
-    viewModel.fetchSavedPost(userId: user_id!) { results in
+    viewModel.fetchSavedPost(userId: user_id ?? "nil") { results in
       self.savedPostsArray = results
       
       if(self.savedPostsArray.isEmpty)
