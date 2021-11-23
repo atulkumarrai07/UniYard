@@ -3,6 +3,7 @@ import Foundation
 import FirebaseFirestore
 
 struct ItemDetailsSell: View {
+
   var itemDetails: PostItem
   @Environment(\.presentationMode) var itemDetailsSellPresentation: Binding<PresentationMode>
   var body: some View {
@@ -139,27 +140,29 @@ struct CardDetails: View {
    self.itemDetails.isSaved = !self.itemDetails.isSaved
   }
 }
+
 struct IndividualCardDetails: View {
-  private var caption:String
- private var text:String
-//  @Binding var text:String
- init(_ caption: String, text: String) {
-  self.caption = caption
- // self._text = text
-  self.text = text
- }
-   var body: some View {
-    VStack(alignment: .leading){
-    HStack
-     {
-     Text(caption).bold().font(.subheadline).frame(alignment: .leading)
-     Text(text).font(.subheadline).frame(width:130,alignment: .leading)
-     Spacer()
-    }
-   }
-  }
+	private var caption:String
+	private var text:String
+	//  @Binding var text:String
+	init(_ caption: String, text: String) {
+		self.caption = caption
+		// self._text = text
+		self.text = text
+	}
+	var body: some View {
+		VStack(alignment: .leading){
+			HStack
+			{
+				Text(caption).bold().font(.subheadline).frame(alignment: .leading)
+				Text(text).font(.subheadline).frame(width:130,alignment: .leading)
+				Spacer()
+			}
+		}
+	}
 }
 struct ItemDetailsSell_Previews: PreviewProvider {
+
   static var previews: some View {
     let item:PostItem = PostItem(postId: "", last_modified_timestamp: Timestamp.init(), Availability: "", post_creation_date: Timestamp.init(), itemId: "", item_title: "", item_description: "", item_category: "", item_buy: false, condition: "", price: 0.0, images: [], zip_code: "", delivery: false, pickup_location: "",isSaved:false)
     ItemDetailsSell(itemDetails:item)

@@ -1,9 +1,11 @@
 
+import FirebaseAuth
 import Foundation
 import FirebaseFirestore
 
 class ViewModel: ObservableObject
 {
+
   private let database = Firestore.firestore()
   var users = [User]()
   var posts = [Post]()
@@ -469,7 +471,4 @@ class ViewModel: ObservableObject
       }
     }
   }
-
-  
-
 }

@@ -50,8 +50,7 @@ struct ItemsHome: View {
           {
             itemViewModel.searchBuy(searchString: itemViewModel.searchString)
           }
-					
-					
+
 				})
 				.overlay(
 					HStack{

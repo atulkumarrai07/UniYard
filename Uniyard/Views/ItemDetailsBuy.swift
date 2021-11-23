@@ -7,18 +7,17 @@ struct ItemDetailsBuy: View {
 	@Environment(\.presentationMode) var itemDetailsBuyPresentation: Binding<PresentationMode>
 	var body: some View {
 		ZStack{
-			Color(red: 214/255.0, green: 158/255.0, blue: 158/255.0, opacity: 1.0)
-				.ignoresSafeArea(.all)
+			Color(red:237/255.0, green: 213/255.0, blue: 213/255.0, opacity: 1.0).ignoresSafeArea(.all)
 			VStack{
 				HStack {
 					Button(action: {
 						itemDetailsBuyPresentation.wrappedValue.dismiss()
 					})
 					{
-						Image(systemName: "chevron.backward").resizable().frame(width: 20, height: 30, alignment: .center).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).padding()
+						Image(systemName: "chevron.backward").resizable().frame(width: 15, height: 20, alignment: .center).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).padding()
 					}
 					Text("Item Details")
-						.font(.largeTitle)
+						.font(.system(size: 25, weight: .heavy))
 						.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
 						.fontWeight(.heavy)
 						.frame(maxWidth: .infinity, alignment: .center).padding(.leading,-20)
@@ -65,10 +64,6 @@ struct CardDetailsBuy: View {
 						Text("List Date: 2019-09-31").font(.subheadline).foregroundColor(.gray).frame(width:220,alignment: .trailing)
 					}
 					
-					Group{
-						Spacer()
-						IndividualCardDetails("Budget:", text: "$" + String(itemDetails.price) )
-					}
 					Group{
 						Spacer()
 						IndividualCardDetails("Category:", text: itemDetails.item_category )
