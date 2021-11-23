@@ -47,4 +47,18 @@ class CurUserViewModel: ObservableObject {
 				}}
 	}
 	
+	func updatePwd(_ newPwd: String){
+		let auth = Auth.auth()
+		let user_id = auth.currentUser?.uid
+		let userRef = database.collection("Users").document(user_id!)
+		userRef.getDocument { (document, err) in
+			if let err = err {
+				print(err.localizedDescription)
+			}
+			else {
+				document?.reference.updateData(["password": newPwd])
+			}
+		}
+	}
+	
 }
