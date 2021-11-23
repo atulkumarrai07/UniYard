@@ -14,6 +14,8 @@ class ViewModel: ObservableObject
   var notifications = [Notification]()
   var notification_sequences = [Notification_Sequence]()
   var itemsWithPostsAvailable = [PostItem]()
+  var itemsWithSavedPosts = [PostItem]()
+  var itemsWithMyPosts = [PostItem]()
   
 	
   func addUser(user:User){
@@ -198,6 +200,7 @@ class ViewModel: ObservableObject
   
   // using this function for fetching all items with their posts to render details in items listing
   func fetchAllItemsWithPostsAvailable(completion: @escaping ([PostItem])->Void) {
+    self.itemsWithPostsAvailable = []
     database.collection("Items").getDocuments() { (querySnapshot, err) in
         if let err = err {
             print("Error getting documents: \(err)")
@@ -218,7 +221,7 @@ class ViewModel: ObservableObject
               self.fetchPostBasedOnPostId(postId: post_id) {(post) in
                 if(post.Availability == "Available")
                 {
-                  self.itemsWithPostsAvailable.append(PostItem(postId: post_id, last_modified_timestamp: post.last_modified_timestamp, Availability: post.Availability, post_creation_date: post.post_creation_date, itemId: id, item_title: item_title, item_description: item_description, item_category: item_category, item_buy: item_buy, condition: condition, price: price, images: images, zip_code: zip_code, delivery: delivery, pickup_location: pickup_location))
+                  self.itemsWithPostsAvailable.append(PostItem(postId: post_id, last_modified_timestamp: post.last_modified_timestamp, Availability: post.Availability, post_creation_date: post.post_creation_date, itemId: id, item_title: item_title, item_description: item_description, item_category: item_category, item_buy: item_buy, condition: condition, price: price, images: images, zip_code: zip_code, delivery: delivery, pickup_location: pickup_location, isSaved: false))
                 }
                 completion(self.itemsWithPostsAvailable)
               }
@@ -229,6 +232,91 @@ class ViewModel: ObservableObject
 //            print(itemwithPosts)
 //          }
 //          print("Items with posts printed")
+          }
+      }
+  }
+  //using it for savepost
+  func fetchSavedPost(userId: String, completion: @escaping ([String])->Void){
+ 
+    database.collection("Users").document(userId).getDocument { (document, error) in
+        if let document = document, document.exists {
+            let saved_post_list = document.get("saved_post_list") as? [String] ?? []
+//            print("Document data: \(saved_post_list)")
+          
+          completion(saved_post_list)
+        } else {
+            print("Document does not exist")
+        }
+      }
+      }
+  //using it for savepost
+  func fetchAllSavedPosts(savePostArray: [String], completion: @escaping ([PostItem])->Void) {
+    self.itemsWithSavedPosts = []
+    database.collection("Items").whereField("post_id", in: savePostArray).getDocuments() { (querySnapshot, err) in
+        if let err = err {
+            print("Error getting documents: \(err)")
+        } else {
+            for document in querySnapshot!.documents {
+              let id = document.documentID
+              let post_id = document.get("post_id") as? String ?? ""
+              let item_title = document.get("item_title") as? String ?? ""
+              let item_description = document.get("item_description") as? String ?? ""
+              let item_category = document.get("item_category") as? String ?? ""
+              let item_buy = document.get("item_buy") as? Bool ?? false
+              let condition = document.get("condition") as? String ?? ""
+              let price = document.get("price") as? Double ?? 0
+              let images = document.get("images") as? [String] ?? []
+              let zip_code = document.get("zip_code") as? String ?? ""
+              let delivery = document.get("delivery") as? Bool ?? false
+              let pickup_location = document.get("pickup_location") as? String ?? ""
+              self.fetchPostBasedOnPostId(postId: post_id) {(post) in
+                self.itemsWithSavedPosts.append(PostItem(postId: post_id, last_modified_timestamp: post.last_modified_timestamp, Availability: post.Availability, post_creation_date: post.post_creation_date, itemId: id, item_title: item_title, item_description: item_description, item_category: item_category, item_buy: item_buy, condition: condition, price: price, images: images, zip_code: zip_code, delivery: delivery, pickup_location: pickup_location,isSaved: false))
+                
+                completion(self.itemsWithSavedPosts)
+              }
+              }
+          }
+      }
+  }
+  //using it for mypost
+  func fetchMyPost(userId: String, completion: @escaping ([String])->Void){
+ 
+    database.collection("Users").document(userId).getDocument { (document, error) in
+        if let document = document, document.exists {
+            let my_post_list = document.get("my_post_list") as? [String] ?? []
+//            print("Document data: \(saved_post_list)")
+          completion(my_post_list)
+        } else {
+            print("Document does not exist")
+        }
+      }
+      }
+  //using it for mypost
+  func fetchAllMyPosts(myPostArray: [String], completion: @escaping ([PostItem])->Void) {
+    itemsWithMyPosts = []
+    database.collection("Items").whereField("post_id", in: myPostArray).getDocuments() { (querySnapshot, err) in
+        if let err = err {
+            print("Error getting documents: \(err)")
+        } else {
+            for document in querySnapshot!.documents {
+              let id = document.documentID
+              let post_id = document.get("post_id") as? String ?? ""
+              let item_title = document.get("item_title") as? String ?? ""
+              let item_description = document.get("item_description") as? String ?? ""
+              let item_category = document.get("item_category") as? String ?? ""
+              let item_buy = document.get("item_buy") as? Bool ?? false
+              let condition = document.get("condition") as? String ?? ""
+              let price = document.get("price") as? Double ?? 0
+              let images = document.get("images") as? [String] ?? []
+              let zip_code = document.get("zip_code") as? String ?? ""
+              let delivery = document.get("delivery") as? Bool ?? false
+              let pickup_location = document.get("pickup_location") as? String ?? ""
+              self.fetchPostBasedOnPostId(postId: post_id) {(post) in
+              self.itemsWithMyPosts.append(PostItem(postId: post_id, last_modified_timestamp: post.last_modified_timestamp, Availability: post.Availability, post_creation_date: post.post_creation_date, itemId: id, item_title: item_title, item_description: item_description, item_category: item_category, item_buy: item_buy, condition: condition, price: price, images: images, zip_code: zip_code, delivery: delivery, pickup_location: pickup_location,isSaved: false))
+                
+                completion(self.itemsWithMyPosts)
+              }
+              }
           }
       }
   }

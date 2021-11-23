@@ -4,10 +4,11 @@ import SwiftUI
 struct BottomBarNav: View {
   @EnvironmentObject var loginModel:LoginModel
  @State var selectedTab: Int
+  @StateObject var itemViewModel = ItemsViewModel()
   //var auth = Auth.auth()
   var body: some View {
    TabView(selection: $selectedTab){
-    ItemsHome().environmentObject(loginModel)
+    ItemsHome(itemViewModel: itemViewModel).environmentObject(loginModel)
      .tabItem {
       Image(systemName: "house.fill")
       .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))

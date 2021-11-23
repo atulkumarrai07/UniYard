@@ -69,7 +69,7 @@ struct ProfileBox: View {
 			}.buttonStyle(PlainButtonStyle())
 			
 			//My Posts
-			NavigationLink(destination: MyPostsView()){
+			NavigationLink(destination: MyPostView()){
 				HStack {
 					Image(systemName: "list.bullet.rectangle")
 						.frame(width: 40)
@@ -141,16 +141,16 @@ struct PersonalView: View {
 	}
 }
 
-struct MyPostsView: View {
-	var body: some View {
-		VStack(spacing: 0) {
-			HStack {
-				Text("My Posts")
-					.font(.body)
-			}
-		}
-	}
-}
+//struct MyPostsView: View {
+//	var body: some View {
+//		VStack(spacing: 0) {
+//			HStack {
+//				Text("My Posts")
+//					.font(.body)
+//			}
+//		}
+//	}
+//}
 
 
 struct SettingsView: View {
