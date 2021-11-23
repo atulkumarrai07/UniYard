@@ -32,10 +32,11 @@ struct PersonalView_Previews: PreviewProvider {
 
 struct personalDetailsView: View {
 	@StateObject var curUserVm = CurUserViewModel()
-	
+	@State var locationInEditMode = false
 	@State var passwordInEditMode = false
 	@State var passwordValid = true
 	@State var ispwdSecured = true
+	var locationList = ["Pittsburgh","Australia","Qatar", "Africa"]
 	
 	var body: some View {
 		ZStack{
@@ -78,12 +79,40 @@ struct personalDetailsView: View {
 						}
 						
 						Group{
-							
 							Text("Campus location").font(.headline).foregroundColor(.black)
 								.frame(maxWidth: .infinity, alignment: .leading).padding(.bottom, 10)
-							Text(curUserVm.campus_location)
-								.foregroundColor(Color(red: 95/255.0, green: 90/255.0, blue: 90/255.0, opacity: 1.0))
-								.frame(maxWidth: .infinity, alignment: .leading)
+							
+							HStack{
+								if locationInEditMode {
+									Picker(selection: $curUserVm.campus_location,
+												 label:
+													HStack{
+														Text(curUserVm.campus_location)
+														Image(systemName: "chevron.down").font(.system(size: 18))
+													}
+													.frame(height: 35,  alignment: .leading).frame(maxWidth: .infinity)
+													.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
+													.background(Color(red:237/255.0, green: 213/255.0, blue: 213/255.0, opacity: 1.0))
+													.cornerRadius(5)
+													
+									) {
+										ForEach(["Africa","Qatar", "Australia","Pittsburgh"], id: \.self) {Text($0)}
+									}.pickerStyle(MenuPickerStyle())
+								}
+								else{Text(curUserVm.campus_location)
+									.foregroundColor(Color(red: 95/255.0, green: 90/255.0, blue: 90/255.0, opacity: 1.0))
+									.frame(maxWidth: .infinity, alignment: .leading)
+								}
+								
+								Button(action: {
+												if (locationInEditMode){curUserVm.updateLocation(curUserVm.campus_location)}
+												self.locationInEditMode.toggle()},
+											 label: {
+												Text(locationInEditMode ? "Save" : "Edit").font(.system(size: 18)).fontWeight(.light)
+													.foregroundColor(Color.blue)
+											 })
+								
+							}//hstcak
 							Divider()
 						}
 						
@@ -109,15 +138,15 @@ struct personalDetailsView: View {
 												passwordValid = isValidPassword(curUserVm.password)
 											})
 									}
-
+									
 								} else { if ispwdSecured {
-										Text("•••••••••••").foregroundColor(Color(red: 95/255.0, green: 90/255.0, blue: 90/255.0, opacity: 1.0))
-											.frame(maxWidth: .infinity, alignment: .leading)
-									} else {
-										Text(curUserVm.password)
-											.foregroundColor(Color(red: 95/255.0, green: 90/255.0, blue: 90/255.0, opacity: 1.0))
-											.frame(maxWidth: .infinity, alignment: .leading)
-									}
+									Text("•••••••••••").foregroundColor(Color(red: 95/255.0, green: 90/255.0, blue: 90/255.0, opacity: 1.0))
+										.frame(maxWidth: .infinity, alignment: .leading)
+								} else {
+									Text(curUserVm.password)
+										.foregroundColor(Color(red: 95/255.0, green: 90/255.0, blue: 90/255.0, opacity: 1.0))
+										.frame(maxWidth: .infinity, alignment: .leading)
+								}
 								}
 								
 								Button(action: {ispwdSecured.toggle()

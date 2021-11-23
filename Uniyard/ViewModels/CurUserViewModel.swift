@@ -61,4 +61,18 @@ class CurUserViewModel: ObservableObject {
 		}
 	}
 	
+	func updateLocation(_ newLocation: String){
+		let auth = Auth.auth()
+		let user_id = auth.currentUser?.uid
+		let userRef = database.collection("Users").document(user_id!)
+		userRef.getDocument { (document, err) in
+			if let err = err {
+				print(err.localizedDescription)
+			}
+			else {
+				document?.reference.updateData(["campus_location": newLocation])
+			}
+		}
+	}
+	
 }
