@@ -2,6 +2,7 @@
 import SwiftUI
 
 struct ItemsHome: View {
+  @StateObject var itemViewModel: ItemsViewModel
 	//aaratrika
 	//  @State var searchField: String = ""
 	//  @State var displayedRepos = [PostItem]()
@@ -9,8 +10,9 @@ struct ItemsHome: View {
 	//----aaratrika
 	
 	@EnvironmentObject var loginModel:LoginModel
-	@StateObject var itemViewModel = ItemsViewModel()
+//	@StateObject var itemViewModel = ItemsViewModel()
 	var body: some View {
+    
 		VStack{
 			//        HStack {
 			//          Button(action: {
@@ -125,7 +127,6 @@ struct ItemsHome: View {
 					SortView(itemViewModel: itemViewModel)
 				}
 			}.padding(.horizontal)
-			
 			if(itemViewModel.renderSell && itemViewModel.searchString == ""){
 				SellListings(itemViewModel: itemViewModel)
 			}
@@ -141,12 +142,15 @@ struct ItemsHome: View {
 			}
 			Spacer()
 		}.navigationBarHidden(true)
-	}
+    .onAppear{
+      itemViewModel.loadItemswithPostsAvailable()
+    }
+  }
 }
 
-struct ItemsHome_Previews: PreviewProvider {
-	static var previews: some View {
-		ItemsHome()
-		
-	}
-}
+//struct ItemsHome_Previews: PreviewProvider {
+//	static var previews: some View {
+//		ItemsHome()
+//		
+//	}
+//}

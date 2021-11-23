@@ -57,7 +57,7 @@ struct ProfileBox: View {
 			}.buttonStyle(PlainButtonStyle())
 			
 			//MyPosts
-			NavigationLink(destination: MyPostsView()){
+			NavigationLink(destination: MyPostView()){
 				VStack(spacing: 0) {
 					//Personal
 					HStack {
@@ -122,11 +122,6 @@ struct ProfileBox: View {
 		
 	}
 }
-
-
-//struct ProfileView_Previews: PreviewProvider {
-//	static var previews: some View {
-//		ProfileView()
 //	}
 //}
 

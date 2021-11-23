@@ -56,6 +56,9 @@
 		BF23DB4527290F4A00410436 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB4427290F4A00410436 /* FirebaseCrashlytics */; };
 		BF23DB4727290F4A00410436 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB4627290F4A00410436 /* FirebaseAuth */; };
 		BF23DB4927290F4A00410436 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = BF23DB4827290F4A00410436 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		BF2792C12749AF0500257F8C /* SavedPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2792C02749AF0500257F8C /* SavedPostViewModel.swift */; };
+		BF2792C3274C882200257F8C /* MyPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2792C2274C882200257F8C /* MyPostView.swift */; };
+		BF2792C5274C8AAA00257F8C /* MyPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2792C4274C8AAA00257F8C /* MyPostViewModel.swift */; };
 		BF9C27FC27346C2E00E3231C /* SearchBuyListings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C27FB27346C2E00E3231C /* SearchBuyListings.swift */; };
 		BF9C27FE27346C9000E3231C /* SearchSellListings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C27FD27346C9000E3231C /* SearchSellListings.swift */; };
 		BF9C280027357BA800E3231C /* SignUpMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C27FF27357BA800E3231C /* SignUpMock.swift */; };
@@ -136,6 +139,9 @@
 		BF23DB3127289FF400410436 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		BF23DB332728C2FD00410436 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		BF23DB352728DC6E00410436 /* CampusLocationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusLocationPicker.swift; sourceTree = "<group>"; };
+		BF2792C02749AF0500257F8C /* SavedPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostViewModel.swift; sourceTree = "<group>"; };
+		BF2792C2274C882200257F8C /* MyPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostView.swift; sourceTree = "<group>"; };
+		BF2792C4274C8AAA00257F8C /* MyPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostViewModel.swift; sourceTree = "<group>"; };
 		BF9C27FB27346C2E00E3231C /* SearchBuyListings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBuyListings.swift; sourceTree = "<group>"; };
 		BF9C27FD27346C9000E3231C /* SearchSellListings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSellListings.swift; sourceTree = "<group>"; };
 		BF9C27FF27357BA800E3231C /* SignUpMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpMock.swift; sourceTree = "<group>"; };
@@ -294,6 +300,7 @@
 				BF9C28012735836300E3231C /* SortView.swift */,
 				BF9C28032735838000E3231C /* BuyFilterView.swift */,
 				BF9C2805273583B000E3231C /* SellFilterView.swift */,
+				BF2792C2274C882200257F8C /* MyPostView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -308,6 +315,8 @@
 				0BF72DF0272AF5DE0013DCC2 /* ItemsViewModel.swift */,
 				0BF72E08273097730013DCC2 /* ItemDetailViewModel.swift */,
 				BF9C280A2735892F00E3231C /* MessageViewModel.swift */,
+				BF2792C02749AF0500257F8C /* SavedPostViewModel.swift */,
+				BF2792C4274C8AAA00257F8C /* MyPostViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -485,7 +494,9 @@
 				0B4552302725B51B009BA1E0 /* ViewModel.swift in Sources */,
 				0BF72E17273098BF0013DCC2 /* ItemDetailsBuy.swift in Sources */,
 				BF23DB342728C2FD00410436 /* SignUpViewModel.swift in Sources */,
+				BF2792C12749AF0500257F8C /* SavedPostViewModel.swift in Sources */,
 				0BF72DF7272B07E80013DCC2 /* BuyListings.swift in Sources */,
+				BF2792C5274C8AAA00257F8C /* MyPostViewModel.swift in Sources */,
 				BF9C2809273588F900E3231C /* Chat.swift in Sources */,
 				BF9C2806273583B000E3231C /* SellFilterView.swift in Sources */,
 				E2E6664B2745A6D10030E5C5 /* PersonalView.swift in Sources */,
@@ -513,6 +524,7 @@
 				0B6C613A27284FEA00D36FAC /* EntryField.swift in Sources */,
 				BF23DB3227289FF400410436 /* SignUpView.swift in Sources */,
 				0BF72E0B273097C30013DCC2 /* ItemDetailsSell.swift in Sources */,
+				BF2792C3274C882200257F8C /* MyPostView.swift in Sources */,
 				0BF72E15273098A20013DCC2 /* ProfileView.swift in Sources */,
 				0BF72DF1272AF5DE0013DCC2 /* ItemsViewModel.swift in Sources */,
 				0B4552322725B554009BA1E0 /* Item.swift in Sources */,

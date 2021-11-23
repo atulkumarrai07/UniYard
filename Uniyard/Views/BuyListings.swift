@@ -12,7 +12,7 @@ struct BuyListings: View {
               Text("Post to Buy")
             }).frame(width: 350, height: 40, alignment: .center).foregroundColor(.white).background(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).font(.title).cornerRadius(15.0).overlay(RoundedRectangle(cornerRadius: 14.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)))
             .navigationBarHidden(true)
-          
+
           List(itemViewModel.buy_filteredItems, id: \.itemId){itemPostAvailable in
             NavigationLink(
               destination: ItemDetailsBuy(itemDetails: itemPostAvailable),
