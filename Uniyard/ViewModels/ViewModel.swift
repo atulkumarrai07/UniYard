@@ -244,6 +244,7 @@ class ViewModel: ObservableObject
         if let document = document, document.exists {
             let saved_post_list = document.get("saved_post_list") as? [String] ?? []
 //            print("Document data: \(saved_post_list)")
+
           
           completion(saved_post_list)
         } else {

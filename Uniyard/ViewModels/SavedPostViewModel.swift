@@ -27,7 +27,7 @@ class SavedPostViewModel: ObservableObject {
     let user_id = auth.currentUser?.uid
     viewModel.fetchSavedPost(userId: user_id ?? "nil") { results in
       self.savedPostsArray = results
-      
+//      print(self.savedPostsArray.count)
       if(self.savedPostsArray.isEmpty)
       {
         self.isEmptySavePostList = true
