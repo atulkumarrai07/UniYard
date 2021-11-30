@@ -50,43 +50,23 @@ class ItemsViewModel: ObservableObject {
   @Published var buy_filteredItems:[PostItem] = []
   @Published var sort_NewDateFirst: Bool = true
   @Published var sort_LowPriceFirst: Bool = true
+  @Published var savedPostsForCurrentUser:[String] = []
 
   //--iris
   private var cancellableSet: Set<AnyCancellable> = []
   
-  init() {
-//    let auth = Auth.auth()
-//    viewModel.fetchMessageUser(userId: "pqu67XwvrcXbaM4sU0AgqCSn0FA3"){result in
-//      let user = result
-//      print(user)
-//    }
-//    viewModel.fetchUserByPostId(postId: "qNerJXUuUOSXROaYK9q4"){result in
-//      let user = result
-//      print(user)
-//    }
-    
-//    viewModel.fetchChats(currentUserID: auth.currentUser!.uid) {results in
-//      let chats = results
-//      print(chats.count)
-//      for chat in chats{
-//        print(chat)
-//      }
-//    }
-//    viewModel.addMessage()
-//    viewModel.addChat()
-    loadItemswithPostsAvailable()
-  }
+//  init() {
+//    loadItemswithPostsAvailable()
+//  }
   //aaratrika
   func searchBuy(searchString: String) {
-   // print("Search string:", searchString)
-    filteredPosts = buy_filteredItems.filter { card in
+   filteredPosts = buy_filteredItems.filter { card in
         return card.item_title.lowercased().contains(searchString.lowercased())
         }
     }
   //aaratrika
   func searchSell(searchString: String) {
-   // print("Search string:", searchString)
-    filteredPosts = sell_filteredItems.filter { card in
+   filteredPosts = sell_filteredItems.filter { card in
         return card.item_title.lowercased().contains(searchString.lowercased())
         }
     }
@@ -148,12 +128,32 @@ class ItemsViewModel: ObservableObject {
     func loadItemswithPostsAvailable() {
       viewModel.fetchAllItemsWithPostsAvailable { results in
         self.itemswithPostsAvailableArray = results
-        self.filterBuyItems()
-        self.filterSellItems()
-        self.sortItems(true)   //sort for sell listings by date
-        self.sortItems(false) //sort for buy listings by date
+        self.updateSaveStatus()
       }
     }
+  
+  func updateSaveStatus() {
+    let auth = Auth.auth()
+    let user_id = auth.currentUser?.uid
+    viewModel.fetchSavedPost(userId: user_id ?? "") { results in
+      self.savedPostsForCurrentUser = results
+      
+      if(!self.savedPostsForCurrentUser.isEmpty)
+      {
+        for postId in self.savedPostsForCurrentUser{
+            if let row = self.itemswithPostsAvailableArray.firstIndex(where: {$0.postId == postId}){
+            self.itemswithPostsAvailableArray[row].isSaved = true
+            }
+        }
+      }
+      self.filterBuyItems()
+      self.filterSellItems()
+      self.sortItems(true)   //sort for sell listings by date
+      self.sortItems(false) //sort for buy listings by date
+      
+  }
+    
+  }
     
     func sortItems_lowPriceFirst(postItem: [PostItem] ) -> [PostItem]{
       return postItem.sorted(by: {$0.price <= $1.price})
@@ -323,6 +323,20 @@ class ItemsViewModel: ObservableObject {
       viewModel.addItem(item: newItemData)
       viewModel.addPost(post: newPostData)
     }
-
+  func updateSavePost(postId: String){
+    let auth = Auth.auth()
+    let user_id = auth.currentUser?.uid
+      let updateReference = database.collection("Users").document(user_id!)
+      updateReference.getDocument { (document, err) in
+        if let err = err {
+          print(err.localizedDescription)
+        }
+        else {
+          document?.reference.updateData([
+            "saved_post_list": FieldValue.arrayUnion([postId])
+          ])
+        }
+      }
+    }
 }
 

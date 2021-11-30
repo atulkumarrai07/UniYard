@@ -38,5 +38,7 @@ struct Item: Identifiable, Codable {
           return (try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any]) ?? [:]
   }
 	
+	
+	
 }
 

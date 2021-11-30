@@ -8,18 +8,17 @@ struct ItemDetailsBuy: View {
 	@Environment(\.presentationMode) var itemDetailsBuyPresentation: Binding<PresentationMode>
 	var body: some View {
 		ZStack{
-			Color(red: 214/255.0, green: 158/255.0, blue: 158/255.0, opacity: 1.0)
-				.ignoresSafeArea(.all)
+			Color(red:237/255.0, green: 213/255.0, blue: 213/255.0, opacity: 1.0).ignoresSafeArea(.all)
 			VStack{
 				HStack {
 					Button(action: {
 						itemDetailsBuyPresentation.wrappedValue.dismiss()
 					})
 					{
-						Image(systemName: "chevron.backward").resizable().frame(width: 20, height: 30, alignment: .center).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).padding()
+						Image(systemName: "chevron.backward").resizable().frame(width: 15, height: 20, alignment: .center).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).padding()
 					}
 					Text("Item Details")
-						.font(.largeTitle)
+						.font(.system(size: 25, weight: .heavy))
 						.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
 						.fontWeight(.heavy)
 						.frame(maxWidth: .infinity, alignment: .center).padding(.leading,-20)
@@ -32,8 +31,11 @@ struct ItemDetailsBuy: View {
 	}
 }
 struct CardDetailsBuy: View {
-	var itemDetails:PostItem
-  @StateObject var itemdetailvmodel:ItemDetailViewModel
+	@State var itemDetails:PostItem
+	@StateObject var itemdetailvmodel:ItemDetailViewModel
+	//take
+  @StateObject var itemsvmodel = ItemsViewModel()
+  @StateObject var savePostViewModel = SavedPostViewModel()
 	var body: some View {
 		ZStack{
 			VStack{
@@ -42,11 +44,22 @@ struct CardDetailsBuy: View {
 						Text("[Buy]").font(.title3).foregroundColor(.blue).frame(alignment: .leading)
 						Text(itemDetails.item_title).font(.title3).fontWeight(.bold).frame(alignment: .leading)
 						Spacer()
-						Button(action: itemdetailvmodel.toggled){
-							Image(systemName: itemdetailvmodel.showBookmarkSelector ? "bookmark.fill" :"bookmark").font(.system(size: 25.0, weight: .bold))
+            Button(action: toggled){
+              Image(systemName: itemDetails.isSaved ? "bookmark.fill" :"bookmark").font(.system(size: 25.0, weight: .bold))
 								.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
 								.frame(width: 120, height: 50, alignment: .trailing)
-						}
+            }.onChange(of: itemDetails.isSaved, perform: { value in
+              if(itemDetails.isSaved)
+              {
+                itemsvmodel.updateSavePost(postId: itemDetails.postId)
+              }
+              else{
+                savePostViewModel.deleteFromSavePost(postId: itemDetails.postId)
+              }
+             })
+          .onAppear {
+            savePostViewModel.loadSavedPosts()
+          }
 					}
 					
 					HStack{
@@ -55,10 +68,6 @@ struct CardDetailsBuy: View {
 						Text("List Date: 2019-09-31").font(.subheadline).foregroundColor(.gray).frame(width:220,alignment: .trailing)
 					}
 					
-					Group{
-						Spacer()
-						IndividualCardDetails("Budget:", text: "$" + String(itemDetails.price) )
-					}
 					Group{
 						Spacer()
 						IndividualCardDetails("Category:", text: itemDetails.item_category )
@@ -70,9 +79,6 @@ struct CardDetailsBuy: View {
 					}
 					Group{
 						IndividualCardDetails("Pickup\nLocation:", text: itemDetails.pickup_location)
-						//														text: itemDetails.delivery ? itemDetails.pickup_location:"N/A" )
-						//     Spacer()
-						//      IndividualCardDetails("Earliest Available:", text: "" )
 						Spacer()
 						Text("Description:").bold().font(.subheadline).frame(width:330,alignment: .leading)
 						Text(itemDetails.item_description).padding().font(.subheadline)
@@ -100,17 +106,22 @@ struct CardDetailsBuy: View {
 				.frame(width: 334,height: 490 , alignment: .leading)
 				Spacer()
 				//   BottomBarNav().frame(width: 400).navigationBarHidden(true).onAppear()
-			}
-      .padding()
+			}.padding()
 			.background(Color(.systemBackground))
 			.cornerRadius(20)
 			.navigationBarHidden(true)
 		}
 	}
+  
+  func toggled(){
+//   self.showBookmarkSelector = !self.showBookmarkSelector
+   self.itemDetails.isSaved = !self.itemDetails.isSaved
+  }
+  
 }
 struct ItemDetailsBuy_Previews: PreviewProvider {
 	static var previews: some View {
-		let item:PostItem = PostItem(postId: "", last_modified_timestamp: Timestamp.init(), Availability: "", post_creation_date: Timestamp.init(), itemId: "", item_title: "", item_description: "", item_category: "", item_buy: false, condition: "", price: 0.0, images: [], zip_code: "", delivery: false, pickup_location: "")
+    let item:PostItem = PostItem(postId: "", last_modified_timestamp: Timestamp.init(), Availability: "", post_creation_date: Timestamp.init(), itemId: "", item_title: "", item_description: "", item_category: "", item_buy: false, condition: "", price: 0.0, images: [], zip_code: "", delivery: false, pickup_location: "", isSaved:false)
 		ItemDetailsBuy(itemDetails: item)
 	}
 }
