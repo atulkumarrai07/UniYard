@@ -18,4 +18,5 @@ struct PostItem {
   var zip_code:String
   var delivery:Bool
   var pickup_location:String
+//  var chat: Chat
 }

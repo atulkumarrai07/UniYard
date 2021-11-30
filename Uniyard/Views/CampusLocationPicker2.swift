@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct CampusLocationPicker2: View {
-  @State var location:Binding<String>
+	@StateObject var itemViewModel:ItemsViewModel
+  @State var locationSelection:Binding<String>
   @Environment(\.presentationMode) var campusLocationPicker: Binding< PresentationMode>
   
     var body: some View {
@@ -16,10 +17,16 @@ struct CampusLocationPicker2: View {
         HStack{
           Spacer()
           Button("Done"){
+						if(itemViewModel.renderSell){
+							itemViewModel.filterSellItems()
+						}else{
+							itemViewModel.filterBuyItems()
+						}
+						
             self.campusLocationPicker.wrappedValue.dismiss()
           }
         }.padding()
-        Picker("", selection: location) {
+				Picker("", selection: locationSelection) {
                    ForEach(["Pittsburgh","Australia","Qatar", "Africa"], id: \.self) {
                        Text("\($0)")
                    }
