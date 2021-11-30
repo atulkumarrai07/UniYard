@@ -72,6 +72,7 @@
 		BF9C280E2735897C00E3231C /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C280D2735897C00E3231C /* ChatList.swift */; };
 		BF9C2810273589AE00E3231C /* ChatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C280F273589AE00E3231C /* ChatRow.swift */; };
 		E28BB7B4274AF76000F06E49 /* CurUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28BB7B3274AF76000F06E49 /* CurUserViewModel.swift */; };
+		E2C467982756B32100350B65 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C467972756B32100350B65 /* ImagePicker.swift */; };
 		E2E6664B2745A6D10030E5C5 /* PersonalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6664A2745A6D10030E5C5 /* PersonalView.swift */; };
 		E2E6664D2745ABCC0030E5C5 /* MyPostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6664C2745ABCC0030E5C5 /* MyPostsView.swift */; };
 		E2E6664F2745AC1C0030E5C5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6664E2745AC1C0030E5C5 /* SettingsView.swift */; };
@@ -157,6 +158,7 @@
 		BF9C280D2735897C00E3231C /* ChatList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
 		BF9C280F273589AE00E3231C /* ChatRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRow.swift; sourceTree = "<group>"; };
 		E28BB7B3274AF76000F06E49 /* CurUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurUserViewModel.swift; sourceTree = "<group>"; };
+		E2C467972756B32100350B65 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		E2E6664A2745A6D10030E5C5 /* PersonalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalView.swift; sourceTree = "<group>"; };
 		E2E6664C2745ABCC0030E5C5 /* MyPostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsView.swift; sourceTree = "<group>"; };
 		E2E6664E2745AC1C0030E5C5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				BF2792C02749AF0500257F8C /* SavedPostViewModel.swift */,
 				BF2792C4274C8AAA00257F8C /* MyPostViewModel.swift */,
 				0B0565BF2755BF3B00EF0807 /* ViewModel.swift */,
+				E2C467972756B32100350B65 /* ImagePicker.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				BF9C2810273589AE00E3231C /* ChatRow.swift in Sources */,
 				0BFD7214272A54920038F669 /* CampusLocationPicker2.swift in Sources */,
 				0B0565B427477CF100EF0807 /* ChatView.swift in Sources */,
+				E2C467982756B32100350B65 /* ImagePicker.swift in Sources */,
 				BF9C280B2735892F00E3231C /* ChatsViewModel.swift in Sources */,
 				0B5C490C274315AA00FEF328 /* DateHelpers.swift in Sources */,
 				BF9C2809273588F900E3231C /* Chat.swift in Sources */,

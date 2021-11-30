@@ -1,14 +1,34 @@
 import SwiftUI
+import Firebase
 import FirebaseFirestore
 import FirebaseAuth
+
+
+
+//class FirebaseManager: NSObject {
+//		let auth: Auth
+//		let storage : Storage
+//
+//		static let shared = FirebaseManager()
+//
+//		override init() {
+//				FirebaseApp.configure()
+//				self.auth = Auth.auth()
+//				self.storage = Storage.storage()
+//				super.init()
+//		}
+//}
 
 struct ProfileView: View {
 	@EnvironmentObject var loginModel:LoginModel
 	@Environment(\.presentationMode) var profilePresentation: Binding< PresentationMode>
 	
 	@StateObject var curUserVm: CurUserViewModel
+	@State var shouldShowImagePicker = false
+	@State var image: UIImage?
 	
 	var body: some View {
+		//		NavigationView {
 		ZStack{
 			Color(red:237/255.0, green: 213/255.0, blue: 213/255.0, opacity: 1.0).ignoresSafeArea(.all)
 			VStack{
@@ -19,14 +39,34 @@ struct ProfileView: View {
 						.frame(maxWidth: .infinity, alignment: .center)
 				}.padding()
 				
-				//image
-				Image("JohnDoe").resizable().frame(width: 90, height: 90).clipShape(Circle())
-				Text("Memeber since " + convertTimestamp(serverTimestamp: curUserVm.date_joined.dateValue() as NSDate))
+				Button {shouldShowImagePicker.toggle()
+				} label: {
+					VStack {
+						if let image = self.image {
+							Image(uiImage: image)
+								.resizable()
+								.scaledToFill()
+								.frame(width: 128, height: 128)
+								.cornerRadius(64)
+						} else {
+							Image(systemName: "person.fill")
+								.font(.system(size: 64))
+								.padding()
+								.foregroundColor(Color(.label))
+						}
+					}.overlay(RoundedRectangle(cornerRadius: 64).stroke(Color.gray, lineWidth: 0))
+				}
+				
+				Text("Member since " + convertTimestamp(serverTimestamp: curUserVm.date_joined.dateValue() as NSDate))
 				
 				ProfileBox(curUserVm: curUserVm)
-			}//zstack
-			
-		}.navigationBarHidden(true)
+			}//vstcak
+		}
+		.navigationViewStyle(StackNavigationViewStyle())
+		.fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil) {
+			ImagePicker(image: $image)//.ignoresSafeArea()
+		}//zstack
+		.navigationBarHidden(true)
 	}
 }
 
@@ -103,7 +143,6 @@ struct ProfileBox: View {
 			//Sign out button
 			Button(action: {
 				loginModel.signOut()
-				
 			},
 			label: {
 				Text("Sign Out").font(.system(size: 20, weight: .medium))
@@ -122,12 +161,9 @@ struct ProfileBox: View {
 		
 	}
 }
-//	}
-//}
-
 
 func convertTimestamp(serverTimestamp: NSDate) -> String {
-//	let x = serverTimestamp
+	//	let x = serverTimestamp
 	let date = serverTimestamp
 	let formatter = DateFormatter()
 	formatter.dateStyle = .medium
