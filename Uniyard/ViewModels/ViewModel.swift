@@ -2,6 +2,7 @@
 import FirebaseAuth
 import Foundation
 import FirebaseFirestore
+import FirebaseAuth
 
 class ViewModel: ObservableObject
 {
@@ -11,15 +12,15 @@ class ViewModel: ObservableObject
   var posts = [Post]()
   var items = [Item]()
   var rentals = [Rental]()
-  var messages = [Message]()
-  var message_sequences = [Message_Sequence]()
+//  var chats = [Chat]()
+//  var message_sequences = [Message_Sequence]()
   var notifications = [Notification]()
   var notification_sequences = [Notification_Sequence]()
   var itemsWithPostsAvailable = [PostItem]()
   var itemsWithSavedPosts = [PostItem]()
   var itemsWithMyPosts = [PostItem]()
   
-	
+  
   func addUser(user:User){
     
     database.collection("Users").document(user.id).setData(user.dictionary)
@@ -40,7 +41,6 @@ class ViewModel: ObservableObject
   }
   
   func fetchUser() {
-    print("fetching")
     database.collection("Users").getDocuments() { (querySnapshot, err) in
         if let err = err {
             print("Error getting documents: \(err)")
@@ -119,15 +119,15 @@ class ViewModel: ObservableObject
 //    print("messages loaded")
 //  }
   
-  func addMessage_Sequence() {
-    message_sequences.append(Message_Sequence(id: "MS00001", from_id: "U00004", timestamp_msg: Timestamp.init(), content: "Hi Aaratrika", read_status: true))
-    message_sequences.append(Message_Sequence(id: "MS00002", from_id: "U00001", timestamp_msg: Timestamp.init(), content: "Hi John", read_status: true))
-    
-    for message_sequence in message_sequences{
-      database.collection("Message_Sequences").document(message_sequence.id).setData(message_sequence.dictionary)
-    }
-    print("message_sequences loaded")
-  }
+//  func addMessage_Sequence() {
+//    message_sequences.append(Message_Sequence(id: "MS00001", from_id: "U00004", timestamp_msg: Timestamp.init(), content: "Hi Aaratrika", read_status: true))
+//    message_sequences.append(Message_Sequence(id: "MS00002", from_id: "U00001", timestamp_msg: Timestamp.init(), content: "Hi John", read_status: true))
+//
+//    for message_sequence in message_sequences{
+//      database.collection("Message_Sequences").document(message_sequence.id).setData(message_sequence.dictionary)
+//    }
+//    print("message_sequences loaded")
+//  }
   
   func addNotification() {
     notifications.append(Notification(id: "N00001", user_id: "U00001", notification_on: true, saved_post_change_alert: true, sequence: ["NS00001"]))
@@ -324,6 +324,62 @@ class ViewModel: ObservableObject
       }
   }
   
+  
+  
+//  func fetchAllRental() {
+//    print("fetching rentals")
+//    database.collection("Rentals").getDocuments() { (querySnapshot, err) in
+//        if let err = err {
+//            print("Error getting documents: \(err)")
+//        } else {
+//            for document in querySnapshot!.documents {
+//              let id = document.documentID
+//              let post_id = document.get("post_id") as? String ?? ""
+//              let item_title = document.get("item_title") as? String ?? ""
+//              let item_description = document.get("item_description") as? String ?? ""
+//              let item_category = document.get("item_category") as? String ?? ""
+//              let item_buy = document.get("item_buy") as? Bool ?? false
+//              let condition = document.get("condition") as? String ?? ""
+//              let price = document.get("price") as? Double ?? 0
+//              let images = document.get("images") as? [String] ?? []
+//              let zip_code = document.get("zip_code") as? String ?? ""
+//              let delivery = document.get("delivery") as? Bool ?? false
+//              let pickup_location = document.get("pickup_location") as? String ?? ""
+//              self.fetchPostBasedOnPostId(postId: post_id) {(post) in
+//                if(post.Availability == "Available")
+//                {
+//                  self.itemsWithPostsAvailable.append(PostItem(postId: post_id, last_modified_timestamp: post.last_modified_timestamp, Availability: post.Availability, post_creation_date: post.post_creation_date, itemId: id, item_title: item_title, item_description: item_description, item_category: item_category, item_buy: item_buy, condition: condition, price: price, images: images, zip_code: zip_code, delivery: delivery, pickup_location: pickup_location))
+//                }
+//                completion(self.itemsWithPostsAvailable)
+//              }
+//              }
+//
+////            print("Position 2: " + String(self.itemsWithPostsAvailable.count))
+////          for itemwithPosts in self.itemsWithPostsAvailable{
+////            print(itemwithPosts)
+////          }
+////          print("Items with posts printed")
+//          }
+//      }
+//  }
+  
+//  func fetchPostBasedOnPostId(postId:String ,completion: @escaping (Post)->Void)
+//  {
+//    self.database.collection("Posts").document(postId).getDocument() { (documentpost, error) in
+//          if let documentpost = documentpost, documentpost.exists {
+//            let last_modified_timestamp = documentpost.get("last_modified_timestamp") as? Timestamp ?? Timestamp.init()
+//            let availability = documentpost.get("Availability") as? String ?? ""
+//            let post_creation_date = documentpost.get("post_creation_date") as? Timestamp ?? Timestamp.init()
+//            let post = Post(id: postId, last_modified_timestamp: last_modified_timestamp, Availability: availability, post_creation_date: post_creation_date)
+//            completion(post)
+//          } else {
+//              print("Document does not exist")
+//        }
+////                print("Position 1: " + String(self.itemsWithPostsAvailable.count))
+//
+//      }
+//  }
+  
   func fetchPostBasedOnPostId(postId:String ,completion: @escaping (Post)->Void)
   {
     self.database.collection("Posts").document(postId).getDocument() { (documentpost, error) in
@@ -341,41 +397,217 @@ class ViewModel: ObservableObject
       }
   }
   
-  func fetchAllRental() {
-    print("fetching rentals")
-    database.collection("Rentals").getDocuments() { (querySnapshot, err) in
+//  func addChat() {
+//    var chats:[SaveChat] = []
+//          chats.append(SaveChat(user1: "U00001", user2: "5XxxXKcFt9Vpr1eK2tjV9y0B7Fg1", messages: ["E122A263-3F9F-4005-866A-D85624422E88", "404A6196-4AEF-484A-8C44-FF6273343BC5"]))
+//          chats.append(SaveChat(user1: "5XxxXKcFt9Vpr1eK2tjV9y0B7Fg1", user2: "UQ1Sr9RAuAaN4MWAKt9n01Kj0kt2", messages: ["1F14BD23-6C77-4A0A-9457-9C5361E6F85B"]))
+//
+//          for chat in chats{
+//            database.collection("Chat").document(chat.id).setData(chat.dictionary)
+//          }
+//  }
+  
+//    func addMessage() {
+//      var messages:[Message] = []
+//      messages.append(Message(date: Date(), from_user_id: "U00001", text: "Hi, How are you?", type: .Sent))
+//      messages.append(Message(date: Date(), from_user_id: "UQ1Sr9RAuAaN4MWAKt9n01Kj0kt2", text: "Hi I am interested in the item you posted", type: .Sent))
+//      messages.append(Message(date: Date(), from_user_id: "5XxxXKcFt9Vpr1eK2tjV9y0B7Fg1", text: "I am good. What about you?", type: .Received))
+//      for message in messages{
+//        database.collection("Messages").document(message.id).setData(message.dictionary)
+//      }
+//      print("messages loaded")
+//    }
+  
+  func fetchUserByPostId(postId: String, completion: @escaping (MessageUser)->Void) {
+    database.collection("Users").whereField("my_post_list", arrayContains: postId).getDocuments(){ (querySnapshot, err) in
+      if let err = err {
+          print("Error getting documents: \(err)")
+      } else {
+        for document in querySnapshot!.documents {
+          let id = document.documentID
+          let user_image = document.get("user_image") as? String ?? ""
+          let first_name = document.get("first_name") as? String ?? ""
+          let last_name = document.get("last_name") as? String ?? ""
+          let user_status = document.get("user_status") as? Bool ?? true
+          let messageUser = MessageUser(id: id, user_image: user_image, first_name: first_name, last_name: last_name, user_status: user_status)
+          completion(messageUser)
+          }
+      }
+    }
+  }
+  
+  func updateHasUnreadMessagesStatus(chatId:String, completion: @escaping ()->Void) {
+    database.collection("Chat").document(chatId).updateData([
+      "hasUnreadMessage": false
+    ])
+    completion()
+  }
+  
+  func UpdateChatWithNewMessage(chat:Chat, message:Message, completion: @escaping (Message)->Void) {
+    if(chat.messages.count == 0){
+      self.addMessage(message: message) { messageId in
+        let newChat = SaveChat(id: chat.id, user1: chat.user1.id, user2: chat.user2.id, messages: [messageId], hasUnreadMessage: true)
+        self.database.collection("Chat").document(newChat.id).setData(newChat.dictionary)
+        completion(message)
+      }
+    }
+    else{
+      self.addMessage(message: message) { messageId in
+        self.database.collection("Chat").document(chat.id).updateData([
+          "messages": FieldValue.arrayUnion([messageId]),
+          "hasUnreadMessage": true
+      ])
+        completion(message)
+      }
+    }
+  }
+  
+  func addMessage(message:Message, completion: @escaping (String)->Void) {
+    database.collection("Messages").document(message.id).setData(message.dictionary)
+    completion(message.id)
+  }
+  
+  func fetchChats(currentUserID:String, completion: @escaping ([Chat])->Void) {
+    let auth = Auth.auth()
+    var chats:[Chat] = []
+    var chatCount = 0
+    database.collection("Chat").getDocuments() { (querySnapshot, err) in            // modification required get chats only for the current user
         if let err = err {
             print("Error getting documents: \(err)")
         } else {
+          
+          self.fetchCountOfChats(currentUserId: auth.currentUser!.uid){result in
+            chatCount = result
             for document in querySnapshot!.documents {
               let id = document.documentID
-              let post_id = document.get("post_id") as? String ?? ""
-              let inquiry_title = document.get("inquiry_title") as? String ?? ""
-              let property_type = document.get("property_type") as? String ?? ""
-              let property_description = document.get("property_description") as? String ?? ""
-              let num_bed = document.get("num_bed") as? Int ?? 0
-              let num_bath = document.get("num_bath") as? Int ?? 0
-              let sqft = document.get("sqft") as? Int ?? 0
-              let max_rent = document.get("max_rent") as? String ?? ""
-              let from_date = document.get("from_date") as? String ?? ""
-              let to_date = document.get("to_date") as? String ?? ""
-              let washer_dryer = document.get("washer_dryer") as? Bool ?? false
-              let pet_friendly = document.get("pet_friendly") as? Bool ?? false
-              let rent_amount = document.get("rent_amount") as? Double ?? 0
-              let rent_currency = document.get("rent_currency") as? Double ?? 0
-              let location = document.get("location") as? String ?? ""
-              let amenities = document.get("images") as? [String] ?? []
-              let images = document.get("images") as? [String] ?? []
-              
-              self.rentals.append(Rental(id: id, post_id: post_id, inquiry_title: inquiry_title, property_type: property_type, property_description: property_description, num_bed: num_bed, num_bath: num_bath, sqft: sqft, max_rent: max_rent, from_date: from_date, to_date: to_date, washer_dryer: washer_dryer, pet_friendly: pet_friendly, rent_amount: rent_amount, rent_currency: rent_currency, amenities: amenities, images: images, location: location))
-//                print("\(document.documentID) => \(document.data())")
+              var user1_id = document.get("user1") as? String ?? ""
+              var user2_id:String = ""
+              if(user1_id == auth.currentUser?.uid){
+                user2_id = document.get("user2") as? String ?? ""
+              }
+              else{
+                user2_id = user1_id
+                user1_id = document.get("user2") as? String ?? ""
+              }
+              if(user1_id == auth.currentUser?.uid){
+                var user1:MessageUser = MessageUser(id: "", user_image: "", first_name: "", last_name: "", user_status: true)
+                var user2:MessageUser = MessageUser(id: "", user_image: "", first_name: "", last_name: "", user_status: true)
+                var messages:[Message] = []
+                let messageIdArr = document.get("messages") as? [String] ?? []
+                var hasUnreadMessage = document.get("hasUnreadMessage") as? Bool ?? false
+                self.fetchMessageUser(userId: user1_id){result in
+                  user1 = result
+                  self.fetchMessageUser(userId: user2_id){result in
+                    user2 = result
+                    self.fetchMessages(messageIds: messageIdArr){results in
+                      messages =  results.sorted(by: {
+                        return $0.date <= $1.date
+                      })
+                      if(messages.last?.type == .Sent)
+                      {
+                        hasUnreadMessage = false
+                      }
+                      chats.append(Chat(id: id, user1: user1, user2: user2, messages: messages, hasUnreadMessage: hasUnreadMessage))
+                      if(chatCount == chats.count){
+                        completion(chats)
+                      }
+                    }
+                  }
+                }
+              }
             }
-          for rental in self.rentals{
-            print(rental)
           }
-        print("Rentals printed")
+        }
+    }
+  }
+  
+  func fetchCountOfChats(currentUserId:String, completion: @escaping (Int)->Void) {
+    var countOfChats = 0
+      database.collection("Chat").whereField("user1", isEqualTo: currentUserId).getDocuments(){(querySnapshot, err) in
+        if let err = err {
+            print("Error getting documents: \(err)")
+        } else {
+          countOfChats = querySnapshot?.count ?? 0
+          self.database.collection("Chat").whereField("user2", isEqualTo: currentUserId).getDocuments(){(querySnapshot, err) in
+              if let err = err {
+                  print("Error getting documents: \(err)")
+              } else {
+                countOfChats = countOfChats + (querySnapshot?.count ?? 0)
+                completion(countOfChats)
+            }
+          }
       }
     }
+  }
+  
+  func fetchMessages(messageIds:[String],completion: @escaping ([Message])->Void) {
+    let auth = Auth.auth()
+    var messages:[Message] = []
+    
+//    ------------option 1--------------
+//    database.collection("Messages").whereField(FieldPath.documentID(), in: messageIds)
+//        .getDocuments() { (querySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                for document in querySnapshot!.documents {
+//                  let id = document.documentID
+//                  let date_number = document.get("date") as? TimeInterval ?? 0
+//                  let date = Date(timeIntervalSinceReferenceDate: date_number)
+//
+//                  let from_user_id = document.get("from_user_id") as? String ?? ""
+//                  let text = document.get("text") as? String ?? ""
+//                  let type = document.get("type") as? Message.MessageType ?? .Received
+//                  messages.append(Message(id: id, date: date, from_user_id: from_user_id, text: text, type: type))
+//                }
+//              completion(messages)
+//            }
+//    }
+//    ------------option 1 ends-----------
+//    ------------option 2 begins---------
+    for messageId in messageIds{
+      database.collection("Messages").document(messageId).getDocument{ (document, error) in
+        if let document = document, document.exists {
+          let id = document.documentID
+//          print(id)
+          let date_number = document.get("date") as? TimeInterval ?? 0
+          let date = Date(timeIntervalSinceReferenceDate: date_number)
+          let from_user_id = document.get("from_user_id") as? String ?? ""
+          let type:Message.MessageType = (from_user_id == auth.currentUser?.uid ? .Sent:.Received)
+          let text = document.get("text") as? String ?? ""
+          messages.append(Message(id: id, date: date, from_user_id: from_user_id, text: text, type: type))
+        } else {
+            print("Document does not exist")
+        }
+//        print("messages count: " + String(messages.count))
+        if(messages.count == messageIds.count){
+          completion(messages)
+        }
+        
+      }
+      
+    }
+//    ------------option 2 ends----------
+    
+  }
+  
+  func fetchMessageUser(userId:String, completion: @escaping (MessageUser)-> Void) {
+    database.collection("Users").document(userId).getDocument{ (document, error) in
+      if let document = document, document.exists {
+        let id = document.documentID
+        let user_image = document.get("user_image") as? String ?? ""
+        let first_name = document.get("first_name") as? String ?? ""
+//        print(first_name)
+        let last_name = document.get("last_name") as? String ?? ""
+        let user_status = document.get("user_status") as? Bool ?? true
+        let user = MessageUser(id: id, user_image: user_image, first_name: first_name, last_name: last_name, user_status: user_status)
+        completion(user)
+//          let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+//          print("Document data: \(dataDescription)")
+      } else {
+          print("Document does not exist")
+      }
+  }
   }
   
 //  func fetchAllMessage() {
@@ -402,29 +634,29 @@ class ViewModel: ObservableObject
 //    }
 //  }
   
-  func fetchAllMessage_Sequence() {
-    print("fetching message sequences")
-    database.collection("Message_Sequences").getDocuments() { (querySnapshot, err) in
-        if let err = err {
-            print("Error getting documents: \(err)")
-        } else {
-            for document in querySnapshot!.documents {
-              let id = document.documentID
-              let from_id = document.get("from_id") as? String ?? ""
-              let timestamp_msg = document.get("timestamp_msg") as? Timestamp ?? Timestamp.init()
-              let content = document.get("content") as? String ?? ""
-              let read_status = document.get("read_status") as? Bool  ?? false
-              
-              self.message_sequences.append(Message_Sequence(id: id, from_id: from_id, timestamp_msg: timestamp_msg, content: content, read_status: read_status))
-//                print("\(document.documentID) => \(document.data())")
-            }
-          for message in self.message_sequences{
-            print(message)
-          }
-        print("Message Sequences printed")
-        }
-    }
-  }
+//  func fetchAllMessage_Sequence() {
+//    print("fetching message sequences")
+//    database.collection("Message_Sequences").getDocuments() { (querySnapshot, err) in
+//        if let err = err {
+//            print("Error getting documents: \(err)")
+//        } else {
+//            for document in querySnapshot!.documents {
+//              let id = document.documentID
+//              let from_id = document.get("from_id") as? String ?? ""
+//              let timestamp_msg = document.get("timestamp_msg") as? Timestamp ?? Timestamp.init()
+//              let content = document.get("content") as? String ?? ""
+//              let read_status = document.get("read_status") as? Bool  ?? false
+//
+//              self.message_sequences.append(Message_Sequence(id: id, from_id: from_id, timestamp_msg: timestamp_msg, content: content, read_status: read_status))
+////                print("\(document.documentID) => \(document.data())")
+//            }
+//          for message in self.message_sequences{
+//            print(message)
+//          }
+//        print("Message Sequences printed")
+//        }
+//    }
+//  }
   
   func fetchAllNotification() {
     print("fetching notifications")

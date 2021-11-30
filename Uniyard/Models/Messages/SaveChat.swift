@@ -1,12 +1,17 @@
-import Foundation
-import FirebaseFirestore
+//
+//  SaveChat.swift
+//  Uniyard
+//
+//  Created by Atul Kumar Rai on 11/23/21.
+//
 
-struct Chat: Codable, Identifiable, Hashable{
+import Foundation
+
+struct SaveChat: Codable, Identifiable, Hashable{
   var id = UUID().uuidString
-//  var post_id:String
-  var user1:MessageUser
-  var user2:MessageUser
-  var messages:[Message]
+  var user1:String
+  var user2:String
+  var messages:[String]
   var hasUnreadMessage = false
   
   enum CodingKeys: String, CodingKey {
@@ -23,7 +28,3 @@ struct Chat: Codable, Identifiable, Hashable{
   }
   
 }
-
-
-
-

@@ -3,7 +3,6 @@ import Foundation
 import FirebaseFirestore
 
 struct ItemDetailsSell: View {
-
   var itemDetails: PostItem
   @Environment(\.presentationMode) var itemDetailsSellPresentation: Binding<PresentationMode>
   var body: some View {

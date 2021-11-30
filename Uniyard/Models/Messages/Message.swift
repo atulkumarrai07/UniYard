@@ -1,47 +1,40 @@
 import Foundation
 import FirebaseFirestore
-import FirebaseFirestoreSwift
+//import FirebaseFirestoreSwift 
 
-//struct Message: Identifiable, Codable {
-//  var id:String = UUID().uuidString
-//  var post_id:String
-//  var user_1:String
-//  var user_2:String
-//  var sequence:[String]
-//
-//  enum CodingKeys: String, CodingKey {
-//    case post_id
-//    case user_1
-//    case user_2
-//    case sequence
-//
-//  }
-//
-//  var dictionary: [String: Any] {
-//          let data = (try? JSONEncoder().encode(self)) ?? Data()
-//          return (try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any]) ?? [:]
-//  }
-//}
-
-struct Message: Identifiable {
+struct Message: Codable, Identifiable, Hashable {
   
-  enum MessageType{
+  enum MessageType: Int, Codable{
     case Sent, Received
   }
+    
+  var id = UUID().uuidString
+  var date: Date
+  var from_user_id: String
+  var text: String
+  var type: MessageType
   
-  let id = UUID().uuidString
-  let date: Date
-  let text: String
-  let type: MessageType
-  var hasUnreadMessage = false
-  
-  init(_ text: String, type: MessageType, date: Date) {
-    self.date = date
-    self.type = type
-    self.text = text
+  enum CodingKeys: String, CodingKey{
+    case date
+    case from_user_id
+    case text
+    case type
   }
   
-  init(_ text:String, type: MessageType) {
-    self.init(text, type: type, date:Date())
+//  init(_ text: String, type: MessageType, date: Date, from_user_id:String) {
+//    self.date = date
+//    self.type = type
+//    self.text = text
+//    self.from_user_id = from_user_id
+//  }
+//
+//  init(_ text:String, type: MessageType, from_user_id:String) {
+//    self.init(text, type: type, date:Date(), from_user_id: from_user_id)
+//  }
+  
+  var dictionary: [String: Any] {
+          let data = (try? JSONEncoder().encode(self)) ?? Data()
+          return (try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any]) ?? [:]
   }
+
 }
