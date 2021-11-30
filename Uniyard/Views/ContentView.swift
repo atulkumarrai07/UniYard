@@ -18,7 +18,8 @@ struct ContentView: View {
             Login(loginModel: loginModel)
 //            UniYardHomepage()
           }
-        }.navigationBarHidden(true)
+        }
+        .navigationBarHidden(true)
       }.onAppear{
         loginModel.signedIn = loginModel.isLoggedIn
       }
