@@ -2,22 +2,7 @@ import SwiftUI
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
-
-
-
-//class FirebaseManager: NSObject {
-//		let auth: Auth
-//		let storage : Storage
-//
-//		static let shared = FirebaseManager()
-//
-//		override init() {
-//				FirebaseApp.configure()
-//				self.auth = Auth.auth()
-//				self.storage = Storage.storage()
-//				super.init()
-//		}
-//}
+import FirebaseStorage
 
 struct ProfileView: View {
 	@EnvironmentObject var loginModel:LoginModel
@@ -25,7 +10,7 @@ struct ProfileView: View {
 	
 	@StateObject var curUserVm: CurUserViewModel
 	@State var shouldShowImagePicker = false
-	@State var image: UIImage?
+	@State var upload_image: UIImage?
 	
 	var body: some View {
 		//		NavigationView {
@@ -39,10 +24,8 @@ struct ProfileView: View {
 						.frame(maxWidth: .infinity, alignment: .center)
 				}.padding()
 				
-				Button {shouldShowImagePicker.toggle()
-				} label: {
 					VStack {
-						if let image = self.image {
+						if let image = self.upload_image {
 							Image(uiImage: image)
 								.resizable()
 								.scaledToFill()
@@ -55,6 +38,23 @@ struct ProfileView: View {
 								.foregroundColor(Color(.label))
 						}
 					}.overlay(RoundedRectangle(cornerRadius: 64).stroke(Color.gray, lineWidth: 0))
+				
+				HStack{
+					Button(action: {
+						shouldShowImagePicker.toggle()
+					}){Text("Edit Image")
+					}.sheet(isPresented: $shouldShowImagePicker) {
+						ImagePicker(image: $upload_image)
+					}
+					
+					Button(action: {
+						if let thisImage = self.upload_image {
+							uploadImage(image: thisImage)
+						} else{
+							print("could not upload image - not present")
+						}
+					}){Text("Save")}
+					
 				}
 				
 				Text("Member since " + convertTimestamp(serverTimestamp: curUserVm.date_joined.dateValue() as NSDate))
@@ -62,11 +62,28 @@ struct ProfileView: View {
 				ProfileBox(curUserVm: curUserVm)
 			}//vstcak
 		}
-		.navigationViewStyle(StackNavigationViewStyle())
-		.fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil) {
-			ImagePicker(image: $image)//.ignoresSafeArea()
-		}//zstack
+	
 		.navigationBarHidden(true)
+	}
+	
+	
+	func uploadImage(image: UIImage){
+		let imageName = UUID().uuidString
+		if let imageData = image.jpegData(compressionQuality: 0.5){
+			let storage = Storage.storage()
+			storage.reference().child(imageName + ".jpg").putData(imageData, metadata: nil){
+				(_, err) in
+				if let err = err {
+					print("an error has occured - \(err.localizedDescription)")
+					return
+				} else{
+					print("image uploaded successfully")
+					curUserVm.updateUserImage(imageName)
+				}
+			}
+		} else{
+			print("couldn't unwrap/cast image to data")
+		}
 	}
 }
 
