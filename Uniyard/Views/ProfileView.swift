@@ -3,6 +3,7 @@ import Firebase
 import FirebaseFirestore
 import FirebaseAuth
 import FirebaseStorage
+import SDWebImageSwiftUI
 
 struct ProfileView: View {
 	@EnvironmentObject var loginModel:LoginModel
@@ -24,20 +25,28 @@ struct ProfileView: View {
 						.frame(maxWidth: .infinity, alignment: .center)
 				}.padding()
 				
-					VStack {
-						if let image = self.upload_image {
-							Image(uiImage: image)
+				VStack {//User profile image
+					if let image = self.upload_image {
+						Image(uiImage: image)
+							.resizable()
+							.scaledToFill()
+							.frame(width: 128, height: 128)
+							.cornerRadius(64)
+					} else {
+						if (curUserVm.user_image != ""){
+							WebImage(url: URL(string: curUserVm.user_image))
 								.resizable()
 								.scaledToFill()
 								.frame(width: 128, height: 128)
 								.cornerRadius(64)
-						} else {
+						} else{
 							Image(systemName: "person.fill")
 								.font(.system(size: 64))
 								.padding()
 								.foregroundColor(Color(.label))
 						}
-					}.overlay(RoundedRectangle(cornerRadius: 64).stroke(Color.gray, lineWidth: 0))
+					}
+				}.overlay(RoundedRectangle(cornerRadius: 64).stroke(Color.gray, lineWidth: 0))
 				
 				HStack{
 					Button(action: {
@@ -62,23 +71,29 @@ struct ProfileView: View {
 				ProfileBox(curUserVm: curUserVm)
 			}//vstcak
 		}
-	
+		
 		.navigationBarHidden(true)
 	}
 	
 	
 	func uploadImage(image: UIImage){
-		let imageName = UUID().uuidString
 		if let imageData = image.jpegData(compressionQuality: 0.5){
 			let storage = Storage.storage()
-			storage.reference().child(imageName + ".jpg").putData(imageData, metadata: nil){
-				(_, err) in
+			let ref = storage.reference(withPath: curUserVm.user_id + ".jpg")
+			ref.putData(imageData, metadata: nil){
+				(data, err) in
 				if let err = err {
 					print("an error has occured - \(err.localizedDescription)")
 					return
 				} else{
-					print("image uploaded successfully")
-					curUserVm.updateUserImage(imageName)
+					ref.downloadURL { url, err in
+						if let err = err {
+							print("Fail to retrive image url - \(err.localizedDescription)")
+							return
+						}
+						print("Succeed in getting image url!")
+						curUserVm.updateUserImage(url?.absoluteString ?? "")
+					}
 				}
 			}
 		} else{
