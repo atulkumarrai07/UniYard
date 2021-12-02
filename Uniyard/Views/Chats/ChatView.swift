@@ -1,6 +1,7 @@
 
 import SwiftUI
 import FirebaseFirestore
+import SDWebImageSwiftUI
 
 struct ChatView: View {
   
@@ -25,7 +26,7 @@ struct ChatView: View {
             Image(systemName: "person.crop.circle").resizable().frame(width: 40, height: 40).clipShape(Circle()).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
           }
           else{
-            Image(chat.user2.user_image).resizable().frame(width: 40, height: 40).clipShape(Circle())
+            WebImage(url: URL(string: chat.user2.user_image)).resizable().frame(width: 40, height: 40).clipShape(Circle())
           }
           Text(chat.user2.first_name + " " + chat.user2.last_name)
             .bold()
