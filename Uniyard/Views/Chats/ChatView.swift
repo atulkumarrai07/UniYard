@@ -4,10 +4,8 @@ import FirebaseFirestore
 
 struct ChatView: View {
   
-  @EnvironmentObject var chatsViewModel: ChatsViewModel
-  
-  
-  let chat:Chat
+  @StateObject var chatsViewModel: ChatsViewModel
+  @State var chat:Chat
   @State private var text = ""
 //  @FocusState private var isFocused
   
@@ -35,27 +33,33 @@ struct ChatView: View {
           .fontWeight(.heavy)
           .frame(maxWidth: .infinity, alignment: .center)
         }.padding(.horizontal) // HStack
-        
-        GeometryReader{reader in
-          ScrollView{
-            ScrollViewReader{scrollReader in
-              getMessagesView(viewWidth: reader.size.width)
-                .padding(.horizontal)
-                .onChange(of: messageIdToScroll) { _ in
-                  if let messageID = messageIdToScroll{
-                    scrollTo(messageId: messageID, shouldAnimate: true, scrollReader: scrollReader)
+        if(chat.messages.count != 0){
+          GeometryReader{reader in
+            ScrollView{
+              ScrollViewReader{scrollReader in
+                getMessagesView(viewWidth: reader.size.width)
+                  .padding(.horizontal)
+                  .onChange(of: messageIdToScroll) { _ in
+                    if let messageID = messageIdToScroll{
+                      scrollTo(messageId: messageID, shouldAnimate: true, scrollReader: scrollReader)
+                    }
                   }
-                }
-                .onAppear{
-                  if let messageId = chat.messages.last?.id{
-                    scrollTo(messageId: messageId, anchor: .bottom, shouldAnimate: false, scrollReader: scrollReader)
+                  .onAppear{
+                    if let messageId = chat.messages.last?.id{
+                      scrollTo(messageId: messageId, anchor: .bottom, shouldAnimate: false, scrollReader: scrollReader)
+                    }
                   }
-                }
+              }
             }
-          }
-        }.padding(.bottom, 5)
-        toolbarView()
+          }.padding(.bottom, 5)
+        }
+        else{
+          Spacer()
+          Text("Start a new conversation!").foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
+          Spacer()
+        }
         Spacer()
+        toolbarView()
       }.padding(.top, 1) //VStack
       .onAppear{
         chatsViewModel.markAsRead(false, chat: chat)
@@ -98,9 +102,12 @@ struct ChatView: View {
   }
   
   func sendMessage() {
-    if let message = chatsViewModel.sendMessage(text, in: chat)
-    {
+//    let countBefore = chat.messages.count
+    chatsViewModel.sendMessage(text, in: chat){message in
       text = ""
+      let indexCheck = chatsViewModel.chats.firstIndex(where: {$0.id == chat.id})
+      print(chatsViewModel.chats[indexCheck!])
+      self.chat = chatsViewModel.chats[indexCheck!]
       messageIdToScroll = message.id
     }
   }
@@ -153,7 +160,7 @@ struct ChatView: View {
 
 struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
-      ChatView(chat:Chat(user1: MessageUser(id: "", user_image: "", first_name: "Aaratrika", last_name: "Chakraborty", user_status: true), user2: MessageUser(id: "", user_image: "", first_name: "Atul Kumar", last_name: "Rai", user_status: true), messages: [Message(date: Date(), from_user_id: "U00001", text: "Hi, How are you?", type: .Sent),Message(date: Date(), from_user_id: "U00001", text: "Hi, How are you?", type: .Sent)], hasUnreadMessage:true)).environmentObject(ChatsViewModel())
+      ChatView(chatsViewModel: ChatsViewModel(), chat:Chat(user1: MessageUser(id: "", user_image: "", first_name: "Aaratrika", last_name: "Chakraborty", user_status: true), user2: MessageUser(id: "", user_image: "", first_name: "Atul Kumar", last_name: "Rai", user_status: true), messages: [Message(date: Date(), from_user_id: "U00001", text: "Hi, How are you?", type: .Sent),Message(date: Date(), from_user_id: "U00001", text: "Hi, How are you?", type: .Sent)], hasUnreadMessage:true)).environmentObject(ChatsViewModel())
     }
 }
 

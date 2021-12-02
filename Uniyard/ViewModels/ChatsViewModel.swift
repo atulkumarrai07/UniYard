@@ -13,6 +13,13 @@ class ChatsViewModel: ObservableObject {
     }
   }
   
+  func refreshChats() {
+    let auth = Auth.auth()
+    viewModel.fetchChats(currentUserID: auth.currentUser!.uid){results in
+      self.chats = results
+    }
+  }
+  
   func getSortedFilteredChats(query: String) -> [Chat] {
     let sortedChats = chats.sorted {
       guard let date1 = $0.messages.last?.date else{
@@ -63,29 +70,30 @@ class ChatsViewModel: ObservableObject {
     }
   }
   
-  func sendMessage(_ text:String, in chat:Chat) -> Message?
+  func sendMessage(_ text:String, in chat:Chat, completion: @escaping (Message)->Void)
   {
     let auth = Auth.auth()
-    var flagDone = false
     if let index = chats.firstIndex(where: {$0.id == chat.id})
     {
-//      let message = Message(text,type: .Sent, from_user: "5XxxXKcFt9Vpr1eK2tjV9y0B7Fg1")
       let message = Message(date: Date(), from_user_id: auth.currentUser!.uid, text: text, type: .Sent)
       viewModel.UpdateChatWithNewMessage(chat: chats[index], message: message){newMessage in
         self.chats[index].messages.append(newMessage)
         self.viewModel.fetchChats(currentUserID: auth.currentUser!.uid){results in
           self.chats = results
+          completion(message)
         }
-        flagDone = true
-      }
-      if(flagDone)
-      {
-        return message
       }
     }
-    return nil
+    else{
+      let message = Message(date: Date(), from_user_id: auth.currentUser!.uid, text: text, type: .Sent)
+      viewModel.UpdateChatWithNewMessage(chat: chat, message: message){newMessage in
+        self.viewModel.fetchChats(currentUserID: auth.currentUser!.uid){results in
+          self.chats = results
+          completion(message)
+        }
+      }
+    }
   }
-  
 }
 extension Chat{
   static let sampleChat:[Chat] = [

@@ -4,6 +4,7 @@ import FirebaseFirestore
 
 struct ItemDetailsSell: View {
   var itemDetails: PostItem
+  @StateObject var itemDetailViewModel = ItemDetailViewModel()
   @Environment(\.presentationMode) var itemDetailsSellPresentation: Binding<PresentationMode>
   var body: some View {
    ZStack{
@@ -24,9 +25,11 @@ struct ItemDetailsSell: View {
        .frame(maxWidth: .infinity, alignment: .center).padding(.leading,-20)
       }
      ItemDetails()
-      CardDetails(itemDetails: itemDetails)
+      CardDetails(itemDetails: itemDetails, itemdetailvmodel: itemDetailViewModel)
 
-   }
+   }.onAppear(){
+    itemDetailViewModel.setPostId(postId: itemDetails.postId)
+  }
   }
  }
 }
@@ -49,10 +52,12 @@ struct ItemDetails: View {
 }
 struct CardDetails: View {
   @State var itemDetails: PostItem
+  @StateObject var itemdetailvmodel:ItemDetailViewModel
  //take
   //@StateObject var itemdetailvmodel = ItemDetailViewModel()
   @StateObject var itemsvmodel = ItemsViewModel()
   @StateObject var savePostViewModel = SavedPostViewModel()
+  @StateObject var chatsViewModel = ChatsViewModel()
  var body: some View {
   ZStack{
     ScrollView{
@@ -114,15 +119,21 @@ struct CardDetails: View {
             .background(Color(red: 229/255.0, green: 229/255.0, blue: 229/255.0, opacity: 1.0))
             .cornerRadius(10)
           .fixedSize(horizontal: false, vertical: true)
-         Button(action: {}
-             , label: {
-             Text("Chat")
-             })
-          .foregroundColor(.white)
-          .padding(.vertical, 10)
-          .padding(.horizontal, 50)
-          .background(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-          .cornerRadius(15)
+          
+          NavigationLink(
+            destination: ChatView(chatsViewModel: chatsViewModel, chat: itemdetailvmodel.chat),
+            label: {
+              Text("Chat")
+            }).frame(width: 340, height: 40, alignment: .center).foregroundColor(.white).background(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).font(.title).cornerRadius(15.0).overlay(RoundedRectangle(cornerRadius: 14.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)))
+//         Button(action: {}
+//             , label: {
+//             Text("Chat")
+//             })
+//          .foregroundColor(.white)
+//          .padding(.vertical, 10)
+//          .padding(.horizontal, 50)
+//          .background(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
+//          .cornerRadius(15)
         }
        }.padding(.top)
        .frame(width: 334,height: 490 , alignment: .center)

@@ -14,9 +14,7 @@ struct ChatList: View {
           .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
           .fontWeight(.heavy)
           .frame(maxWidth: .infinity, alignment: .center)
-
        }
-//      NavigationView{
         HStack{
           HStack{
             TextField("Search chats here...", text: $query).padding(10)
@@ -26,7 +24,6 @@ struct ChatList: View {
           .padding(.horizontal)
           .onChange(of: query, perform: {_ in
             isSearching = true
-//            itemViewModel.searchSell(searchString: itemViewModel.searchString)
           })
           .overlay(
             HStack{
@@ -47,21 +44,17 @@ struct ChatList: View {
         List{
           ForEach(chatsViewModel.getSortedFilteredChats(query: query))
           {chat in
-            
             NavigationLink(
-              destination: ChatView(chat: chat).environmentObject(chatsViewModel),
+              destination: ChatView(chatsViewModel: chatsViewModel, chat: chat),
               label: {
                 ChatRow(chat:chat)
               })
-            
           }
         }.listStyle(PlainListStyle())
-//        .searchable(text:$query)
         .navigationTitle("Chats")
         .navigationBarItems(trailing: Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
           Image(systemName: "square.and.pencil")
         })
-        
         Spacer()
       }
       else{
@@ -69,9 +62,10 @@ struct ChatList: View {
         Text("No data available").foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
         Spacer()
       }
-        
-//      }
      }.navigationBarHidden(true)
+     .onAppear{
+      chatsViewModel.refreshChats()
+     }
     
   }
 }
