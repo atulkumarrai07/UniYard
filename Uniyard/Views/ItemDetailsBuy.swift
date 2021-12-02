@@ -36,6 +36,7 @@ struct CardDetailsBuy: View {
   //take
   @StateObject var itemsvmodel = ItemsViewModel()
   @StateObject var savePostViewModel = SavedPostViewModel()
+  @StateObject var chatsViewModel = ChatsViewModel()
   var body: some View {
     ZStack{
       VStack{
@@ -90,7 +91,7 @@ struct CardDetailsBuy: View {
 //            NavigationLink(destination: ChatView(chat: Chat(user1: itemdetailvmodel.currentUser!, user2: itemdetailvmodel.postedBy!, messages: [])), label: Text("Chat"))
             
             NavigationLink(
-              destination: ChatView(chat: itemdetailvmodel.chat),
+              destination: ChatView(chatsViewModel: chatsViewModel, chat: itemdetailvmodel.chat),
               label: {
                 Text("Chat")
               }).frame(width: 350, height: 40, alignment: .center).foregroundColor(.white).background(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).font(.title).cornerRadius(15.0).overlay(RoundedRectangle(cornerRadius: 14.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)))

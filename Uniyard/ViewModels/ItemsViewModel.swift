@@ -27,14 +27,9 @@ class ItemsViewModel: ObservableObject {
   @Published var conditionSelection = "New"
   @Published var categorySelection = "clothing"
   @Published var availableStatus : Bool = false
-  
-  
-  //aaratrika
   @Published var searchString: String = ""
   @Published var isSearching: Bool = false
   @Published var filteredPosts:[PostItem] = []
-  //--aaratrika
-  //iris
   @Published var showSorts: Bool = false
   @Published var sortOption: String = "Newest Date First"
   @Published var showFilter: Bool = false
@@ -51,26 +46,19 @@ class ItemsViewModel: ObservableObject {
   @Published var sort_NewDateFirst: Bool = true
   @Published var sort_LowPriceFirst: Bool = true
   @Published var savedPostsForCurrentUser:[String] = []
-
-  //--iris
   private var cancellableSet: Set<AnyCancellable> = []
   
-//  init() {
-//    loadItemswithPostsAvailable()
-//  }
-  //aaratrika
   func searchBuy(searchString: String) {
    filteredPosts = buy_filteredItems.filter { card in
         return card.item_title.lowercased().contains(searchString.lowercased())
         }
     }
-  //aaratrika
+  
   func searchSell(searchString: String) {
    filteredPosts = sell_filteredItems.filter { card in
         return card.item_title.lowercased().contains(searchString.lowercased())
         }
     }
-  //--aaratrika
   
   func viewBuySell() {
     if(self.renderSell)

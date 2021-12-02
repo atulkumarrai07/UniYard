@@ -471,7 +471,7 @@ class ViewModel: ObservableObject
     let auth = Auth.auth()
     var chats:[Chat] = []
     var chatCount = 0
-    database.collection("Chat").getDocuments() { (querySnapshot, err) in            // modification required get chats only for the current user
+    database.collection("Chat").addSnapshotListener{ (querySnapshot, err) in
         if let err = err {
             print("Error getting documents: \(err)")
         } else {
@@ -480,6 +480,7 @@ class ViewModel: ObservableObject
             chatCount = result
             for document in querySnapshot!.documents {
               let id = document.documentID
+              print(id)
               var user1_id = document.get("user1") as? String ?? ""
               var user2_id:String = ""
               if(user1_id == auth.currentUser?.uid){
@@ -566,10 +567,10 @@ class ViewModel: ObservableObject
 //    ------------option 1 ends-----------
 //    ------------option 2 begins---------
     for messageId in messageIds{
-      database.collection("Messages").document(messageId).getDocument{ (document, error) in
+      database.collection("Messages").document(messageId).addSnapshotListener{ (document, error) in
         if let document = document, document.exists {
           let id = document.documentID
-//          print(id)
+          print(id)
           let date_number = document.get("date") as? TimeInterval ?? 0
           let date = Date(timeIntervalSinceReferenceDate: date_number)
           let from_user_id = document.get("from_user_id") as? String ?? ""
