@@ -1,9 +1,11 @@
 import Foundation
-import FirebaseAuth
+import SwiftUI
+import Combine
 import FirebaseFirestore
+import FirebaseAuth
 
 
-class CurUserViewModel: ObservableObject {
+class CurUserViewModel: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
 	private let database = Firestore.firestore()
 	
 	@Published var email = ""
@@ -18,10 +20,34 @@ class CurUserViewModel: ObservableObject {
 	@Published var suggestion_preference = ""
 	@Published var user_status = true
 	@Published var notification_on = true
+  
+  @Published var settings: UNNotificationSettings?
 	
-	init() {
+  override init() {
+    super.init()
 		getUserDetails()
 	}
+  
+  func notificationAuth(completion: @escaping  (Bool) -> Void)
+  {
+    if(notification_on)
+    {
+      UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, _  in
+        self.fetchNotificationSettings()
+        completion(granted)
+      }
+    }
+  }
+  
+  func fetchNotificationSettings() {
+    // 1
+    UNUserNotificationCenter.current().getNotificationSettings { settings in
+      // 2
+      DispatchQueue.main.async {
+        self.settings = settings
+      }
+    }
+  }
 	
 	func getUserDetails(){
 			let auth = Auth.auth()
