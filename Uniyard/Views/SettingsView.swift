@@ -32,11 +32,13 @@ struct SettingsView: View {
 									.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
 									.font(.system(size: 30))
 								
-								Toggle(isOn: $curUserViewModel.notification_on) {
+								Toggle(isOn: $curUserViewModel.notification_preference) {
 									Text("Push notifications").font(.title3)
+								}.onChange(of: curUserViewModel.notification_preference) { value in
+									curUserViewModel.updateNotification(curUserViewModel.notification_preference)
 								}
 								
-								Text(curUserViewModel.notification_on ? "ON" : "OFF").font(.system(size: 18))
+								Text(curUserViewModel.notification_preference ? "ON" : "OFF").font(.system(size: 18))
 									.foregroundColor(Color(red: 95/255.0, green: 90/255.0, blue: 90/255.0, opacity: 1.0))
 							}
 							.padding(EdgeInsets(top: 17, leading: 0, bottom: 17, trailing: 0))
@@ -85,11 +87,11 @@ struct settingDetailsView: View {
 							.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
 							.font(.system(size: 30))
 						
-						Toggle(isOn: $curUserViewModel.notification_on) {
+						Toggle(isOn: $curUserViewModel.notification_preference) {
 							Text("Push notifications").font(.title3)
 						}
 						
-						Text(curUserViewModel.notification_on ? "On" : "OFF").font(.title3)
+						Text(curUserViewModel.notification_preference ? "On" : "OFF").font(.title3)
 						
 					}
 					.padding(EdgeInsets(top: 17, leading: 0, bottom: 17, trailing: 0))
