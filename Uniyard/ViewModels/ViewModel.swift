@@ -343,7 +343,6 @@ class ViewModel: ObservableObject
         if let err = err {
             print("Error getting documents: \(err)")
         } else {
-
           self.fetchCountOfChats(currentUserId: auth.currentUser!.uid){result in
             chatCount = result
             if(chatCount == 0){
@@ -379,10 +378,21 @@ class ViewModel: ObservableObject
                       {
                         hasUnreadMessage = false
                       }
-                      chats.append(Chat(id: id, user1: user1, user2: user2, messages: messages, hasUnreadMessage: hasUnreadMessage))
-                      if(chatCount == chats.count){
+                      if(chats.filter({existingChat in return existingChat.id == id}).count > 0)
+                      {
+                        var index = -3
+                        index = chats.firstIndex(where: { $0.id == id })!
+                        let updatedChat = [Chat(id: id, user1: user1, user2: user2, messages: messages, hasUnreadMessage: hasUnreadMessage)]
+                        chats.replaceSubrange(index...index, with: updatedChat)
                         completion(chats)
                       }
+                      else{
+                        chats.append(Chat(id: id, user1: user1, user2: user2, messages: messages, hasUnreadMessage: hasUnreadMessage))
+                        completion(chats)
+                      }
+//                      if(chatCount == chats.count){
+//                        completion(chats)
+//                      }
                     }
                   }
                 }
@@ -420,7 +430,6 @@ class ViewModel: ObservableObject
       database.collection("Messages").document(messageId).addSnapshotListener{ (document, error) in
         if let document = document, document.exists {
           let id = document.documentID
-//          print(id)
           let date_number = document.get("date") as? TimeInterval ?? 0
           let date = Date(timeIntervalSinceReferenceDate: date_number)
           let from_user_id = document.get("from_user_id") as? String ?? ""
@@ -430,17 +439,50 @@ class ViewModel: ObservableObject
         } else {
             print("Document does not exist")
         }
-//        print("messages count: " + String(messages.count))
         if(messages.count == messageIds.count){
           completion(messages)
         }
-
       }
-
     }
-//    ------------option 2 ends----------
-
   }
+  
+//  func fetchMessagesForChatView(chatId:String,completion: @escaping ([Message])->Void) {
+//    let auth = Auth.auth()
+//    var messages:[Message] = []
+//    var messageIdArr:[String] = []
+//    database.collection("Chat").document(chatId).addSnapshotListener{(document, error) in
+//      if let document = document, document.exists {
+//        messageIdArr = document.get("messages") as? [String] ?? []
+//      } else {
+//          print("Document does not exist")
+//      }
+//      if(messageIdArr.count > 0){
+//        for messageId in messageIdArr{
+//          self.database.collection("Messages").document(messageId).addSnapshotListener{ (document, error) in
+//            if let document = document, document.exists {
+//              let id = document.documentID
+//              let date_number = document.get("date") as? TimeInterval ?? 0
+//              let date = Date(timeIntervalSinceReferenceDate: date_number)
+//              let from_user_id = document.get("from_user_id") as? String ?? ""
+//              let type:Message.MessageType = (from_user_id == auth.currentUser?.uid ? .Sent:.Received)
+//              let text = document.get("text") as? String ?? ""
+//              print(text)
+//              messages.append(Message(id: id, date: date, from_user_id: from_user_id, text: text, type: type))
+//              completion(messages)
+//            } else {
+//                print("Document does not exist")
+//            }
+////            if(messages.count == messageIdArr.count){
+////              completion(messages)
+////            }
+//          }
+//        }
+//      }
+//      else{
+//        completion(messages)
+//      }
+//    }
+//  }
 
   func fetchMessageUser(userId:String, completion: @escaping (MessageUser)-> Void) {
     database.collection("Users").document(userId).getDocument{ (document, error) in

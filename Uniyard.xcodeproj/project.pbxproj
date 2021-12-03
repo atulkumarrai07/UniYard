@@ -180,16 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF23DB4327290F4A00410436 /* FirebaseDatabaseSwift-Beta in Frameworks */,
-				BF23DB3D27290F4A00410436 /* FirebaseFirestoreSwift-Beta in Frameworks */,
 				BF2792C827586ED300257F8C /* FirebaseMessaging in Frameworks */,
-				BF23DB3B27290F4A00410436 /* FirebaseDatabase in Frameworks */,
-				BF23DB4527290F4A00410436 /* FirebaseCrashlytics in Frameworks */,
-				BF23DB3F27290F4A00410436 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
-				BF23DB4127290F4A00410436 /* FirebaseAnalytics in Frameworks */,
-				BF23DB3927290F4A00410436 /* FirebaseFirestore in Frameworks */,
-				BF23DB4927290F4A00410436 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
-				BF23DB4727290F4A00410436 /* FirebaseAuth in Frameworks */,
 				E2C467B72756E1DD00350B65 /* FirebaseInAppMessaging-Beta in Frameworks */,
 				E2C467A72756E1DD00350B65 /* FirebaseStorageSwift-Beta in Frameworks */,
 				E2C467A32756E1DD00350B65 /* FirebaseMessaging in Frameworks */,
@@ -206,7 +197,6 @@
 				E2C467BB2756E1DD00350B65 /* FirebaseCrashlytics in Frameworks */,
 				E2C467B92756E1DD00350B65 /* FirebaseDatabaseSwift-Beta in Frameworks */,
 				E2C467AF2756E1DD00350B65 /* FirebaseAnalytics in Frameworks */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,15 +396,6 @@
 			);
 			name = Uniyard;
 			packageProductDependencies = (
-				BF23DB3827290F4A00410436 /* FirebaseFirestore */,
-				BF23DB3A27290F4A00410436 /* FirebaseDatabase */,
-				BF23DB3C27290F4A00410436 /* FirebaseFirestoreSwift-Beta */,
-				BF23DB3E27290F4A00410436 /* FirebaseAnalyticsSwift-Beta */,
-				BF23DB4027290F4A00410436 /* FirebaseAnalytics */,
-				BF23DB4227290F4A00410436 /* FirebaseDatabaseSwift-Beta */,
-				BF23DB4427290F4A00410436 /* FirebaseCrashlytics */,
-				BF23DB4627290F4A00410436 /* FirebaseAuth */,
-				BF23DB4827290F4A00410436 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				BF2792C727586ED300257F8C /* FirebaseMessaging */,
 				E2C4679E2756E1DD00350B65 /* FirebaseAuthCombine-Community */,
 				E2C467A02756E1DD00350B65 /* FirebaseStorageCombine-Community */,
@@ -767,7 +748,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Uniyard/Preview Content\"";
-				DEVELOPMENT_TEAM = GSPH8Z32VH;
+				DEVELOPMENT_TEAM = CZM9X7T294;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Uniyard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -789,7 +770,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Uniyard/Preview Content\"";
-				DEVELOPMENT_TEAM = GSPH8Z32VH;
+				DEVELOPMENT_TEAM = CZM9X7T294;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Uniyard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -945,6 +926,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BF2792C727586ED300257F8C /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseMessaging;
+		};
 		E250B358275965BC00365D8F /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E250B357275965BC00365D8F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
@@ -1024,11 +1009,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E2C4679D2756E1DD00350B65 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
-		};
-		BF2792C727586ED300257F8C /* FirebaseMessaging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BF23DB3727290F4A00410436 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
