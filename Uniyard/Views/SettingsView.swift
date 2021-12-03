@@ -34,10 +34,11 @@ struct SettingsView: View {
 
 								Toggle(isOn: $curUserViewModel.notification_preference) {
 									Text("Push notifications").font(.title3)
-                }.onChange(of: curUserViewModel.notification_on) { value in
-                  //                  curUserViewModel.updateNotification(curUserViewModel.notification_preference)
-                  // curUserViewModel.notificationAuth(completion: (Bool) -> Void)
-                                  }
+                }
+//                .onChange(of: curUserViewModel.notification_on) { value in
+//                  //                  curUserViewModel.updateNotification(curUserViewModel.notification_preference)
+//                  // curUserViewModel.notificationAuth(completion: (Bool) -> Void)
+//                                  }
 
 								Text(curUserViewModel.notification_preference ? "ON" : "OFF").font(.system(size: 18))
 									.foregroundColor(Color(red: 95/255.0, green: 90/255.0, blue: 90/255.0, opacity: 1.0))
