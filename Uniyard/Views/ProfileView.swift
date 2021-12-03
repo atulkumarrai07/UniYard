@@ -21,7 +21,7 @@ struct ProfileView: View {
 				
 				//image
 				Image("JohnDoe").resizable().frame(width: 90, height: 90).clipShape(Circle())
-				Text("Memeber since " + convertTimestamp(serverTimestamp: curUserVm.date_joined.dateValue() as NSDate))
+        Text("Memeber since " + curUserVm.convertTimestamp(serverTimestamp: curUserVm.date_joined as Date))
 				
 				ProfileBox(curUserVm: curUserVm)
 			}//zstack
@@ -126,12 +126,4 @@ struct ProfileBox: View {
 //}
 
 
-func convertTimestamp(serverTimestamp: NSDate) -> String {
-//	let x = serverTimestamp
-	let date = serverTimestamp
-	let formatter = DateFormatter()
-	formatter.dateStyle = .medium
-	formatter.timeStyle = .none
-	
-	return formatter.string(from: date as Date)
-}
+

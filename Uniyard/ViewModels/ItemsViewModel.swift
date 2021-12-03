@@ -167,11 +167,12 @@ class ItemsViewModel: ObservableObject {
   //    return postItem.sorted(by: { $0.post_creation_date.dateValue() >= $1.post_creation_date.dateValue()})
   //    return postItem.sorted(by: { $0.post_creation_date.compare($1.post_creation_date) == .orderedDescending})
       let result =  postItem.sorted(by: {
-        if ($0.post_creation_date.seconds == $1.post_creation_date.seconds){
-          return $0.post_creation_date.nanoseconds >= $1.post_creation_date.nanoseconds
-        }
-
-        return $0.post_creation_date.seconds >= $1.post_creation_date.seconds
+        return $0.post_creation_date >= $1.post_creation_date
+//        if ($0.post_creation_date.seconds == $1.post_creation_date.seconds){
+//          return $0.post_creation_date.nanoseconds >= $1.post_creation_date.nanoseconds
+//        }
+//
+//        return $0.post_creation_date.seconds >= $1.post_creation_date.seconds
       })
 
       return result
@@ -179,11 +180,12 @@ class ItemsViewModel: ObservableObject {
     
     func sortItems_oldDateFirst(postItem: [PostItem] ) -> [PostItem]{
       let result =  postItem.sorted(by: {
-        if ($0.post_creation_date.seconds == $1.post_creation_date.seconds){
-          return $0.post_creation_date.nanoseconds <= $1.post_creation_date.nanoseconds
-        }
-
-        return $0.post_creation_date.seconds <= $1.post_creation_date.seconds
+        return $0.post_creation_date <= $1.post_creation_date
+//        if ($0.post_creation_date.seconds == $1.post_creation_date.seconds){
+//          return $0.post_creation_date.nanoseconds <= $1.post_creation_date.nanoseconds
+//        }
+//
+//        return $0.post_creation_date.seconds <= $1.post_creation_date.seconds
       })
 
       return result
@@ -249,7 +251,7 @@ class ItemsViewModel: ObservableObject {
   //                           availableDate: "")
       self.availableStatus = true
       
-      let cur_time = Timestamp.init()
+      let cur_time = Date()
       let newPostData = Post(id: newPostId,
                              last_modified_timestamp: cur_time,
                              Availability: "Available",
@@ -297,7 +299,7 @@ class ItemsViewModel: ObservableObject {
       
       self.availableStatus = true
       
-      let cur_time = Timestamp.init()
+      let cur_time = Date()
       let newPostData = Post(id: newPostId,
                              last_modified_timestamp: cur_time,
                              Availability: "Available",

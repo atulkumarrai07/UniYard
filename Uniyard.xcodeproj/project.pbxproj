@@ -16,7 +16,6 @@
 		0B45522A2725B491009BA1E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4552292725B491009BA1E0 /* User.swift */; };
 		0B45522E2725B503009BA1E0 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45522D2725B503009BA1E0 /* Post.swift */; };
 		0B4552322725B554009BA1E0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4552312725B554009BA1E0 /* Item.swift */; };
-		0B4552342725B574009BA1E0 /* Rental.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4552332725B574009BA1E0 /* Rental.swift */; };
 		0B4552362725B5A1009BA1E0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4552352725B5A1009BA1E0 /* Message.swift */; };
 		0B4552382725B5B9009BA1E0 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4552372725B5B9009BA1E0 /* Notification.swift */; };
 		0B45523C2725B606009BA1E0 /* Notification_Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45523B2725B606009BA1E0 /* Notification_Sequence.swift */; };
@@ -63,7 +62,6 @@
 		BF2792C5274C8AAA00257F8C /* MyPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2792C4274C8AAA00257F8C /* MyPostViewModel.swift */; };
 		BF2792C827586ED300257F8C /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = BF2792C727586ED300257F8C /* FirebaseMessaging */; };
 		BF2792CA27587D3D00257F8C /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2792C927587D3D00257F8C /* NotificationViewModel.swift */; };
-		BF2792CC275936D100257F8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2792CB275936D100257F8C /* AppDelegate.swift */; };
 		BF9C27FC27346C2E00E3231C /* SearchBuyListings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C27FB27346C2E00E3231C /* SearchBuyListings.swift */; };
 		BF9C27FE27346C9000E3231C /* SearchSellListings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C27FD27346C9000E3231C /* SearchSellListings.swift */; };
 		BF9C280027357BA800E3231C /* SignUpMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C27FF27357BA800E3231C /* SignUpMock.swift */; };
@@ -107,7 +105,6 @@
 		0B4552292725B491009BA1E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0B45522D2725B503009BA1E0 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		0B4552312725B554009BA1E0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
-		0B4552332725B574009BA1E0 /* Rental.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rental.swift; sourceTree = "<group>"; };
 		0B4552352725B5A1009BA1E0 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		0B4552372725B5B9009BA1E0 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		0B45523B2725B606009BA1E0 /* Notification_Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification_Sequence.swift; sourceTree = "<group>"; };
@@ -150,7 +147,6 @@
 		BF2792C2274C882200257F8C /* MyPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostView.swift; sourceTree = "<group>"; };
 		BF2792C4274C8AAA00257F8C /* MyPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostViewModel.swift; sourceTree = "<group>"; };
 		BF2792C927587D3D00257F8C /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
-		BF2792CB275936D100257F8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF2792D02759835B00257F8C /* Uniyard.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Uniyard.entitlements; sourceTree = "<group>"; };
 		BF9C27FB27346C2E00E3231C /* SearchBuyListings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBuyListings.swift; sourceTree = "<group>"; };
 		BF9C27FD27346C9000E3231C /* SearchSellListings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSellListings.swift; sourceTree = "<group>"; };
@@ -210,7 +206,6 @@
 				0B4552292725B491009BA1E0 /* User.swift */,
 				0B45522D2725B503009BA1E0 /* Post.swift */,
 				0B4552312725B554009BA1E0 /* Item.swift */,
-				0B4552332725B574009BA1E0 /* Rental.swift */,
 				0B4552372725B5B9009BA1E0 /* Notification.swift */,
 				0B45523B2725B606009BA1E0 /* Notification_Sequence.swift */,
 				0BFD7211272A3FCF0038F669 /* PostItem.swift */,
@@ -331,7 +326,6 @@
 				BF2792C4274C8AAA00257F8C /* MyPostViewModel.swift */,
 				0B0565BF2755BF3B00EF0807 /* ViewModel.swift */,
 				BF2792C927587D3D00257F8C /* NotificationViewModel.swift */,
-				BF2792CB275936D100257F8C /* AppDelegate.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -542,8 +536,6 @@
 				0B7E7CD22717D006004DB7AC /* UniyardApp.swift in Sources */,
 				0BB0C4852727B96900060C8E /* LoginViewModel.swift in Sources */,
 				BF9C28022735836300E3231C /* SortView.swift in Sources */,
-				0B4552342725B574009BA1E0 /* Rental.swift in Sources */,
-				BF2792CC275936D100257F8C /* AppDelegate.swift in Sources */,
 				E2E6664F2745AC1C0030E5C5 /* SettingsView.swift in Sources */,
 				0B45522A2725B491009BA1E0 /* User.swift in Sources */,
 				0B0565BA274C458D00EF0807 /* MessageUser.swift in Sources */,

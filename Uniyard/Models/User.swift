@@ -14,7 +14,7 @@ struct User: Identifiable, Codable{
   var campus_location:String
   var saved_post_list:[String]
   var my_post_list:[String]
-  var date_joined:Timestamp
+  var date_joined:Date
   var suggestion_preference:String
   var user_status:Bool
   
