@@ -22,22 +22,9 @@ class ViewModel: ObservableObject
   
   
   func addUser(user:User){
-    
     database.collection("Users").document(user.id).setData(user.dictionary)
-    
-    //loading users in array
-//    users.append(User(id: "U00001",email: "aaratric@andrew.cmu.edu", password: "aaratrika1234", user_image: "https://..jpg",first_name: "Aaratrika", last_name: "Chakraborty", campus_location: "Pittsburgh", saved_post_list: ["P00002","P00003"], my_post_list: ["P00001"], date_joined: Timestamp.init(), suggestion_preference: "Items", user_status: true))
-//    users.append(User(id: "U00002",email: "atulkr@andrew.cmu.edu", password: "atul1234", user_image: "https://..jpg",first_name: "Atul", last_name: "Rai", campus_location: "Pittsburgh", saved_post_list: ["P00001","P00003"], my_post_list: ["P00002"], date_joined: Timestamp.init(), suggestion_preference: "Apartments", user_status: true))
-//    users.append(User(id: "U00003",email: "mhao@andrew.cmu.edu", password: "mhao1234", user_image: "https://..jpg",first_name: "Iris", last_name: "Hao", campus_location: "Pittsburgh", saved_post_list: ["P00001","P00002","P00004"], my_post_list: ["P00003"], date_joined: Timestamp.init(), suggestion_preference: "Any", user_status: true))
-//    users.append(User(id: "U00004",email: "johndoe@andrew.cmu.edu", password: "john1234", user_image: "https://..jpg", first_name: "John", last_name: "Doe", campus_location: "Pittsburgh", saved_post_list: ["P00002","P00003"], my_post_list: ["P00004"], date_joined: Timestamp.init(), suggestion_preference: "Any", user_status: true))
-    
-    //looping throught the array to push to the Firestore
-//    for user in users{
-//      database.collection("Users").document(user.id).setData(user.dictionary)
-//    }
-    
     // printing message on completion
-    print("Sample users loaded")
+    print("Sample users created")
   }
   
   func fetchUser() {
@@ -323,62 +310,6 @@ class ViewModel: ObservableObject
           }
       }
   }
-  
-  
-  
-//  func fetchAllRental() {
-//    print("fetching rentals")
-//    database.collection("Rentals").getDocuments() { (querySnapshot, err) in
-//        if let err = err {
-//            print("Error getting documents: \(err)")
-//        } else {
-//            for document in querySnapshot!.documents {
-//              let id = document.documentID
-//              let post_id = document.get("post_id") as? String ?? ""
-//              let item_title = document.get("item_title") as? String ?? ""
-//              let item_description = document.get("item_description") as? String ?? ""
-//              let item_category = document.get("item_category") as? String ?? ""
-//              let item_buy = document.get("item_buy") as? Bool ?? false
-//              let condition = document.get("condition") as? String ?? ""
-//              let price = document.get("price") as? Double ?? 0
-//              let images = document.get("images") as? [String] ?? []
-//              let zip_code = document.get("zip_code") as? String ?? ""
-//              let delivery = document.get("delivery") as? Bool ?? false
-//              let pickup_location = document.get("pickup_location") as? String ?? ""
-//              self.fetchPostBasedOnPostId(postId: post_id) {(post) in
-//                if(post.Availability == "Available")
-//                {
-//                  self.itemsWithPostsAvailable.append(PostItem(postId: post_id, last_modified_timestamp: post.last_modified_timestamp, Availability: post.Availability, post_creation_date: post.post_creation_date, itemId: id, item_title: item_title, item_description: item_description, item_category: item_category, item_buy: item_buy, condition: condition, price: price, images: images, zip_code: zip_code, delivery: delivery, pickup_location: pickup_location))
-//                }
-//                completion(self.itemsWithPostsAvailable)
-//              }
-//              }
-//
-////            print("Position 2: " + String(self.itemsWithPostsAvailable.count))
-////          for itemwithPosts in self.itemsWithPostsAvailable{
-////            print(itemwithPosts)
-////          }
-////          print("Items with posts printed")
-//          }
-//      }
-//  }
-  
-//  func fetchPostBasedOnPostId(postId:String ,completion: @escaping (Post)->Void)
-//  {
-//    self.database.collection("Posts").document(postId).getDocument() { (documentpost, error) in
-//          if let documentpost = documentpost, documentpost.exists {
-//            let last_modified_timestamp = documentpost.get("last_modified_timestamp") as? Timestamp ?? Timestamp.init()
-//            let availability = documentpost.get("Availability") as? String ?? ""
-//            let post_creation_date = documentpost.get("post_creation_date") as? Timestamp ?? Timestamp.init()
-//            let post = Post(id: postId, last_modified_timestamp: last_modified_timestamp, Availability: availability, post_creation_date: post_creation_date)
-//            completion(post)
-//          } else {
-//              print("Document does not exist")
-//        }
-////                print("Position 1: " + String(self.itemsWithPostsAvailable.count))
-//
-//      }
-//  }
   
   func fetchPostBasedOnPostId(postId:String ,completion: @escaping (Post)->Void)
   {

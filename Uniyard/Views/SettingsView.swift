@@ -35,7 +35,7 @@ struct SettingsView: View {
 								Toggle(isOn: $curUserViewModel.notification_preference) {
 									Text("Push notifications").font(.title3)
 								}.onChange(of: curUserViewModel.notification_preference) { value in
-									curUserViewModel.updateNotification(curUserViewModel.notification_preference)
+//									curUserViewModel.updateNotification(curUserViewModel.notification_preference)
 								}
 								
 								Text(curUserViewModel.notification_preference ? "ON" : "OFF").font(.system(size: 18))
