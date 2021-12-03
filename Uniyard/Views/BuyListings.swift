@@ -32,7 +32,9 @@ struct BuyListings: View {
                     HStack{
                       Text("$ " + String(itemPostAvailable.price)).font(.subheadline).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
                       Spacer()
-                      Text("5 minutes ago").foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).font(.subheadline)
+											Text(convertTimestamp(serverTimestamp: itemPostAvailable.last_modified_timestamp))
+												.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).font(.subheadline)
+//                      Text("5 minutes ago").foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).font(.subheadline)
                     }.frame(width: 230, height: 15, alignment: .leading)
                   }.padding(.vertical).frame(width: 240, height: 100, alignment: .leading)
                 }.frame(width: 350, height: 110, alignment: .center).overlay(RoundedRectangle(cornerRadius: 14.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)))
