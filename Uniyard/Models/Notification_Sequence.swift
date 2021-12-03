@@ -5,7 +5,7 @@ import FirebaseFirestoreSwift
 struct Notification_Sequence: Identifiable, Codable {
   var id:String = UUID().uuidString
   var post_id:String
-  var timestamp_notf:Timestamp
+  var timestamp_notf:Date
   var content:String
   
   enum CodingKeys: String, CodingKey {

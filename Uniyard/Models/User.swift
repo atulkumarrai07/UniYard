@@ -14,10 +14,10 @@ struct User: Identifiable, Codable{
   var campus_location:String
   var saved_post_list:[String]
   var my_post_list:[String]
-  var date_joined:Timestamp
-  var suggestion_preference: Bool
+  var date_joined:Date
+  var suggestion_preference:Bool
   var user_status:Bool
-  
+
   enum CodingKeys: String, CodingKey {
     case email
     case password
@@ -31,11 +31,11 @@ struct User: Identifiable, Codable{
     case suggestion_preference
     case user_status
   }
-  
+
   var dictionary: [String: Any] {
           let data = (try? JSONEncoder().encode(self)) ?? Data()
           return (try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any]) ?? [:]
   }
-	
-  
+
+
 }

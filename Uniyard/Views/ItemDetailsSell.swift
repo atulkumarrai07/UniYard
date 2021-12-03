@@ -171,10 +171,10 @@ struct IndividualCardDetails: View {
 		}
 	}
 }
-struct ItemDetailsSell_Previews: PreviewProvider {
-
-  static var previews: some View {
-    let item:PostItem = PostItem(postId: "", last_modified_timestamp: Timestamp.init(), Availability: "", post_creation_date: Timestamp.init(), itemId: "", item_title: "", item_description: "", item_category: "", item_buy: false, condition: "", price: 0.0, images: [], zip_code: "", delivery: false, pickup_location: "",isSaved:false)
-    ItemDetailsSell(itemDetails:item)
-  }
-}
+//struct ItemDetailsSell_Previews: PreviewProvider {
+//
+//  static var previews: some View {
+//    let item:PostItem = PostItem(postId: "", last_modified_timestamp: Date(), Availability: "", post_creation_date: Date(), itemId: "", item_title: "", item_description: "", item_category: "", item_buy: false, condition: "", price: 0.0, images: [], zip_code: "", delivery: false, pickup_location: "",isSaved:false)
+//    ItemDetailsSell(itemDetails:item)
+//  }
+//}

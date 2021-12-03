@@ -16,7 +16,6 @@
 		0B45522A2725B491009BA1E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4552292725B491009BA1E0 /* User.swift */; };
 		0B45522E2725B503009BA1E0 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45522D2725B503009BA1E0 /* Post.swift */; };
 		0B4552322725B554009BA1E0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4552312725B554009BA1E0 /* Item.swift */; };
-		0B4552342725B574009BA1E0 /* Rental.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4552332725B574009BA1E0 /* Rental.swift */; };
 		0B4552362725B5A1009BA1E0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4552352725B5A1009BA1E0 /* Message.swift */; };
 		0B4552382725B5B9009BA1E0 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4552372725B5B9009BA1E0 /* Notification.swift */; };
 		0B45523C2725B606009BA1E0 /* Notification_Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45523B2725B606009BA1E0 /* Notification_Sequence.swift */; };
@@ -52,6 +51,8 @@
 		BF2792C12749AF0500257F8C /* SavedPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2792C02749AF0500257F8C /* SavedPostViewModel.swift */; };
 		BF2792C3274C882200257F8C /* MyPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2792C2274C882200257F8C /* MyPostView.swift */; };
 		BF2792C5274C8AAA00257F8C /* MyPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2792C4274C8AAA00257F8C /* MyPostViewModel.swift */; };
+		BF2792C827586ED300257F8C /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = BF2792C727586ED300257F8C /* FirebaseMessaging */; };
+		BF2792CA27587D3D00257F8C /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2792C927587D3D00257F8C /* NotificationViewModel.swift */; };
 		BF9C27FC27346C2E00E3231C /* SearchBuyListings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C27FB27346C2E00E3231C /* SearchBuyListings.swift */; };
 		BF9C27FE27346C9000E3231C /* SearchSellListings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C27FD27346C9000E3231C /* SearchSellListings.swift */; };
 		BF9C280027357BA800E3231C /* SignUpMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C27FF27357BA800E3231C /* SignUpMock.swift */; };
@@ -113,7 +114,6 @@
 		0B4552292725B491009BA1E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0B45522D2725B503009BA1E0 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		0B4552312725B554009BA1E0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
-		0B4552332725B574009BA1E0 /* Rental.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rental.swift; sourceTree = "<group>"; };
 		0B4552352725B5A1009BA1E0 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		0B4552372725B5B9009BA1E0 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		0B45523B2725B606009BA1E0 /* Notification_Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification_Sequence.swift; sourceTree = "<group>"; };
@@ -155,6 +155,8 @@
 		BF2792C02749AF0500257F8C /* SavedPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostViewModel.swift; sourceTree = "<group>"; };
 		BF2792C2274C882200257F8C /* MyPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostView.swift; sourceTree = "<group>"; };
 		BF2792C4274C8AAA00257F8C /* MyPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostViewModel.swift; sourceTree = "<group>"; };
+		BF2792C927587D3D00257F8C /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		BF2792D02759835B00257F8C /* Uniyard.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Uniyard.entitlements; sourceTree = "<group>"; };
 		BF9C27FB27346C2E00E3231C /* SearchBuyListings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBuyListings.swift; sourceTree = "<group>"; };
 		BF9C27FD27346C9000E3231C /* SearchSellListings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSellListings.swift; sourceTree = "<group>"; };
 		BF9C27FF27357BA800E3231C /* SignUpMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpMock.swift; sourceTree = "<group>"; };
@@ -178,6 +180,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF23DB4327290F4A00410436 /* FirebaseDatabaseSwift-Beta in Frameworks */,
+				BF23DB3D27290F4A00410436 /* FirebaseFirestoreSwift-Beta in Frameworks */,
+				BF2792C827586ED300257F8C /* FirebaseMessaging in Frameworks */,
+				BF23DB3B27290F4A00410436 /* FirebaseDatabase in Frameworks */,
+				BF23DB4527290F4A00410436 /* FirebaseCrashlytics in Frameworks */,
+				BF23DB3F27290F4A00410436 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
+				BF23DB4127290F4A00410436 /* FirebaseAnalytics in Frameworks */,
+				BF23DB3927290F4A00410436 /* FirebaseFirestore in Frameworks */,
+				BF23DB4927290F4A00410436 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				BF23DB4727290F4A00410436 /* FirebaseAuth in Frameworks */,
 				E2C467B72756E1DD00350B65 /* FirebaseInAppMessaging-Beta in Frameworks */,
 				E2C467A72756E1DD00350B65 /* FirebaseStorageSwift-Beta in Frameworks */,
 				E2C467A32756E1DD00350B65 /* FirebaseMessaging in Frameworks */,
@@ -194,6 +206,7 @@
 				E2C467BB2756E1DD00350B65 /* FirebaseCrashlytics in Frameworks */,
 				E2C467B92756E1DD00350B65 /* FirebaseDatabaseSwift-Beta in Frameworks */,
 				E2C467AF2756E1DD00350B65 /* FirebaseAnalytics in Frameworks */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,7 +234,6 @@
 				0B4552292725B491009BA1E0 /* User.swift */,
 				0B45522D2725B503009BA1E0 /* Post.swift */,
 				0B4552312725B554009BA1E0 /* Item.swift */,
-				0B4552332725B574009BA1E0 /* Rental.swift */,
 				0B4552372725B5B9009BA1E0 /* Notification.swift */,
 				0B45523B2725B606009BA1E0 /* Notification_Sequence.swift */,
 				0BFD7211272A3FCF0038F669 /* PostItem.swift */,
@@ -236,6 +248,7 @@
 				0B7E7CE22717D006004DB7AC /* UniyardTests */,
 				0B7E7CED2717D006004DB7AC /* UniyardUITests */,
 				0B7E7CCF2717D006004DB7AC /* Products */,
+				BF2792C627586ED300257F8C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -252,6 +265,7 @@
 		0B7E7CD02717D006004DB7AC /* Uniyard */ = {
 			isa = PBXGroup;
 			children = (
+				BF2792D02759835B00257F8C /* Uniyard.entitlements */,
 				0BB0C4832727B92900060C8E /* ViewModels */,
 				0BB0C47E27271C8F00060C8E /* Views */,
 				0B4552282725B415009BA1E0 /* Models */,
@@ -339,10 +353,18 @@
 				BF2792C02749AF0500257F8C /* SavedPostViewModel.swift */,
 				BF2792C4274C8AAA00257F8C /* MyPostViewModel.swift */,
 				0B0565BF2755BF3B00EF0807 /* ViewModel.swift */,
+				BF2792C927587D3D00257F8C /* NotificationViewModel.swift */,
 				E2C467972756B32100350B65 /* ImagePicker.swift */,
 				E250B35C2759866900365D8F /* MultiImagePicker.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		BF2792C627586ED300257F8C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		BF9C28072735886100E3231C /* Messages */ = {
@@ -384,6 +406,16 @@
 			);
 			name = Uniyard;
 			packageProductDependencies = (
+				BF23DB3827290F4A00410436 /* FirebaseFirestore */,
+				BF23DB3A27290F4A00410436 /* FirebaseDatabase */,
+				BF23DB3C27290F4A00410436 /* FirebaseFirestoreSwift-Beta */,
+				BF23DB3E27290F4A00410436 /* FirebaseAnalyticsSwift-Beta */,
+				BF23DB4027290F4A00410436 /* FirebaseAnalytics */,
+				BF23DB4227290F4A00410436 /* FirebaseDatabaseSwift-Beta */,
+				BF23DB4427290F4A00410436 /* FirebaseCrashlytics */,
+				BF23DB4627290F4A00410436 /* FirebaseAuth */,
+				BF23DB4827290F4A00410436 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				BF2792C727586ED300257F8C /* FirebaseMessaging */,
 				E2C4679E2756E1DD00350B65 /* FirebaseAuthCombine-Community */,
 				E2C467A02756E1DD00350B65 /* FirebaseStorageCombine-Community */,
 				E2C467A22756E1DD00350B65 /* FirebaseMessaging */,
@@ -525,6 +557,7 @@
 				E2C467982756B32100350B65 /* ImagePicker.swift in Sources */,
 				BF9C280B2735892F00E3231C /* ChatsViewModel.swift in Sources */,
 				0B5C490C274315AA00FEF328 /* DateHelpers.swift in Sources */,
+				BF2792CA27587D3D00257F8C /* NotificationViewModel.swift in Sources */,
 				BF9C2809273588F900E3231C /* Chat.swift in Sources */,
 				0B0565C02755BF3B00EF0807 /* ViewModel.swift in Sources */,
 				0BF72DF9272B08040013DCC2 /* SellListings.swift in Sources */,
@@ -551,7 +584,6 @@
 				0B7E7CD22717D006004DB7AC /* UniyardApp.swift in Sources */,
 				0BB0C4852727B96900060C8E /* LoginViewModel.swift in Sources */,
 				BF9C28022735836300E3231C /* SortView.swift in Sources */,
-				0B4552342725B574009BA1E0 /* Rental.swift in Sources */,
 				E2E6664F2745AC1C0030E5C5 /* SettingsView.swift in Sources */,
 				0B45522A2725B491009BA1E0 /* User.swift in Sources */,
 				0B0565BA274C458D00EF0807 /* MessageUser.swift in Sources */,
@@ -992,6 +1024,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E2C4679D2756E1DD00350B65 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		BF2792C727586ED300257F8C /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF23DB3727290F4A00410436 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

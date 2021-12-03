@@ -35,22 +35,7 @@ class MyPostViewModel: ObservableObject {
     }
   }
 }
-//  func updateSaveStatus() {
-//    let auth = Auth.auth()
-//    let user_id = auth.currentUser?.uid
-//    viewModel.fetchSavedPost(userId: user_id!) { results in
-//      self.savedPostsForCurrentUser = results
-//
-//      if(!self.savedPostsForCurrentUser.isEmpty)
-//      {
-//        for postId in self.savedPostsForCurrentUser{
-//            if let row = self.savedPostfilteredItems.firstIndex(where: {$0.postId == postId}){
-//            self.savedPostfilteredItems[row].isSaved = true
-//          }
-//        }
-//      }
-//    }
-//  }
+
   func deleteFromMyPost(postId: String){
     let auth = Auth.auth()
     let user_id = auth.currentUser?.uid

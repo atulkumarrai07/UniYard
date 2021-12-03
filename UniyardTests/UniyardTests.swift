@@ -7,34 +7,46 @@
 
 import XCTest
 @testable import Uniyard
+import FirebaseFirestore
 
 class UniyardTest: XCTestCase {
   
   let signupViewModel = SignUpViewModel()
   let loginViewModel = LoginModel()
   let itemsViewModel = ItemsViewModel()
+  let database = Firestore.firestore()
   var userId:String = ""
-  var postId:String = ""
-  var itemId:String = ""
-  var chatIdForTestUser:[String] = []
-  var messageIdsForTestUer:[String] = []
+  var postIds:[String] = []
+  var itemIds:[String] = []
+  var chatIds:[String] = []
+  var messageIds:[String] = []
   
+  // SignUpViewModel Test case
   func testSignup() throws {
+    let expectationTestSignup = self.expectation(description: "testSignup")
     signupViewModel.cmu_email = "test@andrew.cmu.edu"
     signupViewModel.first_name = "test"
     signupViewModel.last_name = "test"
-    signupViewModel.password = "test"
-    signupViewModel.confirm_password = "test"
+    signupViewModel.password = "Test1234"
+    signupViewModel.confirm_password = "Test1234"
     signupViewModel.showingAlert = false
     signupViewModel.campus_location = "Pittsburgh"
-    
-    
+    signupViewModel.showTCSelector = false
+    signupViewModel.toggled()
+    XCTAssertEqual(signupViewModel.showTCSelector, true)        // testing for toggle functionality
+    XCTAssertEqual(signupViewModel.passwordMatch(), true)       // testing for password match functionality
+    signupViewModel.signUp(email: signupViewModel.cmu_email, password: signupViewModel.password)
+    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+      expectationTestSignup.fulfill()
+    }
+    wait(for: [expectationTestSignup], timeout: 5.0)
+    XCTAssertEqual(signupViewModel.registrationStatus, true)
   }
   
   // loginViewModel Test case
   func testLogin() throws {
     let expectationLogin = self.expectation(description: "login")
-    loginViewModel.login(email: "atulkumr@andrew.cmu.edu", password: "Atul1234")
+    loginViewModel.login(email: "test@andrew.cmu.edu", password: "Test1234")
     DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
       expectationLogin.fulfill()
     }
@@ -42,7 +54,7 @@ class UniyardTest: XCTestCase {
     XCTAssertEqual(loginViewModel.signedIn, true)
   }
   
-  // itemDetailsViewModel Test case
+  // ItemDetailsViewModel Test case
   func testLoadItemsWithPostAvailable() throws {
     let expectationtestLoadItemsWithPostAvailable = self.expectation(description: "testLoadItemsWithPostAvailable")
     itemsViewModel.loadItemswithPostsAvailable()
@@ -51,6 +63,21 @@ class UniyardTest: XCTestCase {
     }
     wait(for: [expectationtestLoadItemsWithPostAvailable], timeout: 5.0)
     XCTAssertGreaterThan(itemsViewModel.itemswithPostsAvailableArray.count, 0)
+  }
+  
+  // CurUserViewModel Test case
+  func testUpdatePwd() throws {
+    let curUserViewModel = CurUserViewModel()
+    let expectationLoginAfterUpdatePassword = self.expectation(description: "update password")
+    curUserViewModel.updatePwd("Test1234")
+    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+    }
+    loginViewModel.login(email: "test@andrew.cmu.edu", password: "Test1234")
+    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+      expectationLoginAfterUpdatePassword.fulfill()
+    }
+    wait(for: [expectationLoginAfterUpdatePassword], timeout: 5.0)
+    XCTAssertEqual(loginViewModel.signedIn, true)
   }
   
   // loginViewModel Test case
@@ -64,9 +91,30 @@ class UniyardTest: XCTestCase {
     XCTAssertEqual(loginViewModel.signedIn, false)
   }
   
-  func clearAllDataForUser(){
-    
-  }
+//  func testClearAllDataForTestUser(){
+//    let expectationTestClearAllDataForTestUser = self.expectation(description: "testClearAllDataForTestUser")
+//    var deletedFlag = false
+//    // delete test user from Users table
+//    database.collection("Users").whereField("email", isEqualTo: "test@andrew.cmu.edu").getDocuments() { (querySnapshot, err) in
+//      if let err = err {
+//          print("Error getting documents: \(err)")
+//      } else {
+//          for document in querySnapshot!.documents {
+//            self.userId = document.documentID
+//          }
+//      }
+//      self.database.collection("Users").document(self.userId).delete() { err in
+//          if let err = err {
+//              print("Error removing document: \(err)")
+//          } else {
+//              deletedFlag = true
+//          }
+//        expectationTestClearAllDataForTestUser.fulfill()
+//      }
+//    }
+//    wait(for: [expectationTestClearAllDataForTestUser], timeout: 7.0)
+//    XCTAssertEqual(deletedFlag, true)
+//  }
   
 //  func testEmailAddressEntered() {
 //    let user = User(email: "sara@andrew.cmu.edu", password: "Sara1234", user_image: "", first_name: "Sara", last_name: "Gomez", campus_location: "Pittsburgh", saved_post_list: <#T##[String]#>, my_post_list: <#T##[String]#>, date_joined: Timestamp, suggestion_preference: "Any", user_status: true)

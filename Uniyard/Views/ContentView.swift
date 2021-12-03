@@ -23,7 +23,6 @@ struct ContentView: View {
       }.onAppear{
         loginModel.signedIn = loginModel.isLoggedIn
       }
-      
     }
 }
 
