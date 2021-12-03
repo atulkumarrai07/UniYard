@@ -1,10 +1,16 @@
 
 import SwiftUI
+import PhotosUI
 
 struct CreateSellView: View {
   @Environment(\.presentationMode) var createSellPresentation: Binding<PresentationMode>
-  
   @StateObject var item_vm = ItemsViewModel()
+	
+	@State var photo : [UIImage] = []
+	@State var showPicker = false
+	@State var any = PHPickerConfiguration()
+	
+//	var columns = Array(repeating: GridItem(.fixed(180), spacing: 8), count: 2)
   
   var conditionList = ["New", "Almost new", "Very good", "Good", "Acceptable"]
   
@@ -41,23 +47,32 @@ struct CreateSellView: View {
               .font(.system(size: 25, weight: .heavy))
               .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
               .frame(maxWidth: .infinity, alignment: .center).padding(.leading,-20)
+						
+						//show photo album
+						Button(action: {
+							self.showPicker.toggle()
+							self.any.filter = .images
+						}){
+							Image(systemName: "camera.fill")
+								.frame(width: 25, height: 20, alignment: .center)
+								.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
+						}
+									 
           }.padding()//Hstack
   
-          // item image
-      
+          // sell item images
           TabView {
-             ForEach(0 ..< 5) {_ in
-              Image(uiImage: #imageLiteral(resourceName: "Login_logo"))
+						ForEach(photo, id: \.self) {pho in
+							Image(uiImage: pho)
                 .resizable()
                 .scaledToFit()
                 .cornerRadius(5)
-                .frame(height: 200)
+                .frame(height: 150)
              }
             }
           .frame(width: 300, height: 200, alignment: .center)
           .tabViewStyle(PageTabViewStyle())
           .cornerRadius(54.0).padding(.bottom)
-          
           
           //post details
           Form {
@@ -141,6 +156,9 @@ struct CreateSellView: View {
           }
           
         }.onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+				.sheet(isPresented: self.$showPicker){
+					MultiImagePicker(photos: self.$photo, showPicker: self.$showPicker)
+				}
       }.navigationBarHidden(true)
   }
   

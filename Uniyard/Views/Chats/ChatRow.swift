@@ -1,4 +1,5 @@
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct ChatRow: View {
   let chat: Chat
@@ -9,7 +10,7 @@ struct ChatRow: View {
           Image(systemName: "person.crop.circle").resizable().frame(width: 70, height: 70).clipShape(Circle()).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
         }
         else{
-          Image(chat.user2.user_image).resizable().frame(width: 70, height: 70).clipShape(Circle())
+          WebImage(url: URL(string: chat.user2.user_image)).resizable().frame(width: 70, height: 70).clipShape(Circle())
         }
           ZStack{
             VStack(alignment: .leading, spacing: 5){

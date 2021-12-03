@@ -16,27 +16,14 @@ class ViewModel: ObservableObject
   var itemsWithPostsAvailable = [PostItem]()
   var itemsWithSavedPosts = [PostItem]()
   var itemsWithMyPosts = [PostItem]()
-  
-  
+
+
   func addUser(user:User){
-    
     database.collection("Users").document(user.id).setData(user.dictionary)
-    
-    //loading users in array
-//    users.append(User(id: "U00001",email: "aaratric@andrew.cmu.edu", password: "aaratrika1234", user_image: "https://..jpg",first_name: "Aaratrika", last_name: "Chakraborty", campus_location: "Pittsburgh", saved_post_list: ["P00002","P00003"], my_post_list: ["P00001"], date_joined: Timestamp.init(), suggestion_preference: "Items", user_status: true))
-//    users.append(User(id: "U00002",email: "atulkr@andrew.cmu.edu", password: "atul1234", user_image: "https://..jpg",first_name: "Atul", last_name: "Rai", campus_location: "Pittsburgh", saved_post_list: ["P00001","P00003"], my_post_list: ["P00002"], date_joined: Timestamp.init(), suggestion_preference: "Apartments", user_status: true))
-//    users.append(User(id: "U00003",email: "mhao@andrew.cmu.edu", password: "mhao1234", user_image: "https://..jpg",first_name: "Iris", last_name: "Hao", campus_location: "Pittsburgh", saved_post_list: ["P00001","P00002","P00004"], my_post_list: ["P00003"], date_joined: Timestamp.init(), suggestion_preference: "Any", user_status: true))
-//    users.append(User(id: "U00004",email: "johndoe@andrew.cmu.edu", password: "john1234", user_image: "https://..jpg", first_name: "John", last_name: "Doe", campus_location: "Pittsburgh", saved_post_list: ["P00002","P00003"], my_post_list: ["P00004"], date_joined: Timestamp.init(), suggestion_preference: "Any", user_status: true))
-    
-    //looping throught the array to push to the Firestore
-//    for user in users{
-//      database.collection("Users").document(user.id).setData(user.dictionary)
-//    }
-    
     // printing message on completion
-    print("Sample users loaded")
+    print("Sample users created")
   }
-  
+
   func fetchUser() {
     database.collection("Users").getDocuments() { (querySnapshot, err) in
         if let err = err {
@@ -64,9 +51,9 @@ class ViewModel: ObservableObject
           print("User printed")
         }
     }
-    
+
   }
-  
+
   // load post in Firestore
   func addPost_old() {
     posts.append(Post(id: "P00001", last_modified_timestamp: Date(), Availability: "Available", post_creation_date: Date()))
@@ -78,43 +65,43 @@ class ViewModel: ObservableObject
     }
     print("Posts loaded")
   }
-  
+
   func addPost(post:Post) {
     database.collection("Posts").document(post.id).setData(post.dictionary)
   }
-  
+
   func addItem(item: Item) {
     database.collection("Items").document(item.id).setData(item.dictionary)
   }
-  
+
   func addItem_old() {
     items.append(Item(id: "I00001", post_id: "P00001", item_title: "Lamp", item_description: "A lamp for the study table", item_category: "Electronics", item_buy: false, condition: "Almost new", price: 15.90, images: ["https://..jpg"], zip_code: "15213", delivery: true, pickup_location: "3229 Hardie Way"))
     items.append(Item(id: "I00002", post_id: "P00004", item_title: "Vacuum Cleaner", item_description: "1 year old vacuum cleaner with auto detection technology available at reasonable price.", item_category: "Cleaning-Appliance", item_buy: false, condition: "New", price: 19.00, images: ["https://..jpg"], zip_code: "15213", delivery: false, pickup_location: "123 Forbes Avenue, Pittburgh"))
-    
+
     for item in items{
       database.collection("Items").document(item.id).setData(item.dictionary)
     }
     print("Items loaded")
   }
-  
+
   func addNotification() {
     notifications.append(Notification(id: "N00001", user_id: "U00001", notification_on: true, saved_post_change_alert: true, sequence: ["NS00001"]))
-    
+
     for notification in notifications{
       database.collection("Notifications").document(notification.id).setData(notification.dictionary)
     }
     print("message_sequences loaded")
   }
-  
+
   func addNotification_Sequence() {
     notification_sequences.append(Notification_Sequence(id: "NS00001", post_id: "P00002", timestamp_notf: Date(), content: "Price of the apartment changed"))
-    
+
     for notification_sequence in notification_sequences{
       database.collection("Notification_Sequences").document(notification_sequence.id).setData(notification_sequence.dictionary)
     }
     print("notification_sequence loaded")
   }
-  
+
   func fetchAllPost() {
     print("fetching posts")
     database.collection("Posts").getDocuments() { (querySnapshot, err) in
@@ -126,7 +113,7 @@ class ViewModel: ObservableObject
               let last_modified_timestamp = document.get("last_modified_timestamp") as? Date ?? Date()
               let Availability = document.get("Availability") as? String ?? ""
               let post_creation_date = document.get("post_creation_date") as? Date ?? Date()
-              
+
               self.posts.append(Post(id: id, last_modified_timestamp: last_modified_timestamp, Availability: Availability, post_creation_date: post_creation_date))
            }
           for post in self.posts{
@@ -136,7 +123,7 @@ class ViewModel: ObservableObject
         }
     }
   }
-  
+
   func fetchAllItem() {
     print("fetching items")
     database.collection("Items").getDocuments() { (querySnapshot, err) in
@@ -156,7 +143,7 @@ class ViewModel: ObservableObject
             let zip_code = document.get("zip_code") as? String ?? ""
             let delivery = document.get("delivery") as? Bool ?? false
             let pickup_location = document.get("pickup_location") as? String ?? ""
-            
+
             self.items.append(Item(id: id, post_id: post_id, item_title: item_title, item_description: item_description, item_category: item_category, item_buy: item_buy, condition: condition, price: price, images: images, zip_code: zip_code, delivery: delivery, pickup_location: pickup_location))
 //                print("\(document.documentID) => \(document.data())")
             }
@@ -167,7 +154,7 @@ class ViewModel: ObservableObject
         }
     }
   }
-  
+
   // using this function for fetching all items with their posts to render details in items listing
   func fetchAllItemsWithPostsAvailable(completion: @escaping ([PostItem])->Void) {
     self.itemsWithPostsAvailable = []
@@ -196,7 +183,7 @@ class ViewModel: ObservableObject
                 completion(self.itemsWithPostsAvailable)
               }
               }
-          
+
 //            print("Position 2: " + String(self.itemsWithPostsAvailable.count))
 //          for itemwithPosts in self.itemsWithPostsAvailable{
 //            print(itemwithPosts)
@@ -207,13 +194,13 @@ class ViewModel: ObservableObject
   }
   //using it for savepost
   func fetchSavedPost(userId: String, completion: @escaping ([String])->Void){
- 
+
     database.collection("Users").document(userId).getDocument { (document, error) in
         if let document = document, document.exists {
             let saved_post_list = document.get("saved_post_list") as? [String] ?? []
 //            print("Document data: \(saved_post_list)")
 
-          
+
           completion(saved_post_list)
         } else {
             print("Document does not exist")
@@ -242,7 +229,7 @@ class ViewModel: ObservableObject
               let pickup_location = document.get("pickup_location") as? String ?? ""
               self.fetchPostBasedOnPostId(postId: post_id) {(post) in
                 self.itemsWithSavedPosts.append(PostItem(postId: post_id, last_modified_timestamp: post.last_modified_timestamp, Availability: post.Availability, post_creation_date: post.post_creation_date, itemId: id, item_title: item_title, item_description: item_description, item_category: item_category, item_buy: item_buy, condition: condition, price: price, images: images, zip_code: zip_code, delivery: delivery, pickup_location: pickup_location,isSaved: false))
-                
+
                 completion(self.itemsWithSavedPosts)
               }
               }
@@ -251,7 +238,7 @@ class ViewModel: ObservableObject
   }
   //using it for mypost
   func fetchMyPost(userId: String, completion: @escaping ([String])->Void){
- 
+
     database.collection("Users").document(userId).getDocument { (document, error) in
         if let document = document, document.exists {
             let my_post_list = document.get("my_post_list") as? [String] ?? []
@@ -284,14 +271,14 @@ class ViewModel: ObservableObject
               let pickup_location = document.get("pickup_location") as? String ?? ""
               self.fetchPostBasedOnPostId(postId: post_id) {(post) in
               self.itemsWithMyPosts.append(PostItem(postId: post_id, last_modified_timestamp: post.last_modified_timestamp, Availability: post.Availability, post_creation_date: post.post_creation_date, itemId: id, item_title: item_title, item_description: item_description, item_category: item_category, item_buy: item_buy, condition: condition, price: price, images: images, zip_code: zip_code, delivery: delivery, pickup_location: pickup_location,isSaved: false))
-                
+
                 completion(self.itemsWithMyPosts)
               }
               }
           }
       }
   }
-  
+
   func fetchPostBasedOnPostId(postId:String ,completion: @escaping (Post)->Void)
   {
     self.database.collection("Posts").document(postId).getDocument() { (documentpost, error) in
@@ -306,7 +293,7 @@ class ViewModel: ObservableObject
         }
       }
   }
-  
+
   func fetchUserByPostId(postId: String, completion: @escaping (MessageUser)->Void) {
     database.collection("Users").whereField("my_post_list", arrayContains: postId).getDocuments(){ (querySnapshot, err) in
       if let err = err {
@@ -324,14 +311,14 @@ class ViewModel: ObservableObject
       }
     }
   }
-  
+
   func updateHasUnreadMessagesStatus(chatId:String, completion: @escaping ()->Void) {
     database.collection("Chat").document(chatId).updateData([
       "hasUnreadMessage": false
     ])
     completion()
   }
-  
+
   func UpdateChatWithNewMessage(chat:Chat, message:Message, completion: @escaping (Message)->Void) {
     if(chat.messages.count == 0){
       self.addMessage(message: message) { messageId in
@@ -350,25 +337,26 @@ class ViewModel: ObservableObject
       }
     }
   }
-  
+
   func addMessage(message:Message, completion: @escaping (String)->Void) {
     database.collection("Messages").document(message.id).setData(message.dictionary)
     completion(message.id)
   }
-  
+
   func fetchChats(currentUserID:String, completion: @escaping ([Chat])->Void) {
     let auth = Auth.auth()
     var chats:[Chat] = []
     var chatCount = 0
-    database.collection("Chat").getDocuments() { (querySnapshot, err) in            // modification required get chats only for the current user
+    database.collection("Chat").addSnapshotListener{ (querySnapshot, err) in
         if let err = err {
             print("Error getting documents: \(err)")
         } else {
-          
+
           self.fetchCountOfChats(currentUserId: auth.currentUser!.uid){result in
             chatCount = result
             for document in querySnapshot!.documents {
               let id = document.documentID
+              print(id)
               var user1_id = document.get("user1") as? String ?? ""
               var user2_id:String = ""
               if(user1_id == auth.currentUser?.uid){
@@ -409,7 +397,7 @@ class ViewModel: ObservableObject
         }
     }
   }
-  
+
   func fetchCountOfChats(currentUserId:String, completion: @escaping (Int)->Void) {
     var countOfChats = 0
       database.collection("Chat").whereField("user1", isEqualTo: currentUserId).getDocuments(){(querySnapshot, err) in
@@ -428,16 +416,16 @@ class ViewModel: ObservableObject
       }
     }
   }
-  
+
   func fetchMessages(messageIds:[String],completion: @escaping ([Message])->Void) {
     let auth = Auth.auth()
     var messages:[Message] = []
-    
+
     for messageId in messageIds{
-      database.collection("Messages").document(messageId).getDocument{ (document, error) in
+      database.collection("Messages").document(messageId).addSnapshotListener{ (document, error) in
         if let document = document, document.exists {
           let id = document.documentID
-//          print(id)
+          print(id)
           let date_number = document.get("date") as? TimeInterval ?? 0
           let date = Date(timeIntervalSinceReferenceDate: date_number)
           let from_user_id = document.get("from_user_id") as? String ?? ""
@@ -451,14 +439,14 @@ class ViewModel: ObservableObject
         if(messages.count == messageIds.count){
           completion(messages)
         }
-        
+
       }
-      
+
     }
 //    ------------option 2 ends----------
-    
+
   }
-  
+
   func fetchMessageUser(userId:String, completion: @escaping (MessageUser)-> Void) {
     database.collection("Users").document(userId).getDocument{ (document, error) in
       if let document = document, document.exists {
@@ -477,8 +465,8 @@ class ViewModel: ObservableObject
       }
   }
   }
-  
-  
+
+
   func fetchAllNotification() {
     print("fetching notifications")
     database.collection("Notifications").getDocuments() { (querySnapshot, err) in
@@ -491,7 +479,7 @@ class ViewModel: ObservableObject
               let sequence = document.get("sequence") as? [String] ?? [""]
               let notification_on = document.get("notification_on") as? Bool  ?? false
               let saved_post_change_alert = document.get("saved_post_change_alert") as? Bool  ?? false
-              
+
               self.notifications.append(Notification(id: id, user_id: user_id, notification_on: notification_on, saved_post_change_alert: saved_post_change_alert, sequence: sequence))
 //                print("\(document.documentID) => \(document.data())")
             }
@@ -502,7 +490,7 @@ class ViewModel: ObservableObject
         }
     }
   }
-  
+
   func fetchAllNotification_Sequence() {
     print("fetching notification sequences")
     database.collection("Notification_Sequences").getDocuments() { (querySnapshot, err) in
@@ -514,7 +502,7 @@ class ViewModel: ObservableObject
               let post_id = document.get("post_id") as? String ?? ""
               let timestamp_notf = document.get("timestamp_notf") as? Date ?? Date()
               let content = document.get("content") as? String ?? ""
-              
+
               self.notification_sequences.append(Notification_Sequence(id: id, post_id: post_id, timestamp_notf: timestamp_notf, content: content))
 //                print("\(document.documentID) => \(document.data())")
             }
