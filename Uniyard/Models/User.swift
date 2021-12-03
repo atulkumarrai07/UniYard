@@ -15,7 +15,7 @@ struct User: Identifiable, Codable{
   var saved_post_list:[String]
   var my_post_list:[String]
   var date_joined:Timestamp
-  var suggestion_preference:Bool
+  var suggestion_preference: Bool
   var user_status:Bool
   
   enum CodingKeys: String, CodingKey {
