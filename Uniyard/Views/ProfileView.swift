@@ -55,7 +55,7 @@ struct ProfileView: View {
 					}.sheet(isPresented: $shouldShowImagePicker) {
 						ImagePicker(image: $upload_image)
 					}
-
+					
 					Button(action: {
 						if let thisImage = self.upload_image {
 							uploadImage(image: thisImage)
@@ -63,8 +63,7 @@ struct ProfileView: View {
 							print("could not upload image - not present")
 						}
 					}){Text("Save")}
-
-				}
+				}.padding(.trailing).padding(.leading)
 
 				Text("Member since " + convertTimestamp(serverTimestamp: curUserVm.date_joined))
 				
