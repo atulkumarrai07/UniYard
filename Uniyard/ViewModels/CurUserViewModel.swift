@@ -42,21 +42,24 @@ class CurUserViewModel: ObservableObject {
 					self.date_joined = document?.get("date_joined") as? Timestamp ?? Timestamp.init()
 					self.notification_preference = document?.get("suggestion_preference") as? Bool ?? true
 					self.user_status = document?.get("user_status") as? Bool ?? true
-				}}
+				}
+      }
 	}
 	
 	func updatePwd(_ newPwd: String){
 		let auth = Auth.auth()
 		let user_id = auth.currentUser?.uid
-		let userRef = database.collection("Users").document(user_id!)
-		userRef.getDocument { (document, err) in
-			if let err = err {
-				print(err.localizedDescription)
-			}
-			else {
-				document?.reference.updateData(["password": newPwd])
-			}
-		}
+    auth.currentUser?.updatePassword(to: newPwd) { error in
+      let userRef = self.database.collection("Users").document(user_id!)
+      userRef.getDocument { (document, err) in
+        if let err = err {
+          print(err.localizedDescription)
+        }
+        else {
+          document?.reference.updateData(["password": newPwd])
+        }
+      }
+    }
 	}
 	
 	func updateLocation(_ newLocation: String){

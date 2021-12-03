@@ -2,7 +2,6 @@
 import FirebaseAuth
 import Foundation
 import FirebaseFirestore
-import FirebaseAuth
 
 class ViewModel: ObservableObject
 {
@@ -22,22 +21,7 @@ class ViewModel: ObservableObject
   
   
   func addUser(user:User){
-    
     database.collection("Users").document(user.id).setData(user.dictionary)
-    
-    //loading users in array
-//    users.append(User(id: "U00001",email: "aaratric@andrew.cmu.edu", password: "aaratrika1234", user_image: "https://..jpg",first_name: "Aaratrika", last_name: "Chakraborty", campus_location: "Pittsburgh", saved_post_list: ["P00002","P00003"], my_post_list: ["P00001"], date_joined: Timestamp.init(), suggestion_preference: "Items", user_status: true))
-//    users.append(User(id: "U00002",email: "atulkr@andrew.cmu.edu", password: "atul1234", user_image: "https://..jpg",first_name: "Atul", last_name: "Rai", campus_location: "Pittsburgh", saved_post_list: ["P00001","P00003"], my_post_list: ["P00002"], date_joined: Timestamp.init(), suggestion_preference: "Apartments", user_status: true))
-//    users.append(User(id: "U00003",email: "mhao@andrew.cmu.edu", password: "mhao1234", user_image: "https://..jpg",first_name: "Iris", last_name: "Hao", campus_location: "Pittsburgh", saved_post_list: ["P00001","P00002","P00004"], my_post_list: ["P00003"], date_joined: Timestamp.init(), suggestion_preference: "Any", user_status: true))
-//    users.append(User(id: "U00004",email: "johndoe@andrew.cmu.edu", password: "john1234", user_image: "https://..jpg", first_name: "John", last_name: "Doe", campus_location: "Pittsburgh", saved_post_list: ["P00002","P00003"], my_post_list: ["P00004"], date_joined: Timestamp.init(), suggestion_preference: "Any", user_status: true))
-    
-    //looping throught the array to push to the Firestore
-//    for user in users{
-//      database.collection("Users").document(user.id).setData(user.dictionary)
-//    }
-    
-    // printing message on completion
-    print("Sample users loaded")
   }
   
   func fetchUser() {
@@ -55,19 +39,13 @@ class ViewModel: ObservableObject
               let campus_location = document.get("campus_location") as? String ?? ""
               let saved_post_list = document.get("saved_post_list") as? [String] ?? []
               let my_post_list = document.get("my_post_list") as? [String] ?? []
-              let date_joined = document.get("date_joined") as? Timestamp ?? Timestamp.init()
+              let date_joined = document.get("date_joined") as? Date ?? Date()
               let suggestion_preference = document.get("suggestion_preference") as? Bool ?? true
               let user_status = document.get("user_status") as? Bool ?? true
               self.users.append(User(id: id, email: email, password: password, user_image: user_image,first_name: first_name, last_name: last_name, campus_location: campus_location, saved_post_list: saved_post_list, my_post_list: my_post_list, date_joined: date_joined, suggestion_preference: suggestion_preference, user_status: user_status))
-//                print("\(document.documentID) => \(document.data())")
             }
-          for user in self.users{
-            print(user)
-          }
-          print("User printed")
         }
     }
-    
   }
   
   // load post in Firestore
