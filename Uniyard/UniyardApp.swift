@@ -83,14 +83,19 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
   }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-      let token = deviceToken.reduce("") {
-        $0 + String(format: "%02x", $1)
-      }
-      print(token)
-
+//      let token = deviceToken.reduce("") {
+//        $0 + String(format: "%02x", $1)
+//      }
+//      print("Another token: [["+token)
+      var readableToken: String = ""
+        for i in 0..<deviceToken.count {
+          readableToken += String(format: "%02.2hhx", deviceToken[i] as CVarArg)
+        }
+        print("Received an APNs device token: \(readableToken)")
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+      print("Oh no!!!!! Failed to register for notifications")
 
     }
 
