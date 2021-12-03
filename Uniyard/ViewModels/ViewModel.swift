@@ -175,11 +175,6 @@ class ViewModel: ObservableObject
               }
               }
 
-//            print("Position 2: " + String(self.itemsWithPostsAvailable.count))
-//          for itemwithPosts in self.itemsWithPostsAvailable{
-//            print(itemwithPosts)
-//          }
-//          print("Items with posts printed")
           }
       }
   }
@@ -275,9 +270,9 @@ class ViewModel: ObservableObject
   {
     self.database.collection("Posts").document(postId).getDocument() { (documentpost, error) in
           if let documentpost = documentpost, documentpost.exists {
-            let last_modified_timestamp = documentpost.get("last_modified_timestamp") as? Date ?? Date()
+            let last_modified_timestamp = Date(timeIntervalSinceReferenceDate: documentpost.get("last_modified_timestamp") as? TimeInterval ?? 0)
             let availability = documentpost.get("Availability") as? String ?? ""
-            let post_creation_date = documentpost.get("post_creation_date") as? Date ?? Date()
+            let post_creation_date = Date(timeIntervalSinceReferenceDate: documentpost.get("post_creation_date") as? TimeInterval ?? 0)
             let post = Post(id: postId, last_modified_timestamp: last_modified_timestamp, Availability: availability, post_creation_date: post_creation_date)
             completion(post)
           } else {
