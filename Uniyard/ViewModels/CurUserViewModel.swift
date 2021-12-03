@@ -3,6 +3,7 @@ import SwiftUI
 import Combine
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseAuth
 
 
 class CurUserViewModel: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
@@ -31,7 +32,7 @@ class CurUserViewModel: NSObject, ObservableObject, UNUserNotificationCenterDele
 
   func notificationAuth(completion: @escaping  (Bool) -> Void)
   {
-    if(notification_on)
+    if(notification_preference)
     {
       UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, _  in
         self.fetchNotificationSettings()
