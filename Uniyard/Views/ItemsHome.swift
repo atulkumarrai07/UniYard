@@ -142,7 +142,9 @@ struct ItemsHome: View {
 			Spacer()
 		}.navigationBarHidden(true)
     .onAppear{
-      itemViewModel.loadItemswithPostsAvailable()
+      if(loginModel.signedIn){
+        itemViewModel.loadItemswithPostsAvailable()
+      }
     }
   }
 }

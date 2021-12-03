@@ -2,7 +2,6 @@
 import FirebaseAuth
 import Foundation
 import FirebaseFirestore
-import FirebaseAuth
 
 class ViewModel: ObservableObject
 {
@@ -20,8 +19,6 @@ class ViewModel: ObservableObject
 
   func addUser(user:User){
     database.collection("Users").document(user.id).setData(user.dictionary)
-    // printing message on completion
-    print("Sample users created")
   }
 
   func fetchUser() {
@@ -40,18 +37,12 @@ class ViewModel: ObservableObject
               let saved_post_list = document.get("saved_post_list") as? [String] ?? []
               let my_post_list = document.get("my_post_list") as? [String] ?? []
               let date_joined = document.get("date_joined") as? Date ?? Date()
-              let suggestion_preference = document.get("suggestion_preference") as? String ?? ""
+              let suggestion_preference = document.get("suggestion_preference") as? Bool ?? true
               let user_status = document.get("user_status") as? Bool ?? true
               self.users.append(User(id: id, email: email, password: password, user_image: user_image,first_name: first_name, last_name: last_name, campus_location: campus_location, saved_post_list: saved_post_list, my_post_list: my_post_list, date_joined: date_joined, suggestion_preference: suggestion_preference, user_status: user_status))
-//                print("\(document.documentID) => \(document.data())")
             }
-          for user in self.users{
-            print(user)
-          }
-          print("User printed")
         }
     }
-
   }
 
   // load post in Firestore

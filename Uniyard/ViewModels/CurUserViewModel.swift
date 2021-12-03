@@ -72,7 +72,8 @@ class CurUserViewModel: NSObject, ObservableObject, UNUserNotificationCenterDele
 					self.date_joined = Date(timeIntervalSinceReferenceDate: document?.get("date_joined") as? TimeInterval ?? 0)
 					self.notification_preference = document?.get("suggestion_preference") as? Bool ?? true
 					self.user_status = document?.get("user_status") as? Bool ?? true
-				}}
+				}
+      }
 	}
 
 	func updatePwd(_ newPwd: String){

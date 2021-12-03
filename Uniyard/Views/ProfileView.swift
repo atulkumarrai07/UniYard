@@ -67,8 +67,8 @@ struct ProfileView: View {
 				}
 
 				Text("Member since " + convertTimestamp(serverTimestamp: curUserVm.date_joined.dateValue() as NSDate))
-
-				ProfileBox(curUserVm: curUserVm)
+				
+        ProfileBox(curUserVm: curUserVm).environmentObject(loginModel)
 			}//vstcak
 		}
 
