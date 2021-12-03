@@ -48,18 +48,18 @@ class CurUserViewModel: ObservableObject {
 	
 	func updatePwd(_ newPwd: String){
 		let auth = Auth.auth()
-		let user_id = auth.currentUser?.uid
-    auth.currentUser?.updatePassword(to: newPwd) { error in
-      let userRef = self.database.collection("Users").document(user_id!)
-      userRef.getDocument { (document, err) in
-        if let err = err {
-          print(err.localizedDescription)
-        }
-        else {
-          document?.reference.updateData(["password": newPwd])
-        }
-      }
-    }
+				let user_id = auth.currentUser?.uid
+				auth.currentUser?.updatePassword(to: newPwd) { result in
+					let userRef = self.database.collection("Users").document(user_id!)
+					userRef.getDocument { (document, err) in
+						if let err = err {
+							print(err.localizedDescription)
+						}
+						else {
+							document?.reference.updateData(["password": newPwd])
+						}
+					}
+				}
 	}
 	
 	func updateLocation(_ newLocation: String){
