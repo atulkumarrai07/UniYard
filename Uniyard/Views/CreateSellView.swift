@@ -1,17 +1,17 @@
 
 import SwiftUI
 import PhotosUI
+import FirebaseStorage
 
 struct CreateSellView: View {
   @Environment(\.presentationMode) var createSellPresentation: Binding<PresentationMode>
   @StateObject var item_vm = ItemsViewModel()
 	
 	@State var photo : [UIImage] = []
+	@State var photoURL : [String] = []
+	@State var photoFullURL : [String] = []
 	@State var showPicker = false
-	@State var any = PHPickerConfiguration()
-	
-//	var columns = Array(repeating: GridItem(.fixed(180), spacing: 8), count: 2)
-  
+
   var conditionList = ["New", "Almost new", "Very good", "Good", "Acceptable"]
   
   var categoryList=["Clothing", "Books", "Computers",
@@ -37,7 +37,6 @@ struct CreateSellView: View {
             Button(action: {
 							UIApplication.shared.endEditing()
               self.createSellPresentation.wrappedValue.dismiss()
-							
             }){
               Image(systemName: "chevron.backward").resizable()
                 .frame(width: 15, height: 20, alignment: .center)
@@ -50,30 +49,31 @@ struct CreateSellView: View {
 						
 						//show photo album
 						Button(action: {
+							self.photo.removeAll()
 							self.showPicker.toggle()
-							self.any.filter = .images
-						}){
-							Image(systemName: "camera.fill")
-								.frame(width: 25, height: 20, alignment: .center)
+						}){Image(systemName: "camera.fill").resizable()
+								.frame(width: 30, height: 25, alignment: .center)
 								.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
 						}
 									 
-          }.padding()//Hstack
+					}.padding(.leading).padding(.trailing )//Hstack
   
           // sell item images
-          TabView {
-						ForEach(photo, id: \.self) {pho in
-							Image(uiImage: pho)
-                .resizable()
-                .scaledToFit()
-                .cornerRadius(5)
-                .frame(height: 150)
-             }
-            }
-          .frame(width: 300, height: 200, alignment: .center)
-          .tabViewStyle(PageTabViewStyle())
-          .cornerRadius(54.0).padding(.bottom)
-          
+					if (photo.count > 0){
+						TabView {
+							ForEach(photo, id: \.self) {pho in
+								Image(uiImage: pho)
+									.resizable()
+									.scaledToFit()
+									.cornerRadius(5)
+									.frame(width: UIScreen.main.bounds.width - 45, height: 250, alignment: .center)
+							 }
+							}
+						.frame(width: 300, height: 200, alignment: .center)
+						.tabViewStyle(PageTabViewStyle())
+						.cornerRadius(54.0)
+					}
+         
           //post details
           Form {
             Section(header: Text("Title")) {
@@ -132,7 +132,11 @@ struct CreateSellView: View {
           .padding(.leading, 20)
           .padding(.trailing, 20)
           
-          Button(action: {item_vm.createSellPost();
+          Button(action: {
+						print("-------------")
+						self.uploadImages(photo, photoURL)
+						print(photoURL)
+						item_vm.createSellPost(imageUrls: self.photoURL);
           }
           , label: {
             Text("Post")
@@ -157,16 +161,45 @@ struct CreateSellView: View {
           
         }.onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
 				.sheet(isPresented: self.$showPicker){
-					MultiImagePicker(photos: self.$photo, showPicker: self.$showPicker)
+					MultiImagePicker(photos: self.$photo, photosURL: self.$photoURL, showPicker: self.$showPicker)
 				}
       }.navigationBarHidden(true)
   }
-  
+	
+	func uploadImages(_ images: [UIImage], _ imagesURL: [String]){
+		if (!images.isEmpty) {
+			for (index, image) in images.enumerated() {
+				if let imageData = image.jpegData(compressionQuality: 0.5){
+					let storage = Storage.storage()
+					let ref = storage.reference(withPath: imagesURL[index])
+					ref.putData(imageData, metadata: nil){
+						(data, err) in
+						if let err = err {
+							print("an error has occured - \(err.localizedDescription)")
+							return
+						} else{
+							ref.downloadURL { url, err in
+								if let err = err {
+									print("Fail to retrive image url - \(err.localizedDescription)")
+									return
+								}
+								print("\(index): succeed in getting image url!")
+								self.photoFullURL.append(url?.absoluteString ?? "")
+								print(url?.absoluteString ?? "")
+							}
+						}
+					}
+				} else{
+					print("couldn't unwrap/cast image to data")
+				}
+			}
+		}
+	}
 }
 
 struct CreateSellView_Previews: PreviewProvider {
   static var previews: some View {
-    CreateSellView()
+		CreateSellView()
   }
 
 }
