@@ -4,6 +4,7 @@ import SwiftUI
 
 struct UniYardHomepage: View {
   @EnvironmentObject var loginModel:LoginModel
+  
     var body: some View {
       NavigationView{
           VStack{

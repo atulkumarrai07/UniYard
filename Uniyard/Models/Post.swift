@@ -5,9 +5,9 @@ import FirebaseFirestoreSwift
 
 struct Post: Identifiable, Codable {
   var id:String = UUID().uuidString
-  var last_modified_timestamp:Timestamp
+  var last_modified_timestamp:Date
   var Availability:String
-  var post_creation_date:Timestamp
+  var post_creation_date:Date
   
   enum CodingKeys: String, CodingKey {
     case last_modified_timestamp

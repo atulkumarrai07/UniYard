@@ -6,11 +6,9 @@ import FirebaseAuth
 class LoginModel: ObservableObject {
 	@Published var email = ""
 	@Published var password = ""
-	
 	@Published var isEmailValid = false
 	@Published var isPasswordValid = false
 	@Published var canSubmit = false
-	
 	@Published var signedIn = false
 	
 	var auth = Auth.auth()

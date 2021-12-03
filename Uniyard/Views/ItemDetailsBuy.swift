@@ -122,7 +122,7 @@ struct CardDetailsBuy: View {
 }
 struct ItemDetailsBuy_Previews: PreviewProvider {
   static var previews: some View {
-    let item:PostItem = PostItem(postId: "", last_modified_timestamp: Timestamp.init(), Availability: "", post_creation_date: Timestamp.init(), itemId: "", item_title: "", item_description: "", item_category: "", item_buy: false, condition: "", price: 0.0, images: [], zip_code: "", delivery: false, pickup_location: "", isSaved:false)
+    let item:PostItem = PostItem(postId: "", last_modified_timestamp: Date(), Availability: "", post_creation_date: Date(), itemId: "", item_title: "", item_description: "", item_category: "", item_buy: false, condition: "", price: 0.0, images: [], zip_code: "", delivery: false, pickup_location: "", isSaved:false)
     ItemDetailsBuy(itemDetails: item)
   }
 }

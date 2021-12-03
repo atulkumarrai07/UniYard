@@ -8,11 +8,11 @@ import SDWebImageSwiftUI
 struct ProfileView: View {
 	@EnvironmentObject var loginModel:LoginModel
 	@Environment(\.presentationMode) var profilePresentation: Binding< PresentationMode>
-	
+
 	@StateObject var curUserVm: CurUserViewModel
 	@State var shouldShowImagePicker = false
 	@State var upload_image: UIImage?
-	
+
 	var body: some View {
 		//		NavigationView {
 		ZStack{
@@ -24,7 +24,7 @@ struct ProfileView: View {
 						.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
 						.frame(maxWidth: .infinity, alignment: .center)
 				}.padding()
-				
+
 				VStack {//User profile image
 					if let image = self.upload_image {
 						Image(uiImage: image)
@@ -47,7 +47,7 @@ struct ProfileView: View {
 						}
 					}
 				}.overlay(RoundedRectangle(cornerRadius: 64).stroke(Color.gray, lineWidth: 0))
-				
+
 				HStack{
 					Button(action: {
 						shouldShowImagePicker.toggle()
@@ -55,7 +55,7 @@ struct ProfileView: View {
 					}.sheet(isPresented: $shouldShowImagePicker) {
 						ImagePicker(image: $upload_image)
 					}
-					
+
 					Button(action: {
 						if let thisImage = self.upload_image {
 							uploadImage(image: thisImage)
@@ -63,19 +63,19 @@ struct ProfileView: View {
 							print("could not upload image - not present")
 						}
 					}){Text("Save")}
-					
+
 				}
-				
+
 				Text("Member since " + convertTimestamp(serverTimestamp: curUserVm.date_joined.dateValue() as NSDate))
 				
         ProfileBox(curUserVm: curUserVm).environmentObject(loginModel)
 			}//vstcak
 		}
-		
+
 		.navigationBarHidden(true)
 	}
-	
-	
+
+
 	func uploadImage(image: UIImage){
 		if let imageData = image.jpegData(compressionQuality: 0.5){
 			let storage = Storage.storage()
@@ -116,7 +116,7 @@ struct ProfileBox: View {
 							.frame(width: 40)
 							.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
 							.font(.system(size: 30))
-						
+
 						Text(profileLinkNames[0]).font(.title3)
 						Spacer() // Spread the Text and Image apart
 						Image(systemName: "chevron.right")
@@ -127,7 +127,7 @@ struct ProfileBox: View {
 					Divider()
 				}
 			}.buttonStyle(PlainButtonStyle())
-			
+
 			//MyPosts
 			NavigationLink(destination: MyPostView()){
 				VStack(spacing: 0) {
@@ -137,7 +137,7 @@ struct ProfileBox: View {
 							.frame(width: 40)
 							.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
 							.font(.system(size: 30))
-						
+
 						Text(profileLinkNames[1]).font(.title3)
 						Spacer() // Spread the Text and Image apart
 						Image(systemName: "chevron.right")
@@ -148,7 +148,7 @@ struct ProfileBox: View {
 					Divider()
 				}
 			}.buttonStyle(PlainButtonStyle())
-			
+
 			//Settings
 			NavigationLink(destination: SettingsView(curUserViewModel: curUserVm)){
 				VStack(spacing: 0) {
@@ -158,7 +158,7 @@ struct ProfileBox: View {
 							.frame(width: 40)
 							.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
 							.font(.system(size: 30))
-						
+
 						Text(profileLinkNames[2]).font(.title3)
 						Spacer() // Spread the Text and Image apart
 						Image(systemName: "chevron.right")
@@ -169,9 +169,9 @@ struct ProfileBox: View {
 					Divider()
 				}
 			}.buttonStyle(PlainButtonStyle())
-			
+
 			Spacer()
-			
+
 			//Sign out button
 			Button(action: {
 				loginModel.signOut()
@@ -190,16 +190,16 @@ struct ProfileBox: View {
 			.padding(.horizontal, 50)
 		}
 		.background(Color(.systemBackground))
-		
+
 	}
 }
 
-func convertTimestamp(serverTimestamp: NSDate) -> String {
+func convertTimestamp(serverTimestamp: Date) -> String {
 	//	let x = serverTimestamp
 	let date = serverTimestamp
 	let formatter = DateFormatter()
 	formatter.dateStyle = .medium
 	formatter.timeStyle = .none
-	
+
 	return formatter.string(from: date as Date)
 }
