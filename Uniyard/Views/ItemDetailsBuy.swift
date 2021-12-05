@@ -8,7 +8,7 @@ struct ItemDetailsBuy: View {
   @Environment(\.presentationMode) var itemDetailsBuyPresentation: Binding<PresentationMode>
   var body: some View {
     ZStack{
-      Color(red:237/255.0, green: 213/255.0, blue: 213/255.0, opacity: 1.0).ignoresSafeArea(.all)
+			Color(red:237/255.0, green: 213/255.0, blue: 213/255.0, opacity: 1.0).ignoresSafeArea(.all)
       VStack{
         HStack {
           Button(action: {

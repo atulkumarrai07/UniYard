@@ -17,7 +17,7 @@ struct ItemsHome: View {
 				HStack{
 					TextField("Search something here...", text: $itemViewModel.searchString).padding(10)
 				}.padding(.leading,40)
-				.background(Color(red: 255/255.0, green: 192/255.0, blue: 190/255.0))
+				.background(Color(red:237/255.0, green: 213/255.0, blue: 213/255.0, opacity: 1.0))
 				.cornerRadius(10.0)
 				.padding(.horizontal)
 				.onChange(of: itemViewModel.searchString, perform: {_ in
