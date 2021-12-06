@@ -83,7 +83,6 @@
 		E2C467B92756E1DD00350B65 /* FirebaseDatabaseSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = E2C467B82756E1DD00350B65 /* FirebaseDatabaseSwift-Beta */; };
 		E2C467BB2756E1DD00350B65 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = E2C467BA2756E1DD00350B65 /* FirebaseCrashlytics */; };
 		E2E6664B2745A6D10030E5C5 /* PersonalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6664A2745A6D10030E5C5 /* PersonalView.swift */; };
-		E2E6664D2745ABCC0030E5C5 /* MyPostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6664C2745ABCC0030E5C5 /* MyPostsView.swift */; };
 		E2E6664F2745AC1C0030E5C5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6664E2745AC1C0030E5C5 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -171,7 +170,6 @@
 		E28BB7B3274AF76000F06E49 /* CurUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurUserViewModel.swift; sourceTree = "<group>"; };
 		E2C467972756B32100350B65 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		E2E6664A2745A6D10030E5C5 /* PersonalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalView.swift; sourceTree = "<group>"; };
-		E2E6664C2745ABCC0030E5C5 /* MyPostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsView.swift; sourceTree = "<group>"; };
 		E2E6664E2745AC1C0030E5C5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -315,7 +313,6 @@
 				0BF72E122730988A0013DCC2 /* NotificationView.swift */,
 				0BF72E14273098A20013DCC2 /* ProfileView.swift */,
 				E2E6664A2745A6D10030E5C5 /* PersonalView.swift */,
-				E2E6664C2745ABCC0030E5C5 /* MyPostsView.swift */,
 				E2E6664E2745AC1C0030E5C5 /* SettingsView.swift */,
 				0BF72E0A273097C30013DCC2 /* ItemDetailsSell.swift */,
 				0B0565C12755BF8B00EF0807 /* ItemDetailsBuy.swift */,
@@ -551,7 +548,6 @@
 				BF9C2806273583B000E3231C /* SellFilterView.swift in Sources */,
 				E2E6664B2745A6D10030E5C5 /* PersonalView.swift in Sources */,
 				BF9C27FE27346C9000E3231C /* SearchSellListings.swift in Sources */,
-				E2E6664D2745ABCC0030E5C5 /* MyPostsView.swift in Sources */,
 				0B45523C2725B606009BA1E0 /* Notification_Sequence.swift in Sources */,
 				BF23DB362728DC6E00410436 /* CampusLocationPicker.swift in Sources */,
 				0B7E7CD42717D006004DB7AC /* ContentView.swift in Sources */,

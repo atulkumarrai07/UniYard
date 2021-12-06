@@ -1,15 +1,17 @@
 import SwiftUI
 import Foundation
 import FirebaseFirestore
+import SDWebImageSwiftUI
 
 struct ItemDetailsSell: View {
 	var itemDetails: PostItem
 	@StateObject var itemDetailViewModel = ItemDetailViewModel()
+	
+	
 	@Environment(\.presentationMode) var itemDetailsSellPresentation: Binding<PresentationMode>
 	var body: some View {
 	 ZStack{
-		Color(red: 214/255.0, green: 158/255.0, blue: 158/255.0, opacity: 1.0)
-		 .ignoresSafeArea(.all)
+		Color(red:237/255.0, green: 213/255.0, blue: 213/255.0, opacity: 1.0).ignoresSafeArea(.all)
 		VStack{
 		HStack {
 			 Button(action: {
@@ -24,7 +26,8 @@ struct ItemDetailsSell: View {
 			 .fontWeight(.heavy)
 			 .frame(maxWidth: .infinity, alignment: .center).padding(.leading,-20)
 			}
-		 ItemDetails()
+			
+			ItemDetails(itemDetails: itemDetails)//item images
 			CardDetails(itemDetails: itemDetails, itemdetailvmodel: itemDetailViewModel)
 
 	 }.onAppear(){
@@ -34,22 +37,26 @@ struct ItemDetailsSell: View {
  }
 }
 struct ItemDetails: View {
- var body: some View {
-	TabView {
-		 ForEach(0 ..< 5) {_ in
-			Image(uiImage: #imageLiteral(resourceName: "Login_logo"))
-				.resizable()
-				.scaledToFit()
-				.cornerRadius(5)
-				.frame(height: 200)
-		 }
-		}
-	.frame(width: 300, height: 200, alignment: .center)
-	.tabViewStyle(PageTabViewStyle())
-	.cornerRadius(54.0).padding(.bottom)
+	@State var itemDetails: PostItem
 	
+ var body: some View {
+	if (itemDetails.images.count > 0){
+		TabView {
+			ForEach(itemDetails.images, id: \.self) {pho in
+				WebImage(url: URL(string: pho))
+					.resizable()
+					.scaledToFit()
+					.cornerRadius(5)
+					.frame(height: 250, alignment: .center)
+			}
+		}
+		.frame(width: 300, height: 200, alignment: .center)
+		.tabViewStyle(PageTabViewStyle())
+		.cornerRadius(54.0)
+	}
  }
 }
+
 struct CardDetails: View {
 	@State var itemDetails: PostItem
 	@StateObject var itemdetailvmodel:ItemDetailViewModel
