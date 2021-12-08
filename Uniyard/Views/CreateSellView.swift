@@ -192,6 +192,9 @@ struct CreateSellView: View {
 				}
 			}
 		}//if !images.isEmpty
+		else{
+			item_vm.createSellPost(imageFullUrls: [])
+		}
 	}
 	
 	
