@@ -8,7 +8,7 @@ struct ItemDetailsBuy: View {
   @Environment(\.presentationMode) var itemDetailsBuyPresentation: Binding<PresentationMode>
   var body: some View {
     ZStack{
-      Color(red:237/255.0, green: 213/255.0, blue: 213/255.0, opacity: 1.0).ignoresSafeArea(.all)
+			Color(red:237/255.0, green: 213/255.0, blue: 213/255.0, opacity: 1.0).ignoresSafeArea(.all)
       VStack{
         HStack {
           Button(action: {
@@ -66,7 +66,7 @@ struct CardDetailsBuy: View {
           HStack{
             Text("$" +  String(itemDetails.price)).font(.title2).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).bold()
               .frame(width:104,alignment: .leading)
-            Text("List Date: 2019-09-31").font(.subheadline).foregroundColor(.gray).frame(width:220,alignment: .trailing)
+						Text("List Date: \(convertTimestamp(serverTimestamp: itemDetails.last_modified_timestamp))").font(.subheadline).foregroundColor(.gray).frame(width:220,alignment: .trailing)
           }
           
           Group{

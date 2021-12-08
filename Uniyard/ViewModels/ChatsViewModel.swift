@@ -56,7 +56,6 @@ class ChatsViewModel: ObservableObject {
       }
     }
     res.append(tmp)
-//    print(res)
     return res
   }
   

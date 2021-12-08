@@ -6,99 +6,99 @@ import FirebaseStorage
 import SDWebImageSwiftUI
 
 struct ProfileView: View {
-  @EnvironmentObject var loginModel:LoginModel
-  @Environment(\.presentationMode) var profilePresentation: Binding< PresentationMode>
+	@EnvironmentObject var loginModel:LoginModel
+	@Environment(\.presentationMode) var profilePresentation: Binding< PresentationMode>
 
-  @StateObject var curUserVm: CurUserViewModel
-  @State var shouldShowImagePicker = false
-  @State var upload_image: UIImage?
+	@StateObject var curUserVm: CurUserViewModel
+	@State var shouldShowImagePicker = false
+	@State var upload_image: UIImage?
 
-  var body: some View {
-    //    NavigationView {
-    ZStack{
-      Color(red:237/255.0, green: 213/255.0, blue: 213/255.0, opacity: 1.0).ignoresSafeArea(.all)
-      VStack{
-        HStack {
-          Text(curUserVm.first_name)
-            .font(.largeTitle).fontWeight(.heavy)
-            .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-            .frame(maxWidth: .infinity, alignment: .center)
-        }.padding()
+	var body: some View {
+		//		NavigationView {
+		ZStack{
+			Color(red:237/255.0, green: 213/255.0, blue: 213/255.0, opacity: 1.0).ignoresSafeArea(.all)
+			VStack{
+				HStack {
+					Text(curUserVm.first_name)
+						.font(.largeTitle).fontWeight(.heavy)
+						.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
+						.frame(maxWidth: .infinity, alignment: .center)
+				}.padding()
 
-        VStack {//User profile image
-          if let image = self.upload_image {
-            Image(uiImage: image)
-              .resizable()
-              .scaledToFill()
-              .frame(width: 128, height: 128)
-              .cornerRadius(64)
-          } else {
-            if (curUserVm.user_image != ""){
-              WebImage(url: URL(string: curUserVm.user_image))
-                .resizable()
-                .scaledToFill()
-                .frame(width: 128, height: 128)
-                .cornerRadius(64)
-            } else{
-              Image(systemName: "person.fill")
-                .font(.system(size: 64))
-                .padding()
-                .foregroundColor(Color(.label))
-            }
-          }
-        }.overlay(RoundedRectangle(cornerRadius: 64).stroke(Color.gray, lineWidth: 0))
+				VStack {//User profile image
+					if let image = self.upload_image {
+						Image(uiImage: image)
+							.resizable()
+							.scaledToFill()
+							.frame(width: 128, height: 128)
+							.cornerRadius(64)
+					} else {
+						if (curUserVm.user_image != ""){
+							WebImage(url: URL(string: curUserVm.user_image))
+								.resizable()
+								.scaledToFill()
+								.frame(width: 128, height: 128)
+								.cornerRadius(64)
+						} else{
+							Image(systemName: "person.fill")
+								.font(.system(size: 64))
+								.padding()
+								.foregroundColor(Color(.label))
+						}
+					}
+				}.overlay(RoundedRectangle(cornerRadius: 64).stroke(Color.gray, lineWidth: 0))
 
-        HStack{
-          Button(action: {
-            shouldShowImagePicker.toggle()
-          }){Text("Edit Image")
-          }.sheet(isPresented: $shouldShowImagePicker) {
-            ImagePicker(image: $upload_image)
-          }
-          
-          Button(action: {
-            if let thisImage = self.upload_image {
-              uploadImage(image: thisImage)
-            } else{
-              print("could not upload image - not present")
-            }
-          }){Text("Save")}
-        }.padding(.trailing).padding(.leading)
+				HStack{
+					Button(action: {
+						shouldShowImagePicker.toggle()
+					}){Text("Edit Image")
+					}.sheet(isPresented: $shouldShowImagePicker) {
+						ImagePicker(image: $upload_image)
+					}
 
-        Text("Member since " + convertTimestamp(serverTimestamp: curUserVm.date_joined))
-        
+					Button(action: {
+						if let thisImage = self.upload_image {
+							uploadImage(image: thisImage)
+						} else{
+							print("could not upload image - not present")
+						}
+					}){Text("Save")}
+				}.padding(.trailing).padding(.leading)
+
+				Text("Member since " + convertTimestamp(serverTimestamp: curUserVm.date_joined))
+
         ProfileBox(curUserVm: curUserVm).environmentObject(loginModel)
-      }//vstcak
-    }
+			}//vstcak
+		}
 
-    .navigationBarHidden(true)
-  }
+		.navigationBarHidden(true)
+	}
 
 
-  func uploadImage(image: UIImage){
-    if let imageData = image.jpegData(compressionQuality: 0.5){
-      let storage = Storage.storage()
-      let ref = storage.reference(withPath: curUserVm.user_id + ".jpg")
-      ref.putData(imageData, metadata: nil){
-        (data, err) in
-        if let err = err {
-          print("an error has occured - \(err.localizedDescription)")
-          return
-        } else{
-          ref.downloadURL { url, err in
-            if let err = err {
-              print("Fail to retrive image url - \(err.localizedDescription)")
-              return
-            }
-            print("Succeed in getting image url!")
-            curUserVm.updateUserImage(url?.absoluteString ?? "")
-          }
-        }
-      }
-    } else{
-      print("couldn't unwrap/cast image to data")
-    }
-  }
+	func uploadImage(image: UIImage){
+		if let imageData = image.jpegData(compressionQuality: 0.5){
+			let storage = Storage.storage()
+			let ref = storage.reference(withPath: curUserVm.user_id + ".jpg")
+			ref.putData(imageData, metadata: nil){
+				(data, err) in
+				if let err = err {
+					print("an error has occured - \(err.localizedDescription)")
+					return
+				} else{
+					ref.downloadURL { url, err in
+						if let err = err {
+							print("Fail to retrive image url - \(err.localizedDescription)")
+							return
+						}
+						print("Succeed in getting image url!")
+						curUserVm.updateUserImage(url?.absoluteString ?? "")
+					}
+				}
+			}
+		} else{
+			print("couldn't unwrap/cast image to data")
+		}
+	}
 }
 
 struct ProfileBox: View {

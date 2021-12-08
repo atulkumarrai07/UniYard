@@ -2,24 +2,11 @@ import SwiftUI
 
 struct ItemsHome: View {
   @StateObject var itemViewModel: ItemsViewModel
-	//aaratrika
-	//  @State var searchField: String = ""
-	//  @State var displayedRepos = [PostItem]()
-	
-	//----aaratrika
-	
 	@EnvironmentObject var loginModel:LoginModel
-//	@StateObject var itemViewModel = ItemsViewModel()
+
 	var body: some View {
     
 		VStack{
-			//        HStack {
-			//          Button(action: {
-			//            self.ItemHomePresentation.wrappedValue.dismiss()
-			//          }){
-			//            Image(systemName: "chevron.backward").resizable().frame(width: 20, height: 30, alignment: .center).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-			//          }
-			
 			Text("Items")
 				.font(.largeTitle)
 				.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
@@ -30,15 +17,9 @@ struct ItemsHome: View {
 				HStack{
 					TextField("Search something here...", text: $itemViewModel.searchString).padding(10)
 				}.padding(.leading,40)
-				.background(Color(red: 255/255.0, green: 192/255.0, blue: 190/255.0))
+				.background(Color(red:237/255.0, green: 213/255.0, blue: 213/255.0, opacity: 1.0))
 				.cornerRadius(10.0)
 				.padding(.horizontal)
-				//          .onTapGesture {
-				//            itemViewModel.isSearching = true
-				//            print(itemViewModel.searchString)
-				//            itemViewModel.search(searchString: itemViewModel.searchString)
-				//
-				//          }
 				.onChange(of: itemViewModel.searchString, perform: {_ in
 					itemViewModel.isSearching = true
           if(itemViewModel.renderSell)
@@ -65,14 +46,6 @@ struct ItemsHome: View {
 					}.padding(.horizontal,30)
 				)
 			}
-			
-			//aaratrika
-			//          Button(action: {
-			//
-			//          }){
-			//            Image(systemName: "magnifyingglass").resizable().frame(width: 30, height: 30, alignment: .leading).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-			//          }
-			//        }.padding()
 			
 			HStack{
 				Button("Sell", action: {
@@ -130,26 +103,16 @@ struct ItemsHome: View {
 				SellListings(itemViewModel: itemViewModel)
 			}
 			else if(itemViewModel.renderSell && itemViewModel.searchString != "")
-			{
-				SearchSellListings(itemViewModel: itemViewModel)
-			}
+			{SearchSellListings(itemViewModel: itemViewModel)}
 			else if(!itemViewModel.renderSell && itemViewModel.searchString == ""){
 				BuyListings(itemViewModel: itemViewModel)
 			}
-			else{
-				SearchBuyListings(itemViewModel: itemViewModel)
-			}
+			else{SearchBuyListings(itemViewModel: itemViewModel)}
 			Spacer()
 		}.navigationBarHidden(true)
     .onAppear{
-      itemViewModel.loadItemswithPostsAvailable()
+      if(loginModel.signedIn){itemViewModel.loadItemswithPostsAvailable()}
     }
   }
 }
 
-//struct ItemsHome_Previews: PreviewProvider {
-//	static var previews: some View {
-//		ItemsHome()
-//		
-//	}
-//}

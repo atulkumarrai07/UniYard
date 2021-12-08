@@ -2,6 +2,7 @@
 import SwiftUI
 import FirebaseFirestore
 import SDWebImageSwiftUI
+import FirebaseAuth
 
 struct ChatView: View {
   
@@ -64,6 +65,23 @@ struct ChatView: View {
       }.padding(.top, 1) //VStack
       .onAppear{
         chatsViewModel.markAsRead(false, chat: chat)
+        let viewModel = ViewModel()
+        let auth = Auth.auth()
+        viewModel.fetchChats(currentUserID: auth.currentUser!.uid){results in
+          let chats = results
+          if(chats.filter({existingChat in return existingChat.id == chat.id}).count > 0){
+            let indexOfCurrentChat = chats.firstIndex(where: { $0.id == chat.id })
+            self.chat.messages = chats[indexOfCurrentChat!].messages
+            messageIdToScroll = self.chat.messages.last?.id
+          }
+        }
+//        viewModel.fetchMessagesForChatView(chatId: chat.id){messages in
+//          chat.messages = messages
+//        }
+        
+//        chatsViewModel.refreshChats()
+//        let index = chatsViewModel.chats.firstIndex(where: { $0.id == chat.id })
+//        chat = chatsViewModel.chats[index!]
       }
     }
   
@@ -107,7 +125,7 @@ struct ChatView: View {
     chatsViewModel.sendMessage(text, in: chat){message in
       text = ""
       let indexCheck = chatsViewModel.chats.firstIndex(where: {$0.id == chat.id})
-      print(chatsViewModel.chats[indexCheck!])
+//      print(chatsViewModel.chats[indexCheck!])
       self.chat = chatsViewModel.chats[indexCheck!]
       messageIdToScroll = message.id
     }

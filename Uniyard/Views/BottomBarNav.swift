@@ -30,13 +30,13 @@ struct BottomBarNav: View {
       .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
       Text("Saved Posts")
      }.tag(2)
-    NotificationView()
-     .tabItem {
-      Image(systemName: "bell.fill")
-      .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-      Text("Notifications")
-     }.tag(3)
-		ProfileView(curUserVm: curUserVm)
+//    NotificationView()
+//     .tabItem {
+//      Image(systemName: "bell.fill")
+//      .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
+//      Text("Notifications")
+//     }.tag(3)
+    ProfileView(curUserVm: curUserVm).environmentObject(loginModel)
      .tabItem {
       Image(systemName: "person.circle.fill")
       .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
