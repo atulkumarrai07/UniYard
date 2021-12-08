@@ -3,35 +3,36 @@ import SwiftUI
 import Combine
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseAuth
 
 
 class CurUserViewModel: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
-	private let database = Firestore.firestore()
+  private let database = Firestore.firestore()
 
-	@Published var user_id = ""
-	@Published var email = ""
-	@Published var password = ""
-	@Published var user_image = ""
-	@Published var first_name = ""
-	@Published var last_name = ""
-	@Published var campus_location = ""
-	@Published var saved_post_list = []
-	@Published var my_post_list = []
-	@Published var date_joined = Date()
-	@Published var suggestion_preference = ""
-	@Published var user_status = true
-	@Published var notification_preference = true
+  @Published var user_id = ""
+  @Published var email = ""
+  @Published var password = ""
+  @Published var user_image = ""
+  @Published var first_name = ""
+  @Published var last_name = ""
+  @Published var campus_location = ""
+  @Published var saved_post_list = []
+  @Published var my_post_list = []
+  @Published var date_joined = Date()
+  @Published var suggestion_preference = ""
+  @Published var user_status = true
+  @Published var notification_preference = true
 
   @Published var settings: UNNotificationSettings?
 
   override init() {
     super.init()
-		getUserDetails()
-	}
+    getUserDetails()
+  }
 
   func notificationAuth(completion: @escaping  (Bool) -> Void)
   {
-    if(notification_on)
+    if(notification_preference)
     {
       UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, _  in
         self.fetchNotificationSettings()
@@ -50,88 +51,89 @@ class CurUserViewModel: NSObject, ObservableObject, UNUserNotificationCenterDele
     }
   }
 
-	func getUserDetails(){
-			let auth = Auth.auth()
-			let user_id = auth.currentUser?.uid
-			let userRef = database.collection("Users").document(user_id!)
+  func getUserDetails(){
+      let auth = Auth.auth()
+      let user_id = auth.currentUser?.uid
+      let userRef = database.collection("Users").document(user_id!)
 
-			userRef.getDocument { (document, error) in
-				if let err = error {
-					print(err.localizedDescription)
-				}
-				else{
-					self.user_id = user_id ?? ""
-					self.email = document?.get("email") as? String ?? ""
-					self.password = document?.get("password") as? String ?? ""
-					self.first_name = document?.get("first_name") as? String ?? ""
-					self.last_name = document?.get("last_name") as? String ?? ""
-					self.user_image = document?.get("user_image") as? String ?? ""
-					self.campus_location = document?.get("campus_location") as? String ?? ""
-					self.saved_post_list = document?.get("saved_post_list") as? [String] ?? []
-					self.my_post_list = document?.get("my_post_list") as? [String] ?? []
-					self.date_joined = Date(timeIntervalSinceReferenceDate: document?.get("date_joined") as? TimeInterval ?? 0)
-					self.notification_preference = document?.get("suggestion_preference") as? Bool ?? true
-					self.user_status = document?.get("user_status") as? Bool ?? true
-				}}
-	}
+      userRef.getDocument { (document, error) in
+        if let err = error {
+          print(err.localizedDescription)
+        }
+        else{
+          self.user_id = user_id ?? ""
+          self.email = document?.get("email") as? String ?? ""
+          self.password = document?.get("password") as? String ?? ""
+          self.first_name = document?.get("first_name") as? String ?? ""
+          self.last_name = document?.get("last_name") as? String ?? ""
+          self.user_image = document?.get("user_image") as? String ?? ""
+          self.campus_location = document?.get("campus_location") as? String ?? ""
+          self.saved_post_list = document?.get("saved_post_list") as? [String] ?? []
+          self.my_post_list = document?.get("my_post_list") as? [String] ?? []
+          self.date_joined = Date(timeIntervalSinceReferenceDate: document?.get("date_joined") as? TimeInterval ?? 0)
+          self.notification_preference = document?.get("suggestion_preference") as? Bool ?? true
+          self.user_status = document?.get("user_status") as? Bool ?? true
+        }
+      }
+  }
 
-	func updatePwd(_ newPwd: String){
-		let auth = Auth.auth()
-				let user_id = auth.currentUser?.uid
-				auth.currentUser?.updatePassword(to: newPwd) { result in
-					let userRef = self.database.collection("Users").document(user_id!)
-					userRef.getDocument { (document, err) in
-						if let err = err {
-							print(err.localizedDescription)
-						}
-						else {
-							document?.reference.updateData(["password": newPwd])
-						}
-					}
-				}
-	}
+  func updatePwd(_ newPwd: String){
+    let auth = Auth.auth()
+        let user_id = auth.currentUser?.uid
+        auth.currentUser?.updatePassword(to: newPwd) { result in
+          let userRef = self.database.collection("Users").document(user_id!)
+          userRef.getDocument { (document, err) in
+            if let err = err {
+              print(err.localizedDescription)
+            }
+            else {
+              document?.reference.updateData(["password": newPwd])
+            }
+          }
+        }
+  }
 
-	func updateLocation(_ newLocation: String){
-		let auth = Auth.auth()
-		let user_id = auth.currentUser?.uid
-		let userRef = database.collection("Users").document(user_id!)
-		userRef.getDocument { (document, err) in
-			if let err = err {
-				print(err.localizedDescription)
-			}
-			else {
-				document?.reference.updateData(["campus_location": newLocation])
-			}
-		}
-	}
+  func updateLocation(_ newLocation: String){
+    let auth = Auth.auth()
+    let user_id = auth.currentUser?.uid
+    let userRef = database.collection("Users").document(user_id!)
+    userRef.getDocument { (document, err) in
+      if let err = err {
+        print(err.localizedDescription)
+      }
+      else {
+        document?.reference.updateData(["campus_location": newLocation])
+      }
+    }
+  }
 
-	func updateUserImage(_ newImage: String){
-		let auth = Auth.auth()
-		let user_id = auth.currentUser?.uid
-		let userRef = database.collection("Users").document(user_id!)
-		userRef.getDocument { (document, err) in
-			if let err = err {
-				print(err.localizedDescription)
-			}
-			else {
-				document?.reference.updateData(["user_image": newImage])
-			}
-		}
-	}
+  func updateUserImage(_ newImage: String){
+    let auth = Auth.auth()
+    let user_id = auth.currentUser?.uid
+    let userRef = database.collection("Users").document(user_id!)
+    userRef.getDocument { (document, err) in
+      if let err = err {
+        print(err.localizedDescription)
+      }
+      else {
+        document?.reference.updateData(["user_image": newImage])
+      }
+    }
+  }
 
-	func updateNotification(_ newNotification: Bool){
-		let auth = Auth.auth()
-		let user_id = auth.currentUser?.uid
-		let userRef = database.collection("Users").document(user_id!)
-		userRef.getDocument { (document, err) in
-			if let err = err {
-				print(err.localizedDescription)
-			}
-			else {
-				document?.reference.updateData(["suggestion_preference": newNotification])
-			}
-		}
-	}
+  func updateNotification(_ newNotification: Bool){
+    let auth = Auth.auth()
+    let user_id = auth.currentUser?.uid
+    let userRef = database.collection("Users").document(user_id!)
+    userRef.getDocument { (document, err) in
+      if let err = err {
+        print(err.localizedDescription)
+      }
+      else {
+        document?.reference.updateData(["suggestion_preference": newNotification])
+      }
+    }
+  }
 
   func convertTimestamp(serverTimestamp: Date) -> String {
   //  let x = serverTimestamp
