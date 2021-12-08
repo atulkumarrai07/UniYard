@@ -1,4 +1,5 @@
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct SearchSellListings: View {
   @StateObject var itemViewModel:ItemsViewModel
@@ -20,9 +21,16 @@ struct SearchSellListings: View {
               destination: ItemDetailsSell(itemDetails: itemPostAvailable),
               label: {
                 HStack{
-                  VStack{
-                    Image("Login_logo").resizable().frame(width: 100, height: 100, alignment: .center)
-                  }.offset(CGSize(width: 7.0, height: 0))
+									VStack{
+										if (itemPostAvailable.images.count > 0){
+											WebImage(url: URL(string: itemPostAvailable.images[0]))
+												.resizable().frame(width: 100, height: 100, alignment: .center)
+												.cornerRadius(10)
+										} else{
+											Image("Login_logo").resizable().frame(width: 100, height: 100, alignment: .center)
+										}
+									}.offset(CGSize(width: 7.0, height: 0))
+									
                   Spacer()
                   VStack{
                     HStack {
