@@ -33,6 +33,7 @@ struct MultiImagePicker: UIViewControllerRepresentable{
 		
 		func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
 			self.photo.showPicker.toggle()
+			self.photo.photos = [UIImage]()
 			
 			for photo in results{
 				if photo.itemProvider.canLoadObject(ofClass: UIImage.self){
