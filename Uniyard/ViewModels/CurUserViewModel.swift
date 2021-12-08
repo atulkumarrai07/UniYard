@@ -7,28 +7,28 @@ import FirebaseAuth
 
 
 class CurUserViewModel: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
-	private let database = Firestore.firestore()
+  private let database = Firestore.firestore()
 
-	@Published var user_id = ""
-	@Published var email = ""
-	@Published var password = ""
-	@Published var user_image = ""
-	@Published var first_name = ""
-	@Published var last_name = ""
-	@Published var campus_location = ""
-	@Published var saved_post_list = []
-	@Published var my_post_list = []
-	@Published var date_joined = Date()
-	@Published var suggestion_preference = ""
-	@Published var user_status = true
-	@Published var notification_preference = true
+  @Published var user_id = ""
+  @Published var email = ""
+  @Published var password = ""
+  @Published var user_image = ""
+  @Published var first_name = ""
+  @Published var last_name = ""
+  @Published var campus_location = ""
+  @Published var saved_post_list = []
+  @Published var my_post_list = []
+  @Published var date_joined = Date()
+  @Published var suggestion_preference = ""
+  @Published var user_status = true
+  @Published var notification_preference = true
 
   @Published var settings: UNNotificationSettings?
 
   override init() {
     super.init()
-		getUserDetails()
-	}
+    getUserDetails()
+  }
 
   func notificationAuth(completion: @escaping  (Bool) -> Void)
   {

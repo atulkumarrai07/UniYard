@@ -49,7 +49,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         print("Message ID: \(messageID)")
       }
 
-      print(userInfo)
+      //print(userInfo)
 
       completionHandler(UIBackgroundFetchResult.newData)
     }
@@ -76,7 +76,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         print("Message ID: \(messageID)")
     }
 
-    print(userInfo)
+    //print(userInfo)
 
     // Change this to your preferred presentation option
     completionHandler([[.banner, .badge, .sound]])
@@ -108,7 +108,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
       print("Message ID from userNotificationCenter didReceive: \(messageID)")
     }
 
-    print(userInfo)
+    //print(userInfo)
 
     completionHandler()
   }

@@ -55,7 +55,7 @@ struct ProfileView: View {
 					}.sheet(isPresented: $shouldShowImagePicker) {
 						ImagePicker(image: $upload_image)
 					}
-					
+
 					Button(action: {
 						if let thisImage = self.upload_image {
 							uploadImage(image: thisImage)
@@ -66,7 +66,7 @@ struct ProfileView: View {
 				}.padding(.trailing).padding(.leading)
 
 				Text("Member since " + convertTimestamp(serverTimestamp: curUserVm.date_joined))
-				
+
         ProfileBox(curUserVm: curUserVm).environmentObject(loginModel)
 			}//vstcak
 		}
@@ -102,103 +102,103 @@ struct ProfileView: View {
 }
 
 struct ProfileBox: View {
-	@EnvironmentObject var loginModel:LoginModel
-	let profileLinkNames: [String] = ["Personal", "My Posts", "Settings"]
-	@StateObject var curUserVm : CurUserViewModel
-	var body: some View {
-		VStack{
-			NavigationLink(destination: PersonalView()){
-				VStack(spacing: 0) {
-					//Personal
-					HStack {
-						Image(systemName: "person.crop.rectangle")
-							.frame(width: 40)
-							.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-							.font(.system(size: 30))
+  @EnvironmentObject var loginModel:LoginModel
+  let profileLinkNames: [String] = ["Personal", "My Posts", "Settings"]
+  @StateObject var curUserVm : CurUserViewModel
+  var body: some View {
+    VStack{
+      NavigationLink(destination: PersonalView()){
+        VStack(spacing: 0) {
+          //Personal
+          HStack {
+            Image(systemName: "person.crop.rectangle")
+              .frame(width: 40)
+              .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
+              .font(.system(size: 30))
 
-						Text(profileLinkNames[0]).font(.title3)
-						Spacer() // Spread the Text and Image apart
-						Image(systemName: "chevron.right")
-							.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-							.font(.system(size: 20))
-					}.contentShape(Rectangle())
-					.padding(EdgeInsets(top: 17, leading: 21, bottom: 17, trailing: 21))
-					Divider()
-				}
-			}.buttonStyle(PlainButtonStyle())
+            Text(profileLinkNames[0]).font(.title3)
+            Spacer() // Spread the Text and Image apart
+            Image(systemName: "chevron.right")
+              .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
+              .font(.system(size: 20))
+          }.contentShape(Rectangle())
+          .padding(EdgeInsets(top: 17, leading: 21, bottom: 17, trailing: 21))
+          Divider()
+        }
+      }.buttonStyle(PlainButtonStyle())
 
-			//MyPosts
-			NavigationLink(destination: MyPostView()){
-				VStack(spacing: 0) {
-					//Personal
-					HStack {
-						Image(systemName: "list.bullet.rectangle")
-							.frame(width: 40)
-							.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-							.font(.system(size: 30))
+      //MyPosts
+      NavigationLink(destination: MyPostView()){
+        VStack(spacing: 0) {
+          //Personal
+          HStack {
+            Image(systemName: "list.bullet.rectangle")
+              .frame(width: 40)
+              .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
+              .font(.system(size: 30))
 
-						Text(profileLinkNames[1]).font(.title3)
-						Spacer() // Spread the Text and Image apart
-						Image(systemName: "chevron.right")
-							.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-							.font(.system(size: 20))
-					}.contentShape(Rectangle())
-					.padding(EdgeInsets(top: 17, leading: 21, bottom: 17, trailing: 21))
-					Divider()
-				}
-			}.buttonStyle(PlainButtonStyle())
+            Text(profileLinkNames[1]).font(.title3)
+            Spacer() // Spread the Text and Image apart
+            Image(systemName: "chevron.right")
+              .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
+              .font(.system(size: 20))
+          }.contentShape(Rectangle())
+          .padding(EdgeInsets(top: 17, leading: 21, bottom: 17, trailing: 21))
+          Divider()
+        }
+      }.buttonStyle(PlainButtonStyle())
 
-			//Settings
-			NavigationLink(destination: SettingsView(curUserViewModel: curUserVm)){
-				VStack(spacing: 0) {
-					//Personal
-					HStack {
-						Image(systemName: "gearshape")
-							.frame(width: 40)
-							.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-							.font(.system(size: 30))
+      //Settings
+      NavigationLink(destination: SettingsView(curUserViewModel: curUserVm)){
+        VStack(spacing: 0) {
+          //Personal
+          HStack {
+            Image(systemName: "gearshape")
+              .frame(width: 40)
+              .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
+              .font(.system(size: 30))
 
-						Text(profileLinkNames[2]).font(.title3)
-						Spacer() // Spread the Text and Image apart
-						Image(systemName: "chevron.right")
-							.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-							.font(.system(size: 20))
-					}.contentShape(Rectangle())
-					.padding(EdgeInsets(top: 17, leading: 21, bottom: 17, trailing: 21))
-					Divider()
-				}
-			}.buttonStyle(PlainButtonStyle())
+            Text(profileLinkNames[2]).font(.title3)
+            Spacer() // Spread the Text and Image apart
+            Image(systemName: "chevron.right")
+              .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
+              .font(.system(size: 20))
+          }.contentShape(Rectangle())
+          .padding(EdgeInsets(top: 17, leading: 21, bottom: 17, trailing: 21))
+          Divider()
+        }
+      }.buttonStyle(PlainButtonStyle())
 
-			Spacer()
+      Spacer()
 
-			//Sign out button
-			Button(action: {
-				loginModel.signOut()
-			},
-			label: {
-				Text("Sign Out").font(.system(size: 20, weight: .medium))
-				Image(systemName: "chevron.right.circle")
-					.foregroundColor(.white)
-					.font(.system(size: 22))
-			})
-			.frame(width: 300, height: 40, alignment: .center)
-			.foregroundColor(.white)
-			.background(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-			.cornerRadius(15)
-			.padding(.vertical, 20)
-			.padding(.horizontal, 50)
-		}
-		.background(Color(.systemBackground))
+      //Sign out button
+      Button(action: {
+        loginModel.signOut()
+      },
+      label: {
+        Text("Sign Out").font(.system(size: 20, weight: .medium))
+        Image(systemName: "chevron.right.circle")
+          .foregroundColor(.white)
+          .font(.system(size: 22))
+      })
+      .frame(width: 300, height: 40, alignment: .center)
+      .foregroundColor(.white)
+      .background(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
+      .cornerRadius(15)
+      .padding(.vertical, 20)
+      .padding(.horizontal, 50)
+    }
+    .background(Color(.systemBackground))
 
-	}
+  }
 }
 
 func convertTimestamp(serverTimestamp: Date) -> String {
-	//	let x = serverTimestamp
-	let date = serverTimestamp
-	let formatter = DateFormatter()
-	formatter.dateStyle = .medium
-	formatter.timeStyle = .none
+  //  let x = serverTimestamp
+  let date = serverTimestamp
+  let formatter = DateFormatter()
+  formatter.dateStyle = .medium
+  formatter.timeStyle = .none
 
-	return formatter.string(from: date as Date)
+  return formatter.string(from: date as Date)
 }
