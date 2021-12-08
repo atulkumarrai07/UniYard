@@ -114,11 +114,11 @@ struct CardDetails: View {
 				 Spacer()
 				}
 				Group{
-					IndividualCardDetails("Location:", text: "Coming soon" )
+//          IndividualCardDetails("Location:", text: itemDetails.pickup_location )
+//				 Spacer()
+					IndividualCardDetails("Pickup Address:", text: itemDetails.pickup_location )
 				 Spacer()
-					IndividualCardDetails("Pickup/nAddress:", text: itemDetails.pickup_location )
-				 Spacer()
-					IndividualCardDetails("Earliest Available:", text: "Coming soon" )
+          IndividualCardDetails("Earliest Available:", text: convertTimestamp(serverTimestamp: itemDetails.last_modified_timestamp) )
 				 Spacer()
 				 Text("Description:").bold().font(.subheadline).frame(width:330,alignment: .leading)
 					Text(itemDetails.item_description).padding().font(.subheadline)
@@ -131,7 +131,7 @@ struct CardDetails: View {
 						destination: ChatView(chatsViewModel: chatsViewModel, chat: itemdetailvmodel.chat),
 						label: {
 							Text("Chat")
-						}).frame(width: 340, height: 40, alignment: .center).foregroundColor(.white).background(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).font(.title).cornerRadius(15.0).overlay(RoundedRectangle(cornerRadius: 14.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)))
+						}).frame(width: 330, height: 40, alignment: .center).foregroundColor(.white).background(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).font(.title).cornerRadius(15.0).overlay(RoundedRectangle(cornerRadius: 14.0).stroke(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)))
 //         Button(action: {}
 //             , label: {
 //             Text("Chat")
