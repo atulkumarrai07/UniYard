@@ -27,10 +27,10 @@ struct MyPostView: View {
         }
         
         List(myPostViewModel.myPostfilteredItems, id: \.itemId){itemPostAvailable in
-          if(itemPostAvailable.item_buy)
+					if(itemPostAvailable.item_buy)
           {
             NavigationLink(
-              destination: ItemDetailsBuy(itemDetails: itemPostAvailable),
+              destination: MyPostBuyDetailsView(itemDetails: itemPostAvailable),
               label: {
                 HStack{
 									VStack (alignment: .leading){
@@ -56,7 +56,7 @@ struct MyPostView: View {
           else
           {
             NavigationLink(
-              destination: ItemDetailsSell(itemDetails: itemPostAvailable),
+							destination: MyPostSellDetailsView(itemDetails: itemPostAvailable),
               label: {
                 HStack{
 									
