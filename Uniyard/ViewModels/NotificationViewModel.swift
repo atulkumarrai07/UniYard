@@ -9,7 +9,7 @@ class NotificationViewModel: NSObject, ObservableObject, UNUserNotificationCente
   func createANotification(){
     let content = UNMutableNotificationContent()
     content.title = "New Notification!"
-    content.subtitle = "Atul messaged you regarding Lamp"
+    content.subtitle = "Aaratrika messaged you regarding Lamp"
     content.sound = UNNotificationSound.default
     content.categoryIdentifier = "ACTIONS"
 
