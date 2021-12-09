@@ -316,8 +316,6 @@ class ItemsViewModel: ObservableObject {
 	}
 	
 	func markPostSolved(postId: String){
-//		let auth = Auth.auth()
-//		let user_id = auth.currentUser?.uid
 		let updateReference = database.collection("Posts").document(postId)
 		updateReference.getDocument { (document, err) in
 			if let err = err {
@@ -330,6 +328,49 @@ class ItemsViewModel: ObservableObject {
 		}
 	}
 	
+	func saveBuyPost(itemId: String, item_title: String, item_description: String, item_category: String,
+									  price: String, zip_code: String, delivery: Bool, pickup_location: String){
+		let updateReference = database.collection("Items").document(itemId)
+		updateReference.getDocument { (document, err) in
+			if let err = err {
+				print(err.localizedDescription)
+			}
+			else {
+				document?.reference.updateData(
+					["item_title": item_title,
+					 "item_description": item_description,
+					 "item_category": item_category,
+					 "price": Double(price) ?? 0,
+					 "zip_code": zip_code,
+					 "delivery": delivery,
+					 "pickup_location": pickup_location,
+					])
+			}
+		}
+	}
 	
+	func saveSellPost(itemId: String, item_title: String, item_description: String, item_category: String,
+									 condition: String,  price: String, zip_code: String, delivery: Bool, pickup_location: String){
+		let updateReference = database.collection("Items").document(itemId)
+		updateReference.getDocument { (document, err) in
+			if let err = err {
+				print(err.localizedDescription)
+			}
+			else {
+				document?.reference.updateData(
+					["item_title": item_title,
+					 "item_description": item_description,
+					 "item_category": item_category,
+					 "condition": condition,
+					 "price": Double(price) ?? 0,
+					 "zip_code": zip_code,
+					 "delivery": delivery,
+					 "pickup_location": pickup_location
+					])
+			}
+		}
+	}
+	
+
 }
 

@@ -1,125 +1,152 @@
 import SwiftUI
-import Foundation
-import FirebaseFirestore
 
 struct MyPostBuyDetailsView: View {
-	var itemDetails:PostItem
-	@StateObject var itemDetailViewModel = ItemDetailViewModel()
-	@Environment(\.presentationMode) var itemDetailsBuyPresentation: Binding<PresentationMode>
+	@Environment(\.presentationMode) var createBuyPresentation: Binding<PresentationMode>
+	@StateObject var itemDetails : PostItem
+	@StateObject var itemsvmodel = ItemsViewModel()
+	
+	@State private var showingAlert = false
+	
+	var categoryList=["Clothing", "Books", "Computers",
+										"Electronics", "Furniture", "Home appliances",
+										"Jewelley, watches", "Music instruments", "Phones",
+										"Sporting goods", "Tools", "Toys, games", "Other"]
+	
+	var locationList = ["Pittsburgh","Australia","Qatar", "Africa"]
+	
+	var itemPriceStr: Binding<String> {
+					Binding<String>(
+							get: { String(format: "%.02f", Double(itemDetails.price)) },
+							set: {
+									if let value = NumberFormatter().number(from: $0) {
+										itemDetails.price = value.doubleValue
+									}
+							}
+					)
+			}
+	
 	var body: some View {
+		//  NavigationView {
 		ZStack{
 			Color(red:237/255.0, green: 213/255.0, blue: 213/255.0, opacity: 1.0).ignoresSafeArea(.all)
 			VStack{
 				HStack {
 					Button(action: {
-						itemDetailsBuyPresentation.wrappedValue.dismiss()
-					})
-					{
-						Image(systemName: "chevron.backward").resizable().frame(width: 15, height: 20, alignment: .center).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).padding()
+						UIApplication.shared.endEditing()
+						self.createBuyPresentation.wrappedValue.dismiss()
+					}){
+						Image(systemName: "chevron.backward").resizable()
+							.frame(width: 15, height: 20, alignment: .center)
+							.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
 					}
-					Text("Item Details")
+					Text("My Buy Post")
 						.font(.system(size: 25, weight: .heavy))
 						.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-						.fontWeight(.heavy)
 						.frame(maxWidth: .infinity, alignment: .center).padding(.leading,-20)
-				}
-				CardDetailsBuywSold(itemDetails: itemDetails, itemdetailvmodel: itemDetailViewModel)
-			}.onAppear(){
-				itemDetailViewModel.setPostId(postId: itemDetails.postId)
-			}
-		}
-	}
-}
-struct CardDetailsBuywSold: View {
-	@State var itemDetails:PostItem
-	@StateObject var itemdetailvmodel:ItemDetailViewModel
-	//take
-	@StateObject var itemsvmodel = ItemsViewModel()
-	@StateObject var savePostViewModel = SavedPostViewModel()
-	@StateObject var chatsViewModel = ChatsViewModel()
-	var body: some View {
-		ZStack{
-			VStack{
-				VStack{
-					HStack{
-						Text("[Buy]").font(.title3).foregroundColor(.blue).frame(alignment: .leading)
-						Text(itemDetails.item_title).font(.title3).fontWeight(.bold).frame(alignment: .leading)
-						Spacer()
-						Button(action: toggled){
-							Image(systemName: itemDetails.isSaved ? "bookmark.fill" :"bookmark").font(.system(size: 25.0, weight: .bold))
-								.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-								.frame(width: 120, height: 50, alignment: .trailing)
-						}.onChange(of: itemDetails.isSaved, perform: { value in
-							if(itemDetails.isSaved)
-							{
-								itemsvmodel.updateSavePost(postId: itemDetails.postId)
-							}
-							else{
-								savePostViewModel.deleteFromSavePost(postId: itemDetails.postId)
-							}
-						 })
-					.onAppear {
-						savePostViewModel.loadSavedPosts()
+				}.padding()
+				
+				Form {
+					Section(header: Text("Title")) {
+						TextEditor(text: $itemDetails.item_title)
 					}
-					}
+					.textCase(nil)
+					.font(.system(size: 18))
+					.foregroundColor(.black)
 					
-					HStack{
-						Text("$" +  String(itemDetails.price)).font(.title2).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).bold()
-							.frame(width:104,alignment: .leading)
-						Text("List Date: \(convertTimestamp(serverTimestamp: itemDetails.last_modified_timestamp))").font(.subheadline).foregroundColor(.gray).frame(width:220,alignment: .trailing)
-					}
+					Section(header: Text("Budget (USD)")) {
+						TextField("$0.00", text: itemPriceStr)
+							.keyboardType(.decimalPad)
+					}.textCase(nil)
+					.font(.system(size: 18))
+					.foregroundColor(.black)
 					
-					Group{
-						Spacer()
-						IndividualCardDetails("Category:", text: itemDetails.item_category )
-						Spacer()
-						IndividualCardDetails("Zipcode:", text: itemDetails.zip_code )
-						Spacer()
-						IndividualCardDetails("Delivery:", text: itemDetails.delivery ? "Yes":"No" )
-						Spacer()
-					}
-					Group{
-						IndividualCardDetails("Pickup\nLocation:", text: itemDetails.pickup_location)
-						Spacer()
-						Text("Description:").bold().font(.subheadline).frame(width:330,alignment: .leading)
-						Text(itemDetails.item_description).padding().font(.subheadline)
-							.frame(width: 330, alignment: .leading)
-							.background(Color(red: 229/255.0, green: 229/255.0, blue: 229/255.0, opacity: 1.0))
-							.fixedSize(horizontal: false, vertical: true)
-							.cornerRadius(10)
+					Section {
+						Picker("Category", selection: $itemDetails.item_category) {
+							ForEach(categoryList, id: \.self) {
+								Text($0)
+							}}
 						
-//            NavigationLink(destination: ChatView(chat: Chat(user1: itemdetailvmodel.currentUser!, user2: itemdetailvmodel.postedBy!, messages: [])), label: Text("Chat"))
-						
-
-            Button(action: {
-							itemsvmodel.markPostSolved(postId: itemDetails.postId)
-							itemDetails.Availability = "No"
+						Toggle(isOn: $itemDetails.delivery) {
+							Text("Delivery request")
 						}
-									 
-                   , label: {Text("Mark as resolved")})
-              .foregroundColor(.white)
-              .padding(.vertical, 10)
-              .padding(.horizontal, 50)
-              .background(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-              .cornerRadius(15)
-						.opacity((itemDetails.Availability == "Available") ? 1 : 0.5)
-						.disabled(itemDetails.Availability == "No")
 						
-					}
-				}.padding(.top)
-				.frame(width: 334,height: 490 , alignment: .leading)
-				Spacer()
-				//   BottomBarNav().frame(width: 400).navigationBarHidden(true).onAppear()
-			}.padding()
-			.background(Color(.systemBackground))
-			.cornerRadius(20)
+						Picker("Location", selection: $itemDetails.pickup_location) {
+							ForEach(locationList, id: \.self) {
+								Text($0)
+							}}
+						
+					}.textCase(nil)
+					.font(.system(size: 18))
+					
+					
+					Section(header: Text("Zip code")) {
+						TextField("12345", text: $itemDetails.zip_code)
+							.keyboardType(.numberPad)
+					}.textCase(nil)
+					.font(.system(size: 18))
+					.foregroundColor(.black)
+					
+					Section(header: Text("Item description")) {
+						TextEditor(text: $itemDetails.item_description)
+					}.textCase(nil)
+					.font(.system(size: 18))
+					.foregroundColor(.black)
+				}.cornerRadius(15)
+				.padding(.leading, 20)
+				.padding(.trailing, 20)
+				
+				Button(action: {
+					showingAlert = true
+					itemsvmodel.saveBuyPost(itemId: itemDetails.itemId, item_title: itemDetails.item_title,
+																	item_description: itemDetails.item_description, item_category: itemDetails.item_category,
+																	price: String(itemDetails.price), zip_code: itemDetails.zip_code, delivery: itemDetails.delivery, pickup_location: itemDetails.pickup_location)
+				}
+				, label: {
+					Text("Save")
+						.frame(width: 300, height: 50, alignment: .center)
+						.font(.system(size: 20, weight: .heavy))
+						.foregroundColor(.white)
+						.background(Color(red: 128/255.0,
+															green: 0/255.0,
+															blue: 0/255.0, opacity: 1.0))
+						.cornerRadius(15)
+				})
+				.padding(.vertical, 10)
+				.padding(.horizontal, 50)
+				.opacity(((!itemDetails.item_title.isEmpty) && (!itemDetails.item_description.isEmpty) && (itemDetails.Availability == "Available")) ? 1 : 0.5)
+				.opacity(((!itemDetails.item_title.isEmpty) || (!itemDetails.item_description.isEmpty) || (itemDetails.Availability == "Available")) ? 1 : 0.5)
+				.alert(isPresented: $showingAlert)
+				{
+					Alert(title: Text("Success"),
+								message: Text("Changed has been saved!"),
+								dismissButton: .default(Text("OK")))
+				}
+				
+				Button(action: {
+					itemsvmodel.markPostSolved(postId: itemDetails.postId)
+					itemDetails.Availability = "No"
+				}
+				, label: {
+					Text("Mark as resolved")
+						.frame(width: 300, height: 50, alignment: .center)
+						.font(.system(size: 20, weight: .heavy))
+						.foregroundColor(.white)
+						.background(Color(red: 128/255.0,
+															green: 0/255.0,
+															blue: 0/255.0, opacity: 1.0))
+						.cornerRadius(15)
+				})
+				.padding(.vertical, 10)
+				.padding(.horizontal, 50)
+				.opacity(((!itemDetails.item_title.isEmpty) && (!itemDetails.item_description.isEmpty) && (itemDetails.Availability == "Available")) ? 1 : 0.5)
+				.opacity(((!itemDetails.item_title.isEmpty) || (!itemDetails.item_description.isEmpty) || (itemDetails.Availability == "Available")) ? 1 : 0.5)
+			
+				
+			}//zstack
+			.onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
 			.navigationBarHidden(true)
 		}
 	}
-	
-	func toggled(){
-	 self.itemDetails.isSaved = !self.itemDetails.isSaved
-	}
-	
 }
+
 
