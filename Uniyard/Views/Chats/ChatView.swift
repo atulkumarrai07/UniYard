@@ -124,10 +124,13 @@ struct ChatView: View {
 //    let countBefore = chat.messages.count
     chatsViewModel.sendMessage(text, in: chat){message in
       text = ""
-      let indexCheck = chatsViewModel.chats.firstIndex(where: {$0.id == chat.id})
-//      print(chatsViewModel.chats[indexCheck!])
-      self.chat = chatsViewModel.chats[indexCheck!]
-      messageIdToScroll = message.id
+      chatsViewModel.refreshChats()
+      if(chatsViewModel.chats.filter({existingChat in return existingChat.id == chat.id}).count > 0){
+        let indexCheck = chatsViewModel.chats.firstIndex(where: {$0.id == chat.id})
+  //      print(chatsViewModel.chats[indexCheck!])
+        self.chat = chatsViewModel.chats[indexCheck!]
+        messageIdToScroll = message.id
+      }
     }
   }
   
