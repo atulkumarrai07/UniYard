@@ -8,7 +8,7 @@ struct Login: View {
     var body: some View {
       NavigationView{
         VStack{
-          Image("Login_logo").resizable().scaledToFit().padding(.bottom,15)
+          Image("white_login_logo").resizable().scaledToFit().padding(.bottom,15)
           
           Text("Welcome!").font(.custom("Comfortaa", size: 35)).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).fontWeight(.semibold).padding(.bottom,10)
           

@@ -13,10 +13,8 @@ struct MyPostView: View {
         }){
           Image(systemName: "chevron.backward").resizable().frame(width: 20, height: 30, alignment: .center).foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0)).padding()
         }
-          Text("My Posts")
-          .font(.largeTitle)
+          Text("My Posts").font(.system(size: 25, weight: .heavy))
           .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-          .fontWeight(.heavy)
           .frame(maxWidth: .infinity, alignment: .center)
          }
         if(myPostViewModel.isEmptyMyPostList){
@@ -66,7 +64,7 @@ struct MyPostView: View {
 												.resizable().frame(width: 100, height: 100, alignment: .center)
 												.cornerRadius(10)
 										} else{
-											Image("Login_logo").resizable().frame(width: 100, height: 100, alignment: .center)
+											Image("white_login_logo").resizable().frame(width: 100, height: 100, alignment: .center)
 										}
 									}.offset(CGSize(width: 7.0, height: 0))
 									

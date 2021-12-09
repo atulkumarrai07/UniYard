@@ -9,10 +9,8 @@ struct ChatList: View {
   var body: some View {
      VStack{
        HStack {
-          Text("Chats")
-          .font(.largeTitle)
+          Text("Chats").font(.system(size: 30, weight: .heavy))
           .foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
-          .fontWeight(.heavy)
           .frame(maxWidth: .infinity, alignment: .center)
        }
         HStack{
