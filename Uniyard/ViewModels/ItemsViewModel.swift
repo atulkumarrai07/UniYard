@@ -315,5 +315,21 @@ class ItemsViewModel: ObservableObject {
 		}
 	}
 	
+	func markPostSolved(postId: String){
+//		let auth = Auth.auth()
+//		let user_id = auth.currentUser?.uid
+		let updateReference = database.collection("Posts").document(postId)
+		updateReference.getDocument { (document, err) in
+			if let err = err {
+				print(err.localizedDescription)
+			}
+			else {
+				document?.reference.updateData(
+					["Availability": "No"])
+			}
+		}
+	}
+	
+	
 }
 
