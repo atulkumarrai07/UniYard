@@ -44,8 +44,7 @@ struct CreateSellView: View {
 							.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
 					}
 					
-					Text("Sell an Item")
-						.font(.system(size: 25, weight: .heavy))
+					Text("Sell an Item").font(.system(size: 25, weight: .heavy))
 						.foregroundColor(Color(red: 128/255.0, green: 0/255.0, blue: 0/255.0, opacity: 1.0))
 						.frame(maxWidth: .infinity, alignment: .center).padding(.leading,-20)
 					

@@ -27,7 +27,7 @@ struct SearchSellListings: View {
 												.resizable().frame(width: 100, height: 100, alignment: .center)
 												.cornerRadius(10)
 										} else{
-											Image("Login_logo").resizable().frame(width: 100, height: 100, alignment: .center)
+											Image("white_login_logo").resizable().frame(width: 100, height: 100, alignment: .center)
 										}
 									}.offset(CGSize(width: 7.0, height: 0))
 									
