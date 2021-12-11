@@ -44,7 +44,22 @@ class ViewModel: ObservableObject
         }
     }
   }
-
+  
+  func checkUserExist(email:String, completion: @escaping (Bool)->Void){
+    var present = false
+    database.collection("Users").whereField("email", isEqualTo: email)
+      .getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+              if(querySnapshot!.count != 0)
+              {
+                present = true
+              }
+              completion(present)
+            }
+    }
+  }
 //  // load post in Firestore
 //  func addPost_old() {
 //    posts.append(Post(id: "P00001", last_modified_timestamp: Date(), Availability: "Available", post_creation_date: Date()))

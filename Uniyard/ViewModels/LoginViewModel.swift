@@ -10,6 +10,8 @@ class LoginModel: ObservableObject {
 	@Published var isPasswordValid = false
 	@Published var canSubmit = false
 	@Published var signedIn = false
+  @Published var alert = false
+  @Published var error = ""
 	
 	var auth = Auth.auth()
 	
@@ -44,6 +46,10 @@ class LoginModel: ObservableObject {
 	
 	func login(email:String, password:String) {
 		auth.signIn(withEmail: email, password: password) { [weak self] result, error in
+      if(error != nil){
+        self?.error = error!.localizedDescription
+        self?.alert.toggle()
+      }
 			guard result != nil, error == nil else{
 				return
 			}
