@@ -26,6 +26,8 @@ class SignUpViewModel: ObservableObject {
   @Published var canSignUp2 = false
   @Published var registrationStatus:Bool = false
   @Published var displayLogin = false
+  @Published var alert = false
+  @Published var error = ""
 
  private var cancellableSet: Set<AnyCancellable> = []
 
@@ -33,6 +35,7 @@ class SignUpViewModel: ObservableObject {
   let pwdPred = NSPredicate(format: "SELF MATCHES %@", "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$")
   var loginModel:LoginModel = LoginModel()
   var auth = Auth.auth()
+  let viewModel = ViewModel()
 
   init() {
     $cmu_email
@@ -93,25 +96,33 @@ class SignUpViewModel: ObservableObject {
     (showTCSelector ? "":"T&C must be checked to register")
   }
   func signUp(email: String, password: String) {
-   auth.createUser(withEmail: email, password: password) { [weak self]result, error in
-    guard result != nil, error == nil else{
-      self?.registrationStatus = false
-     return
-    }
-    if let id = result?.user.uid {
-      let user = User(id: id, email: (self?.cmu_email)!, password: password, user_image: "", first_name: (self?.first_name)!, last_name: self?.last_name ?? "", campus_location: self!.campus_location, saved_post_list: [], my_post_list: [], date_joined: Date(), suggestion_preference: true, user_status: true)
-      
-      let viewModel = ViewModel()
-      viewModel.addUser(user: user)
-      self?.registrationStatus = true
-      DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-        self?.loginModel.signOut()
+    viewModel.checkUserExist(email: email){result in
+      if(result){
+        self.alert.toggle()
+        self.error = "User already Exist"
+      }
+      else{
+        self.auth.createUser(withEmail: email, password: password) { [weak self]result, error in
+         guard result != nil, error == nil else{
+           self?.registrationStatus = false
+          return
+         }
+         if let id = result?.user.uid {
+           let user = User(id: id, email: (self?.cmu_email)!, password: password, user_image: "", first_name: (self?.first_name)!, last_name: self?.last_name ?? "", campus_location: self!.campus_location, saved_post_list: [], my_post_list: [], date_joined: Date(), suggestion_preference: true, user_status: true)
+           
+           let viewModel = ViewModel()
+           viewModel.addUser(user: user)
+           self?.registrationStatus = true
+           DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+             self?.loginModel.signOut()
+           }
+         }
+         else{
+           self?.registrationStatus = false
+          return
+         }
+        }
       }
     }
-    else{
-      self?.registrationStatus = false
-     return
-    }
-   }
   }
 }
